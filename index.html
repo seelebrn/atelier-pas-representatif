@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier « Ce n’est pas représentatif »</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Mise en page : une colonne de lecture, trois modules empilés, chacun dans un cadre d'exercice. */
+:root{
+  --paper:#f5f6f8;
+  --surface:#ffffff;
+  --ink:#1c2532;
+  --muted:#5a6575;
+  --line:#d9dee6;
+  --accent:#2d5a86;
+  --accent-soft:#e4ecf5;
+  --good:#2c7556;
+  --good-soft:#e2f1ea;
+  --bad:#a4482a;
+  --bad-soft:#f7e6df;
+  --mid:#8a6a14;
+  --mid-soft:#f5eed9;
+  --display:"Newsreader", Georgia, "Times New Roman", serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141920; --surface:#1c232d; --ink:#e6eaf0; --muted:#a3adbb; --line:#2f3946;
+    --accent:#8bb4de; --accent-soft:#22324a; --good:#7fcaa6; --good-soft:#1c3329;
+    --bad:#ec9a7c; --bad-soft:#3a2420; --mid:#e2c46b; --mid-soft:#3a3218;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141920; --surface:#1c232d; --ink:#e6eaf0; --muted:#a3adbb; --line:#2f3946;
+  --accent:#8bb4de; --accent-soft:#22324a; --good:#7fcaa6; --good-soft:#1c3329;
+  --bad:#ec9a7c; --bad-soft:#3a2420; --mid:#e2c46b; --mid-soft:#3a3218;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:40px 20px 80px}
+header.top{display:grid;gap:10px;padding-bottom:28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:40px}
+h2{font-size:28px}
+h3{font-size:20px}
+.lede{color:var(--muted);margin:0;max-width:62ch}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+nav.toc a{font-size:14px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 12px;border-radius:999px}
+nav.toc a:hover{border-color:var(--accent)}
+section.module{display:grid;gap:16px;padding-top:44px}
+.modhead{display:grid;gap:6px}
+.modnum{font-size:13px;color:var(--accent);font-weight:600;letter-spacing:.04em}
+.intro{margin:0;max-width:65ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;display:grid;gap:16px}
+.speaker{font-size:13px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:0}
+.quote{font-family:var(--display);font-size:22px;line-height:1.35;margin:0}
+.choices{display:grid;gap:10px}
+button{font:inherit;cursor:pointer}
+.choice{text-align:left;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:12px 14px;line-height:1.45}
+.choice:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.choice[disabled]{cursor:default;opacity:.55}
+.choice.picked{opacity:1;border-width:2px}
+.choice.picked.good{border-color:var(--good);background:var(--good-soft)}
+.choice.picked.bad{border-color:var(--bad);background:var(--bad-soft)}
+.choice.picked.mid{border-color:var(--mid);background:var(--mid-soft)}
+.feedback{border-left:4px solid var(--line);padding:4px 0 4px 14px;display:grid;gap:6px}
+.feedback.good{border-color:var(--good)}
+.feedback.bad{border-color:var(--bad)}
+.feedback.mid{border-color:var(--mid)}
+.feedback p{margin:0}
+.verdict{font-weight:600}
+.feedback.good .verdict{color:var(--good)}
+.feedback.bad .verdict{color:var(--bad)}
+.feedback.mid .verdict{color:var(--mid)}
+.ref{font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{background:var(--accent);color:var(--surface);border:0;border-radius:8px;padding:10px 16px;font-weight:500}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn:hover{filter:brightness(1.08)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.progress{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.trail{display:flex;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dot.good{background:var(--good)}
+.dot.bad{background:var(--bad)}
+.dot.mid{background:var(--mid)}
+/* Module 2 */
+.stmts{display:grid;gap:12px}
+.stmt{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:12px}
+.stmt.ok{border-left:5px solid var(--good)}
+.stmt.ko{border-left:5px solid var(--bad)}
+.stmt p.s{margin:0;font-family:var(--display);font-size:19px;line-height:1.4}
+.pill{display:inline-block;font-size:13px;font-weight:600;padding:2px 10px;border-radius:999px}
+.pill.ok{background:var(--good-soft);color:var(--good)}
+.pill.ko{background:var(--bad-soft);color:var(--bad)}
+.sortbtn{background:var(--paper);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:8px 12px;font-size:15px}
+.sortbtn:hover:not([disabled]){border-color:var(--accent)}
+.sortbtn[disabled]{cursor:default;opacity:.5}
+.score{font-weight:600;font-variant-numeric:tabular-nums}
+/* Module 3 */
+.transcript{display:grid;gap:10px;background:var(--paper);border-radius:8px;padding:16px}
+.turn{display:grid;grid-template-columns:84px 1fr;gap:10px}
+.turn .who{font-size:13px;font-weight:600;color:var(--muted);padding-top:2px}
+.turn p{margin:0}
+.turn.context p{color:var(--muted)}
+.ctxlabel{font-size:13px;color:var(--accent);font-weight:600;margin:0}
+label{font-weight:500}
+textarea{width:100%;min-height:70px;font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 12px;resize:vertical}
+.codes{display:grid;gap:12px}
+.code{border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:6px;background:var(--paper)}
+.code .lvl{font-size:13px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.code .lbl{font-family:var(--display);font-size:19px;line-height:1.35}
+.code p{margin:0}
+.yours{border:2px dashed var(--accent);border-radius:8px;padding:14px 16px;display:grid;gap:8px}
+.yours ul{margin:0;padding-left:20px}
+/* Modules 4 à 7 */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.col{display:grid;gap:8px;align-content:start}
+.colhead{font-weight:600;font-size:15px;margin:0}
+.mcqs{display:grid;gap:14px}
+.mcq{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:12px}
+.mcq .qq{margin:0;font-family:var(--display);font-size:19px;line-height:1.35}
+.note{background:var(--accent-soft);border-radius:8px;padding:14px 16px;display:grid;gap:6px}
+.note p{margin:0}
+.dims{display:grid}
+.dim{display:grid;gap:8px;padding:14px 0;border-top:1px solid var(--line)}
+.dim:first-child{border-top:0;padding-top:0}
+.dimtop{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline}
+.dimname{font-weight:600}
+.dimhint{font-size:14px;color:var(--muted);margin:0}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:14px;color:var(--ink)}
+.seg button:hover{border-color:var(--accent)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+.arrow{font-size:13px;font-weight:600;padding:2px 10px;border-radius:999px}
+.arrow.less{background:var(--good-soft);color:var(--good)}
+.arrow.more{background:var(--mid-soft);color:var(--mid)}
+.arrow.open{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+.draft{background:var(--paper);border-radius:8px;padding:14px 16px;margin:0;line-height:1.55}
+input[type="number"]{width:5.5em;font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-variant-numeric:tabular-nums}
+.catbtns{display:flex;flex-wrap:wrap;gap:6px}
+.extracts{display:grid;gap:10px}
+.extract{background:var(--paper);border-radius:8px;padding:12px 14px;display:grid;gap:4px}
+.extract p{margin:0}
+.extract .who{font-size:13px;font-weight:600;color:var(--muted)}
+.extract.odd{border:2px solid var(--bad);background:var(--bad-soft)}
+.theme{font-family:var(--display);font-size:20px;line-height:1.35;margin:0;padding:12px 16px;border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+.defs{display:grid;gap:10px}
+.def{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:8px}
+.def p{margin:0}
+.defhead{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.defname{font-family:var(--display);font-size:20px;font-weight:600}
+.defq{font-size:14px;color:var(--accent);font-style:italic}
+.defex,.defpit{font-size:15px}
+.defex span,.defpit span{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-right:6px}
+.defex span{color:var(--good)}
+.defpit span{color:var(--bad)}
+@media (max-width:640px){.cols{grid-template-columns:1fr}}
+section.module.inactive{display:none}
+nav.toc a[aria-current="true"]{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+.nextbox{display:grid;gap:10px;justify-items:start;padding:18px 20px;border:1px solid var(--accent);border-radius:10px;background:var(--accent-soft)}
+.nextbox p{margin:0}
+#modCounter{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums;margin:0}
+.retenir{display:grid;gap:4px;background:var(--surface);border-radius:8px;padding:12px 14px}
+.retenir p{margin:0}
+.tblwrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
+.tbl th{font-weight:600;text-align:left;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:6px 10px 8px 0;vertical-align:bottom}
+.tbl td{border-top:1px solid var(--line);padding:9px 10px 9px 0;vertical-align:top}
+ol.five{margin:0;padding-left:22px;display:grid;gap:10px}
+.gloss{margin:0;display:grid;grid-template-columns:minmax(150px,auto) 1fr;gap:8px 18px}
+.gloss dt{font-weight:600}
+.gloss dd{margin:0}
+@media (max-width:520px){.gloss{grid-template-columns:1fr;gap:2px}.gloss dd{margin-bottom:10px}}
+ul.biblio{margin:0;padding-left:20px;display:grid;gap:8px;font-size:15px}
+@media print{
+  nav.toc,#modCounter,.nextbox,.btn,header.top .lede{display:none !important}
+  body{background:#fff;color:#000}
+  .panel,.def,.note{break-inside:avoid;border:1px solid #bbb;background:#fff}
+}
+.fbzone{display:grid;gap:10px}
+.fbzone:empty{display:none}
+.acts{display:flex;flex-wrap:wrap;gap:6px 20px}
+.linkbtn{background:none;border:0;padding:2px 0;color:var(--accent);font-size:15px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.linkbtn:hover{text-decoration-thickness:2px}
+.quote-small{font-style:italic}
+.hidden{display:none !important}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);display:grid;gap:6px}
+footer p{margin:0}
+@media (max-width:480px){
+  h1{font-size:31px} .quote{font-size:19px} .turn{grid-template-columns:1fr;gap:2px}
+}
+@media (prefers-reduced-motion: no-preference){
+  .feedback,.codes,.yours{animation:fade .25s ease-out}
+  @keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="kicker">Consultation d’aide méthodologique F2RSM Psy · auto-formation</p>
+  <h1>« Mais ce n’est pas représentatif ! »</h1>
+  <p class="lede">Se défendre contre ses propres réflexes positivistes et comprendre ce qui fait la rigueur du qualitatif. Des repères pour commencer, dix exercices, puis une synthèse à garder. Comptez une dizaine de minutes par module ; ils peuvent se faire séparément et dans n’importe quel ordre.</p>
+  <nav class="toc" aria-label="Modules">
+    <a href="#reperes">0. Avant de commencer</a>
+    <a href="#soutenance">1. La soutenance</a>
+    <a href="#ecrire">2. Peut-on écrire ça ?</a>
+    <a href="#coder">3. Coder un extrait</a>
+    <a href="#position">4. La blouse</a>
+    <a href="#effectif">5. Combien d’entretiens ?</a>
+    <a href="#produits">6. Des thèmes à l’interprétation</a>
+    <a href="#cas-negatif">7. Le cas qui dérange</a>
+    <a href="#biais">8. Biais ou donnée ?</a>
+    <a href="#dit-observe">9. Dit, observé ou interprété ?</a>
+    <a href="#concurrence">10. Deux lectures en concurrence</a>
+    <a href="#synthese">Synthèse et ressources</a>
+  </nav>
+  <p id="modCounter" aria-live="polite"></p>
+</header>
+
+<!-- MODULE 0 -->
+<section class="module" id="reperes" aria-labelledby="t0">
+  <div class="modhead">
+    <span class="modnum">Module 0</span>
+    <h2 id="t0">Avant de commencer</h2>
+    <p class="intro">Le qualitatif ne mesure pas moins bien : il répond à une autre question, avec ses propres exigences de preuve. Cet atelier aide à repérer quelques réflexes bien ancrés, puis à leur substituer une idée exigeante de la rigueur. Il s’adresse à celles et ceux qui découvrent les méthodes qualitatives, en particulier en médecine et en sciences infirmières.</p>
+    <p class="intro ref">Il n’existe pas une seule épistémologie du qualitatif : ses traditions ne conçoivent pas toutes de la même façon la réalité étudiée, le rôle du chercheur et la valeur des données. Cet atelier adopte principalement une approche compréhensive et réflexive, en s’appuyant notamment sur Jean-Pierre Olivier de Sardan.</p>
+  </div>
+  <div class="defs">
+    <div class="def">
+      <div class="defhead"><span class="defname">Le qualitatif</span><span class="defq">Comprendre plutôt que mesurer</span></div>
+      <p>Une enquête qualitative cherche à comprendre des pratiques, des situations et le sens qu’elles ont pour les personnes. Elle s’appuie surtout sur des entretiens, des observations ou des documents, et le recueil et l’analyse s’y nourrissent mutuellement. Ce n’est donc pas une enquête « sans chiffres » ou « sur peu de personnes » : ce qui la définit, c’est ce qu’elle cherche.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">L’épistémologie</span><span class="defq">Comment sait-on ce qu’on prétend savoir ?</span></div>
+      <p>C’est la réflexion sur ce qui compte comme connaissance et sur ce qui autorise à affirmer quelque chose. Vous en pratiquez déjà une : la hiérarchie des preuves de la médecine fondée sur les preuves dit ce qui fait preuve pour juger de l’efficacité d’un traitement. On parlera ici de réflexes « positivistes », au sens simple et un peu rapide de l’idée que seul ce qui se mesure et se reproduit fait connaissance.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">La validité</span><span class="defq">Un discours qui tient face à ses données et à ses critiques</span></div>
+      <p>Un résultat qualitatif ne devient pas valide en franchissant un seuil, comme un p &lt; 0,05. Il l’est dans la mesure où il reste fidèle à ce qui a été dit et observé, où son raisonnement se tient, où il explique mieux les données que d’autres interprétations de ces mêmes données, et où il peut être discuté. Il ne prétend pas à la vérité définitive, mais à une plausibilité argumentée et révisable.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Une comparaison : le raisonnement clinique</span><span class="defq">Utile, sans équivalence</span></div>
+      <p>Un diagnostic se construit à partir d’indices, écarte d’autres hypothèses, se défend devant un collègue et se révise si un signe le contredit. L’historien Carlo Ginzburg a d’ailleurs rapproché ce raisonnement par indices de la médecine et des sciences humaines.</p>
+    </div>
+  </div>
+  <div class="note">
+    <p class="verdict">Et la subjectivité ?</p>
+    <p>Le qualitatif engage la subjectivité du chercheur ; la bonne question est de savoir si elle reste contrôlable. La comparaison avec le quantitatif est d’ailleurs trompeuse : le chiffre contient aussi des choix (formuler les items, retenir un critère de jugement, fixer un seuil), que la standardisation rend répétables, pas neutres. Et la subjectivité est aussi un instrument : comprendre un récit demande de le mettre en relation, d’être surpris, d’interpréter.</p>
+    <p>Le vrai danger n’est donc pas la subjectivité, mais l’arbitraire : n’entendre que ce qui confirme ses idées, ou affirmer sans montrer d’où l’on tient ce qu’on avance. Multiplier les regards peut aider, mais deux subjectivités ne font pas une objectivité. La rigueur vient de ce que le lecteur peut vérifier et contester.</p>
+  </div>
+  <div class="note">
+    <p class="verdict">Deux fossés</p>
+    <p>« Seul le chiffre fait science » d’un côté, « tout est subjectif, donc tout se vaut » de l’autre. Comme l’écrit Olivier de Sardan, nous sommes dans de l’à peu près, mais cet à peu près n’a « rien (ne devrait rien avoir) d’un n’importe quoi ».</p>
+  </div>
+  <div class="panel">
+    <p class="speaker">L’exemple qui sert de fil rouge (fictif)</p>
+    <p class="theme">Une interne en psychiatrie mène 12 entretiens avec des patients qui ont arrêté leur traitement. Sa question : que signifie arrêter son traitement pour ces personnes, et comment en arrivent-elles là ?</p>
+    <p style="margin:0">Pour savoir si un traitement est efficace, ou combien de patients l’arrêtent, il faut un résultat valable au-delà des personnes étudiées : un échantillon adapté, une mesure standardisée, un contrôle des biais. Ces règles restent indispensables. Mais la question de l’interne n’appelle pas un chiffre : elle appelle une explication du sens et des logiques à l’œuvre. Juger son enquête comme un essai clinique conduirait soit à la disqualifier à tort, soit à la déformer pour qu’elle lui ressemble.</p>
+  </div>
+  <p class="intro">Trois questions pour vérifier vos repères.</p>
+  <div class="mcqs" id="m0Qs"></div>
+</section>
+
+<!-- MODULE 1 -->
+<section class="module" id="soutenance" aria-labelledby="t1">
+  <div class="modhead">
+    <span class="modnum">Module 1</span>
+    <h2 id="t1">La soutenance</h2>
+    <p class="intro">Une interne en psychiatrie a mené 12 entretiens avec des patients qui ont arrêté leur traitement. Sa question : que signifie arrêter son traitement pour ces personnes, et comment en arrivent-elles là ? Vous êtes à sa place devant le jury. Choisissez vos réponses.</p>
+  </div>
+  <div class="panel" id="scene">
+    <div class="row" style="justify-content:space-between">
+      <span class="progress" id="sceneProgress"></span>
+      <div class="trail" id="sceneTrail" aria-hidden="true"></div>
+    </div>
+    <div id="sceneBody"></div>
+  </div>
+</section>
+
+<!-- MODULE 2 -->
+<section class="module" id="ecrire" aria-labelledby="t2">
+  <div class="modhead">
+    <span class="modnum">Module 2</span>
+    <h2 id="t2">Peut-on écrire ça ?</h2>
+    <p class="intro">Toujours avec les 12 entretiens de l’interne. Pour chaque phrase, décidez si elle peut figurer dans ses résultats, ou si elle affirme plus que ce que le matériau permet.</p>
+  </div>
+  <div class="row"><span class="score" id="sortScore">0 réponse sur 12</span></div>
+  <div class="stmts" id="stmts"></div>
+  <div class="row"><button class="btn ghost" id="sortReset" type="button">Recommencer le module</button></div>
+</section>
+
+<!-- MODULE 3 -->
+<section class="module" id="coder" aria-labelledby="t3">
+  <div class="modhead">
+    <span class="modnum">Module 3</span>
+    <h2 id="t3">Coder un extrait</h2>
+    <p class="intro">Voici un passage d’un entretien de l’interne (fictif). Proposez un code, puis comparez-le à trois lectures possibles. Ensuite, découvrez ce qui s’était dit plus tôt dans l’entretien.</p>
+  </div>
+  <div class="panel">
+    <div class="transcript" id="transcript">
+      <p class="ctxlabel hidden" id="ctxLabel">Plus tôt dans l’entretien</p>
+      <div class="turn context hidden"><span class="who">Interne</span><p>Je me présente : je suis interne dans le service, je travaille avec le Dr M. Rien de ce que vous me direz ne sera répété avec votre nom.</p></div>
+      <div class="turn context hidden"><span class="who">Patient</span><p>Après la première hospitalisation, j’ai cru que j’étais guéri. Le Dr M. m’a dit que le traitement, c’était à vie. À vie, vous vous rendez compte ?</p></div>
+      <p class="ctxlabel hidden" id="ctxLabel2">Le passage à coder</p>
+      <div class="turn"><span class="who">Interne</span><p>Et la dernière fois, vous aviez arrêté le traitement ?</p></div>
+      <div class="turn"><span class="who">Patient</span><p>Oui… enfin, j’ai oublié, quoi. Plusieurs jours. Vous savez ce que c’est, avec le travail. [rire] Et puis je me sentais bien. Je me suis dit, on va voir.</p></div>
+      <div class="turn"><span class="who">Interne</span><p>On va voir quoi ?</p></div>
+      <div class="turn"><span class="who">Patient</span><p>Ben… si ça tient sans. Mais je l’ai pas dit au Dr M. Il se serait inquiété pour rien.</p></div>
+    </div>
+
+    <div style="display:grid;gap:8px">
+      <label for="userCode">Votre code pour ce passage</label>
+      <textarea id="userCode" placeholder="Par exemple une courte phrase, avec un verbe si possible"></textarea>
+    </div>
+    <div class="row">
+      <button class="btn" id="showCodes" type="button">Comparer avec trois lectures</button>
+    </div>
+
+    <div class="yours hidden" id="yours">
+      <p class="speaker">Votre code</p>
+      <p id="yoursText" style="margin:0;font-family:var(--display);font-size:19px"></p>
+      <ul>
+        <li>Dit-il quelque chose, ou se contente-t-il de ranger le passage ? Un bon code peut être faux.</li>
+        <li>Contient-il un verbe ou une relation (« X pour Y », « X comme Y ») ?</li>
+        <li>S’appuie-t-il sur les mots du patient, ou sur ce qu’il fait en parlant, et à qui ?</li>
+      </ul>
+    </div>
+
+    <div class="codes hidden" id="codes">
+      <div class="code">
+        <span class="lvl">Lecture sémantique</span>
+        <span class="lbl">Oubli de prise sur plusieurs jours, lié au travail</span>
+        <p>Au plus près de ce qui est dit. Légitime comme première prise, mais elle reprend « j’ai oublié » à la lettre, alors que le patient corrige lui-même : « je me suis dit, on va voir ».</p>
+      </div>
+      <div class="code">
+        <span class="lvl">Lecture latente</span>
+        <span class="lbl">Arrêter pour vérifier qu’on tient sans traitement</span>
+        <p>L’oubli glisse vers une mise à l’épreuve : « si ça tient sans ». C’est le germe de la logique de l’arrêt comme test. On interprète ici ce qui sous-tend le propos.</p>
+      </div>
+      <div class="code">
+        <span class="lvl">Lecture de la situation de parole</span>
+        <span class="lbl">Présenter l’arrêt comme un oubli devant une future prescriptrice</span>
+        <p>« J’ai oublié » est une version recevable face à une soignante. Et le patient dit avoir caché l’arrêt au Dr M. pour lui éviter de s’inquiéter : taire l’arrêt pour préserver la relation. Ce qui est dit dépend de qui écoute.</p>
+      </div>
+      <p class="ref">Ces lectures ne s’excluent pas : un même passage peut recevoir plusieurs codes. Voir aussi le module 9, « Dit, observé ou interprété ? ».</p>
+      <div class="row"><button class="btn" id="showContext" type="button">Voir l’échange qui précède</button></div>
+    </div>
+
+    <div class="feedback mid hidden" id="ctxComment">
+      <p class="verdict">Le contexte change-t-il votre lecture ?</p>
+      <p>Deux éléments plus tôt dans l’entretien pèsent sur le passage. Le « à vie » rend plus plausible la lecture du test : arrêter, c’est vérifier que ce verdict ne s’applique pas à soi. Et l’interne s’est présentée comme collègue du Dr M. : dire « je l’ai pas dit au Dr M. » à quelqu’un de son équipe n’est pas anodin, et « j’ai oublié » prend un relief différent.</p>
+      <p>Le contexte ne tranche pas pour autant : le patient a peut-être vraiment oublié. Il rend certaines lectures mieux fondées que d’autres. C’est pourquoi on code des segments assez larges, et pourquoi on garde le lien entre chaque interprétation et les passages qui la fondent.</p>
+      <div class="row"><button class="btn ghost" id="codeReset" type="button">Recommencer le module</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 4 -->
+<section class="module" id="position" aria-labelledby="t4">
+  <div class="modhead">
+    <span class="modnum">Module 4</span>
+    <h2 id="t4">La blouse</h2>
+    <p class="intro">Le même patient (fictif) parle de son traitement deux fois : à l’interne, qui fait partie de l’équipe soignante, puis à une sociologue venue de l’extérieur, sans blouse. Lisez les deux extraits, puis répondez aux questions.</p>
+  </div>
+  <div class="panel">
+    <div class="cols">
+      <div class="col">
+        <p class="colhead">Face à l’interne</p>
+        <div class="transcript">
+          <div class="turn"><span class="who">Patient</span><p>Le traitement, ça va. J’ai eu une période où je le prenais moins, à cause des effets secondaires, la prise de poids surtout. Le docteur a changé de molécule, maintenant ça va mieux.</p></div>
+          <div class="turn"><span class="who">Interne</span><p>Et au quotidien, comment vous vous organisez ?</p></div>
+          <div class="turn"><span class="who">Patient</span><p>Je le prends avec le petit-déjeuner, j’ai un pilulier pour la semaine. Je dors mieux. Je reprends le travail le matin, à mi-temps.</p></div>
+        </div>
+      </div>
+      <div class="col">
+        <p class="colhead">Face à la sociologue</p>
+        <div class="transcript">
+          <div class="turn"><span class="who">Patient</span><p>Franchement, le Dr M., il écoute pas. Il dit « c’est à vie » et c’est tout. Alors des fois j’arrête, pour voir. Je dis rien.</p></div>
+          <div class="turn"><span class="who">Sociologue</span><p>Et la prise du traitement, au quotidien, ça se passe comment ?</p></div>
+          <div class="turn"><span class="who">Patient</span><p>Bah… comme tout le monde. Je sais pas trop quoi vous dire.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mcqs" id="posQs"></div>
+  <div class="note">
+    <p class="verdict">La question utile</p>
+    <p>Pas « ai-je un biais ? », mais : que ma position permet-elle de voir, que masque-t-elle, et comment en ai-je tenu compte ? En pratique, on ne dispose souvent que d’une des deux versions. D’où l’intérêt de décrire sa position et de chercher, dans ses propres données, la trace de ce qu’elle rend difficile à dire.</p>
+    <p class="ref">Approfondir : module 8, « Biais ou donnée ? »</p>
+  </div>
+</section>
+
+<!-- MODULE 5 -->
+<section class="module" id="effectif" aria-labelledby="t5">
+  <div class="modhead">
+    <span class="modnum">Module 5</span>
+    <h2 id="t5">Combien d’entretiens ?</h2>
+    <p class="intro">Un outil pour raisonner sur la taille d’un corpus avec la notion de pouvoir informationnel (Malterud et al., 2016). Il ne calcule rien : il vous aide à rédiger une justification. Les réglages de départ correspondent au projet de l’interne ; modifiez-les pour le vôtre.</p>
+  </div>
+  <div class="panel">
+    <div class="dims" id="dims"></div>
+    <div class="row">
+      <label for="nEnv">Effectif envisagé</label>
+      <input type="number" id="nEnv" min="1" max="200" value="12">
+      <span class="ref">entretiens</span>
+    </div>
+  </div>
+  <div class="panel">
+    <p class="speaker">Ce que disent vos réglages</p>
+    <p id="infoVerdict" style="margin:0"></p>
+    <p class="speaker">Ébauche de justification pour votre protocole</p>
+    <p class="draft" id="infoDraft"></p>
+    <div class="row">
+      <button class="btn" id="copyDraft" type="button">Copier l’ébauche</button>
+      <span class="ref" id="copyMsg" role="status"></span>
+    </div>
+    <div class="feedback mid">
+      <p class="verdict">Ce n’est pas un calcul de puissance.</p>
+      <p>Aucun réglage ne donne un nombre « suffisant ». Le modèle sert à faire une première estimation, à la réviser pendant le recueil, puis à justifier son choix. Un échantillon trop grand peut aussi nuire, en faisant perdre la vue d’ensemble nécessaire à l’analyse.</p>
+      <p class="ref">Malterud, Siersma et Guassora, 2016</p>
+    </div>
+  </div>
+  <div class="panel">
+    <p class="speaker">Qualitatif ne veut pas dire « micro »</p>
+    <p style="margin:0">Une enquête localisée peut produire un résultat qui dépasse largement son terrain. En observant pendant environ un an la vie d’un hôpital psychiatrique de Washington, Erving Goffman élabore dans <em>Asiles</em> (1961) le concept d’« institution totale » : un lieu où l’on vit coupé du monde, sous une même autorité, selon des règles et des horaires communs à tous.</p>
+    <p style="margin:0">Il en montre les effets des deux côtés. Dès l’admission, les reclus sont dépossédés de leurs affaires, de leurs rôles sociaux et d’une part de leur identité ; leur quotidien dépend ensuite de privilèges à gagner et de petites ruses pour préserver un peu d’eux-mêmes. Le personnel doit traiter des personnes comme un travail à organiser. Les deux groupes forment des mondes séparés, qui se voient à travers des stéréotypes hostiles. Surtout, des conduites lues comme des symptômes peuvent être des façons de s’adapter à l’institution elle-même.</p>
+  </div>
+  <div class="mcqs" id="goffQ"></div>
+</section>
+
+<!-- MODULE 6 -->
+<section class="module" id="produits" aria-labelledby="t6">
+  <div class="modhead">
+    <span class="modnum">Module 6</span>
+    <h2 id="t6">Des thèmes à l’interprétation</h2>
+    <p class="intro">Une liste comme « isolement, stigmatisation, observance » range le matériau, mais ne dit encore rien. Le produit d’une enquête qualitative est une interprétation argumentée, qui peut prendre plusieurs formes, souvent combinées dans un même travail. Lisez d’abord les repères ci-dessous, puis classez les formulations.</p>
+  </div>
+  <div class="defs">
+    <div class="def">
+      <div class="defhead"><span class="defname">Étiquette</span><span class="defq">Range, mais ne dit rien</span></div>
+      <p>Un intitulé qui nomme un domaine ou un sujet abordé, sans dire ce qu’il signifie pour les personnes ni ce qu’il produit. Ce n’est pas encore un résultat, mais une étape de rangement. Une étiquette peut être longue et détaillée : « les participants évoquent X à de nombreuses reprises » en reste une.</p>
+      <p class="defex"><span>Exemple</span> « Fatigue. » ou « Les infirmières de nuit évoquent souvent la fatigue. »</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Description dense</span><span class="defq">Que se passe-t-il ici, et quel sens cela a-t-il pour les personnes ?</span></div>
+      <p>Une description qui restitue ce que recouvre concrètement une pratique ou une situation, avec le sens qu’elle a pour ceux qui la vivent. L’expression vient de Clifford Geertz.</p>
+      <p class="defex"><span>Exemple</span> « Le “calme” de la nuit recouvre des rondes, des veilles au chevet, des appels au cadre de garde, et des temps d’attente vécus comme les plus éprouvants. »</p>
+      <p class="defpit"><span>Piège</span> Glisser une interprétation sous l’apparence d’un fait.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Typologie</span><span class="defq">Quelles logiques différentes coexistent ?</span></div>
+      <p>Une mise en ordre des différentes façons de vivre, de faire ou de donner sens à une même chose. Elle classe des logiques, des rapports, des manières de faire.</p>
+      <p class="defex"><span>Exemple</span> « La nuit peut être vécue comme un refuge, comme une relégation ou comme un espace d’autonomie ; une même infirmière passe de l’un à l’autre selon les équipes. »</p>
+      <p class="defpit"><span>Piège</span> Classer les personnes une fois pour toutes, alors qu’une même personne peut changer de logique.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Processus</span><span class="defq">Comment en arrive-t-on là, par quelles étapes ?</span></div>
+      <p>Une dynamique dans le temps : des étapes, et surtout ce qui fait passer de l’une à l’autre. C’est ce second élément qui distingue un processus d’une simple chronologie.</p>
+      <p class="defex"><span>Exemple</span> « De l’enthousiasme au repli : c’est lorsque les décisions prises la nuit sont désavouées par l’équipe de jour que l’engagement se défait. »</p>
+      <p class="defpit"><span>Piège</span> Raconter une suite d’événements sans dire ce qui fait passer d’une étape à l’autre.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Mécanisme explicatif</span><span class="defq">Comment ceci produit-il cela, dans ce contexte ?</span></div>
+      <p>Un lien entre deux éléments, qui montre comment l’un contribue à produire l’autre dans des situations données. Il ne dit pas de combien, ni qu’il vaut partout ; il peut devenir ensuite une hypothèse à tester.</p>
+      <p class="defex"><span>Exemple</span> « L’absence de médecin sur place oblige les infirmières de nuit à décider seules, ce qui renforce leur autonomie mais les expose davantage en cas d’incident. »</p>
+      <p class="defpit"><span>Piège</span> Présenter comme un effet mesuré ce qui reste une explication plausible.</p>
+    </div>
+  </div>
+  <p class="intro">Les formulations à classer viennent d’une enquête fictive : une interne en psychiatrie a mené 12 entretiens avec des patients qui ont arrêté leur traitement, pour comprendre ce que signifie cet arrêt et comment ils en arrivent là. Certaines formulations sont réussies, d’autres tombent dans le piège de leur catégorie.</p>
+  <div class="row"><span class="score" id="prodScore"></span></div>
+  <div class="stmts" id="prods"></div>
+  <div class="row"><button class="btn ghost" id="prodReset" type="button">Recommencer le module</button></div>
+</section>
+
+<!-- MODULE 7 -->
+<section class="module" id="cas-negatif" aria-labelledby="t7">
+  <div class="modhead">
+    <span class="modnum">Module 7</span>
+    <h2 id="t7">Le cas qui dérange</h2>
+    <p class="intro">L’interne a codé ses premiers entretiens et formulé un thème provisoire. Il reste un entretien à relire.</p>
+  </div>
+  <div class="panel">
+    <p class="speaker">Thème provisoire</p>
+    <p class="theme">Arrêter pour vérifier qu’on n’est plus malade</p>
+    <div class="extracts">
+      <div class="extract"><span class="who">M. A.</span><p>« Je voulais savoir si c’était le traitement qui me tenait, ou moi. »</p></div>
+      <div class="extract"><span class="who">Mme B.</span><p>« Ça faisait un an que j’allais bien. Je me suis dit : peut-être qu’ils se sont trompés. »</p></div>
+      <div class="extract"><span class="who">M. C.</span><p>« J’ai arrêté pour voir. Au bout de trois semaines, j’ai compris. »</p></div>
+      <div class="extract"><span class="who">Mme D.</span><p>« Si je vais bien sans, c’est que je suis pas malade. C’est logique, non ? »</p></div>
+      <div class="extract odd hidden" id="caseL"><span class="who">Mme L.</span><p>« Je sais très bien que je suis malade, je l’ai jamais mis en doute. Le mercredi, je garde mon petit-fils et je dois conduire. Ce comprimé-là m’endort. Alors ce jour-là je le saute, et je le reprends le soir. »</p></div>
+    </div>
+    <div class="row"><button class="btn" id="showL" type="button">Lire le dernier entretien</button></div>
+  </div>
+  <div class="mcqs hidden" id="negQ"></div>
+  <div class="panel hidden" id="reform">
+    <label for="userTheme">Reformulez le thème pour qu’il rende compte de tous les cas</label>
+    <textarea id="userTheme" placeholder="Votre reformulation"></textarea>
+    <div class="row"><button class="btn" id="showModel" type="button">Voir une reformulation possible</button></div>
+    <div class="feedback good hidden" id="model">
+      <p class="verdict">Une reformulation possible</p>
+      <p class="theme">L’arrêt comme test suppose un doute sur le diagnostic. Il coexiste avec des arrêts tactiques, sans doute aucun, qui concilient le traitement et les obligations du quotidien.</p>
+      <p>D’autres formulations sont possibles. L’essentiel est que le cas qui dérange précise les conditions du thème, au lieu d’être écarté. Le thème en sort plus étroit, mais plus solide, et une seconde logique apparaît.</p>
+      <p class="ref">Synthèse : « Qu’est-ce qui résiste ? »</p>
+      <div class="row"><button class="btn ghost" id="negReset" type="button">Recommencer le module</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULE 8 -->
+<section class="module" id="biais" aria-labelledby="t8">
+  <div class="modhead">
+    <span class="modnum">Module 8</span>
+    <h2 id="t8">Biais ou donnée ?</h2>
+    <p class="intro">Aucune position d’enquête n’est neutre, mais tout ne se vaut pas pour autant. Certaines façons de conduire l’enquête orientent les réponses et doivent être limitées ; d’autres effets tiennent à la place de l’enquêteur et se décrivent ; certains incidents, enfin, renseignent sur l’objet lui-même. Lisez les repères, puis classez six situations tirées d’une enquête fictive : une interne en psychiatrie interroge des patients qui ont arrêté leur traitement.</p>
+  </div>
+  <div class="defs">
+    <div class="def">
+      <div class="defhead"><span class="defname">Mécanisme qui oriente les données</span><span class="defq">À limiter</span></div>
+      <p>Une manière de mener l’enquête qui pousse les réponses dans un sens, quel que soit l’objet : intimidation, relances qui ne suivent que ce qui confirme une hypothèse, questions qui suggèrent la réponse. C’est pour ces mécanismes que le mot « biais » reste utile.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Effet de position</span><span class="defq">À décrire et à analyser</span></div>
+      <p>Ce que la place de l’enquêteur rend visible ou invisible : soignant ou extérieur, familier du milieu ou étranger. On ne peut pas le supprimer, puisqu’aucune place n’est neutre. On le décrit et on en tient compte dans l’interprétation.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Incident révélateur</span><span class="defq">À analyser comme une donnée</span></div>
+      <p>Un refus, une gaffe, un malentendu. Si l’on analyse la relation d’enquête comme une relation sociale, l’incident cesse d’être une « perturbation » et renseigne sur l’objet étudié (Papinot, 2013).</p>
+    </div>
+  </div>
+  <div class="row"><span class="score" id="biaisScore"></span></div>
+  <div class="stmts" id="biaisList"></div>
+  <div class="row"><button class="btn ghost" id="biaisReset" type="button">Recommencer le module</button></div>
+</section>
+
+<!-- MODULE 9 -->
+<section class="module" id="dit-observe" aria-labelledby="t9">
+  <div class="modhead">
+    <span class="modnum">Module 9</span>
+    <h2 id="t9">Dit, observé ou interprété ?</h2>
+    <p class="intro">Une analyse rigoureuse relie chaque affirmation aux données et distingue ce qui a été dit, ce qui a été observé et ce que le chercheur interprète. Les trois sont légitimes ; la faute est de les confondre. Voici des phrases tirées d’un paragraphe de résultats (fictif) sur M. C., qui a arrêté son traitement après un an de stabilité. Classez chacune.</p>
+  </div>
+  <div class="defs">
+    <div class="def">
+      <div class="defhead"><span class="defname">Dit</span><span class="defq">Ce que la personne a déclaré</span></div>
+      <p>Un propos rapporté, cité ou paraphrasé. Fidèlement rapporté, il reste un récit : il ne décrit pas pour autant exactement les événements, et reste une donnée à analyser.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Observé</span><span class="defq">Ce que le chercheur a constaté</span></div>
+      <p>Un fait constaté pendant l’enquête : un geste, un silence, une demande, un refus, une comparaison entre les entretiens du corpus.</p>
+    </div>
+    <div class="def">
+      <div class="defhead"><span class="defname">Interprété</span><span class="defq">Ce que le chercheur en propose comme lecture</span></div>
+      <p>Une mise en sens par le chercheur. Elle est le cœur de l’analyse, à condition de rester liée aux passages qui la fondent et d’être présentée comme une interprétation.</p>
+    </div>
+  </div>
+  <div class="row"><span class="score" id="ditScore"></span></div>
+  <div class="stmts" id="ditList"></div>
+  <div class="note hidden" id="ditNote">
+    <p class="verdict">Le pacte ethnographique</p>
+    <p>Olivier de Sardan parle de « pacte ethnographique » : ne pas inventer ses données et respecter le matériau recueilli. Cela ne veut pas dire que les propos rapportés décrivent les faits. Le plus courant n’est pas l’invention, mais le glissement : un récit qui devient un événement, une interprétation qui se présente comme un propos.</p>
+  </div>
+  <div class="row"><button class="btn ghost" id="ditReset" type="button">Recommencer le module</button></div>
+</section>
+
+<!-- MODULE 10 -->
+<section class="module" id="concurrence" aria-labelledby="t10">
+  <div class="modhead">
+    <span class="modnum">Module 10</span>
+    <h2 id="t10">Deux lectures en concurrence</h2>
+    <p class="intro">Une interprétation qualitative est valide dans la mesure où elle reste fidèle aux données et les explique mieux que d’autres interprétations possibles du même matériau. Encore faut-il confronter ces lectures. Dans une enquête fictive, plusieurs patients disent avoir caché à leur psychiatre qu’ils avaient arrêté leur traitement. Deux interprétations sont en présence.</p>
+  </div>
+  <div class="cols">
+    <p class="theme">A. On se tait pour préserver la relation : ne pas décevoir le psychiatre.</p>
+    <p class="theme">B. On se tait pour éviter une sanction : une hospitalisation, une injection retard.</p>
+  </div>
+  <p class="intro">Pour chaque extrait, dites ce qu’il apporte au choix entre les deux lectures.</p>
+  <div class="row"><span class="score" id="concScore"></span></div>
+  <div class="stmts" id="concList"></div>
+  <div class="mcqs hidden" id="concQ"></div>
+  <div class="row"><button class="btn ghost" id="concReset" type="button">Recommencer le module</button></div>
+</section>
+
+<!-- SYNTHESE -->
+<section class="module" id="synthese" aria-labelledby="tS">
+  <div class="modhead">
+    <span class="modnum">Synthèse</span>
+    <h2 id="tS">Synthèse et ressources</h2>
+    <p class="intro">L’essentiel de l’atelier, à garder sous la main.</p>
+    <div class="row" id="printRow"><button class="btn ghost" id="printBtn" type="button">Imprimer cette synthèse</button></div>
+  </div>
+
+  <div class="note">
+    <p class="verdict">À retenir</p>
+    <p>La validité est ce qu’on revendique ; la rigueur est ce qu’on fait pour la mériter. Une analyse rigoureuse n’est pas une analyse que d’autres reproduiraient à l’identique, mais une analyse que le lecteur peut contester, parce qu’il voit comment elle a été faite. Encore faut-il qu’elle rende compte des données, qu’elle ne néglige pas ce qui la contredit et qu’elle reste à la mesure du matériau.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Les cinq questions de la rigueur</h3>
+    <p style="margin:0">Il n’existe pas de code écrit qui garantisse la rigueur, et une grille cochée n’en tient pas lieu. Ces cinq questions permettent de l’éprouver.</p>
+    <ol class="five">
+      <li><strong>Pourquoi ces cas ?</strong> Justifiez le choix des personnes et du terrain au regard de la question. L’interne a cherché des arrêts récents et anciens, annoncés et cachés.</li>
+      <li><strong>Comment le savez-vous ?</strong> Reliez chaque affirmation aux données, et distinguez ce qui a été dit, observé et interprété. C’est le « pacte ethnographique » : ne pas inventer ses données et respecter le matériau recueilli. Un propos fidèlement rapporté ne décrit pas pour autant exactement les événements : il reste une donnée à analyser.</li>
+      <li><strong>Qu’est-ce qui résiste ?</strong> Cherchez activement les contre-exemples, au lieu d’écarter ce qui gêne. Une patiente qui arrête sans aucun doute sur son diagnostic oblige à revoir l’idée de « test ».</li>
+      <li><strong>Que fait votre place à ces données ?</strong> Dites ce que votre position a rendu possible ou difficile, sans en faire une confession : « le héros […] c’est celui dont on parle, non celui qui parle ».</li>
+      <li><strong>Jusqu’où ça vaut ?</strong> Délimitez les situations auxquelles votre résultat peut s’appliquer. On transfère un mécanisme sous conditions, pas un pourcentage. Ce qui vaut en suivi ambulatoire ne vaut pas forcément à l’hôpital.</li>
+    </ol>
+  </div>
+
+  <div class="panel">
+    <h3>Ce qu’une dizaine d’entretiens permet d’affirmer</h3>
+    <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th scope="col">Dix entretiens bien menés peuvent…</th><th scope="col">…mais ne peuvent pas</th></tr></thead>
+        <tbody>
+          <tr><td>Montrer qu’un phénomène existe et décrire comment il se déroule</td><td>Dire combien de personnes sont concernées</td></tr>
+          <tr><td>Contredire un « tous » : un cas bien documenté suffit</td><td>Prouver qu’une situation n’existe pas ailleurs</td></tr>
+          <tr><td>Mettre au jour des logiques différentes derrière une même conduite</td><td>Dire laquelle est la plus fréquente dans une population</td></tr>
+          <tr><td>Proposer un mécanisme plausible, dans un contexte donné</td><td>Mesurer un effet ou la force d’un facteur de risque</td></tr>
+          <tr><td>Faire naître des hypothèses, des concepts, des questions de questionnaire</td><td>Trancher entre deux traitements ou dispositifs</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin:0">Il n’existe pas de nombre magique. La force d’un petit corpus tient au choix raisonné des personnes, à la qualité de la relation d’enquête et à la profondeur de l’analyse. Pour justifier un effectif, le pouvoir informationnel offre un raisonnement plutôt qu’un calcul.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Quatre réflexes à repérer chez soi</h3>
+    <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th scope="col">Ce que je me dis</th><th scope="col">Ce que ça suppose</th><th scope="col">La question à poser</th></tr></thead>
+        <tbody>
+          <tr><td>« Il faut un second codeur et un kappa »</td><td>L’accord fait la validité</td><td>Que nous apprend la discussion de nos désaccords ?</td></tr>
+          <tr><td>« 9 sur 12 l’ont dit, donc c’est vrai »</td><td>La fréquence fait la preuve</td><td>Que permet de comprendre ce propos, même s’il est rare ?</td></tr>
+          <tr><td>« Le patient l’a dit, c’est dans le verbatim »</td><td>Le discours est un fait brut</td><td>Pourquoi me dit-il cela, à moi, ici ?</td></tr>
+          <tr><td>« Saturation atteinte, grille COREQ cochée »</td><td>La procédure garantit la qualité</td><td>Qu’ai-je réellement fait, et qu’est-ce qui est saturé au juste ?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin:0">Quelques nuances évitent de remplacer un réflexe par un autre. Compter reste utile pour décrire un corpus, tant qu’on n’en tire pas de preuve. Un second codeur peut tester la clarté d’une grille en codage déductif, sans rien garantir sur la validité d’une interprétation. La grille COREQ aide à rendre compte d’une étude ; ce n’est pas une mesure de sa qualité.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Face à un jury ou un relecteur</h3>
+    <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th scope="col">On vous dit</th><th scope="col">Vous pouvez répondre</th></tr></thead>
+        <tbody>
+          <tr><td>« Ce n’est pas représentatif. »</td><td>« Mon objectif n’était pas d’estimer une fréquence, mais de comprendre une logique. J’ai choisi ces personnes pour telle raison, et voici les situations auxquelles mes résultats peuvent s’étendre. »</td></tr>
+          <tr><td>« C’est subjectif. »</td><td>« Ma position a joué et je la décris. Vous pouvez vérifier mes interprétations, car je montre les données qui les fondent et les cas qui les ont contredites. »</td></tr>
+          <tr><td>« Pourquoi pas de kappa ? »</td><td>« Un kappa mesure l’accord sur l’application d’une grille, pas la justesse d’une interprétation. J’ai discuté mon analyse avec telle personne, et voici ce que cela a changé. »</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Glossaire</h3>
+    <dl class="gloss">
+      <dt>Cas négatif</dt><dd>Un cas qui contredit ou complique l’interprétation en cours, et qu’on cherche activement.</dd>
+      <dt>Description dense</dt><dd>Une description qui restitue une scène ou une pratique avec le sens qu’elle a pour les personnes (l’expression vient de Clifford Geertz).</dd>
+      <dt>Plausibilité</dt><dd>Dans cette approche, une interprétation solidement argumentée et ancrée dans les données, mais révisable.</dd>
+      <dt>Pouvoir informationnel</dt><dd>L’information pertinente que contient un corpus pour la question posée : plus elle est grande, moins il faut de participants.</dd>
+      <dt>Réflexivité</dt><dd>L’examen de ce que la position du chercheur fait aux données et à leur interprétation.</dd>
+      <dt>Saturation</dt><dd>Le moment où de nouvelles données n’apportent plus d’élément nouveau au regard de la question posée. La notion garde son sens dans certaines démarches, comme la théorisation ancrée, mais ne suffit pas toujours à justifier un effectif.</dd>
+      <dt>Verbatim</dt><dd>Transcription mot à mot d’un entretien ; plus largement, le matériau brut analysé.</dd>
+    </dl>
+  </div>
+
+  <div class="panel">
+    <h3>Pour aller plus loin</h3>
+    <p class="speaker">À lire, dans cet ordre</p>
+    <ul class="biblio">
+      <li>Barbour, R. S. (2001). « Checklists for improving rigour in qualitative research: a case of the tail wagging the dog? ». <em>BMJ</em>, 322, 1115-1117. doi:10.1136/bmj.322.7294.1115 — À lire en premier : court, écrit pour le monde médical, il montre qu’une procédure cochée ne suffit pas à faire la rigueur.</li>
+      <li>Greenhalgh, T. &amp; Taylor, R. (1997). « Papers that go beyond numbers (qualitative research) ». <em>BMJ</em>, 315, 740-743. doi:10.1136/bmj.315.7110.740 — Une bonne entrée pour les soignants, à lire de façon critique : il présente encore l’analyse par plusieurs chercheurs comme un gain de validité.</li>
+      <li>Olivier de Sardan, J.-P. (2004). « La rigueur du qualitatif. L’anthropologie comme science empirique ». <em>EspacesTemps</em>, 84-86, 38-50. doi:10.3406/espat.2004.4237 — Pour franchir le pas vers les sciences sociales.</li>
+      <li>Gouirir, M. (1998). « L’observatrice, indigène ou invitée ? Enquêter dans un univers familier ». <em>Genèses</em>, 32, 110-126. doi:10.3406/genes.1998.1527 — Utile si vous enquêtez dans votre propre service ou un milieu que vous connaissez déjà.</li>
+      <li>Papinot, C. (2013). « Erreurs, biais, perturbations de l’observateur et autres “mauvais génies” des sciences sociales ». <em>SociologieS</em>. doi:10.4000/sociologies.4534 — Pour aller au bout de la critique de la notion de biais, exemples de terrain à l’appui.</li>
+      <li>Goffman, E. (1968 [1961]). <em>Asiles. Études sur la condition sociale des malades mentaux</em>. Paris : Minuit. — Un classique pour voir ce qu’une enquête de terrain peut révéler d’une institution de soin.</li>
+      <li>Malterud, K., Siersma, V. D. &amp; Guassora, A. D. (2016). « Sample size in qualitative interview studies: guided by information power ». <em>Qualitative Health Research</em>, 26(13), 1753-1760. doi:10.1177/1049732315617444 — Pour justifier la taille de son échantillon sans invoquer automatiquement la saturation.</li>
+      <li>Braun, V. &amp; Clarke, V. (2021). « To saturate or not to saturate? ». <em>Qualitative Research in Sport, Exercise and Health</em>, 13(2), 201-216. doi:10.1080/2159676X.2019.1704846 — Pour comprendre les limites de la saturation.</li>
+      <li>Becker, H. S. (2002). <em>Les ficelles du métier</em>. Paris : La Découverte. — Pour les plus curieux : des astuces concrètes pour penser son enquête.</li>
+    </ul>
+    <p class="speaker">Le cadre théorique, en clair</p>
+    <ul class="biblio">
+      <li>Jean-Claude Passeron, <em>Le raisonnement sociologique</em> (Nathan, 1991 ; nouvelle édition, Albin Michel, 2006). Les sciences sociales ont leur propre régime de scientificité : elles visent une connaissance empiriquement fondée, sans relever de la falsification au sens de Popper.</li>
+      <li>Carlo Ginzburg, « Signes, traces, pistes », <em>Le Débat</em>, n° 6, 1980, p. 3-44. Un raisonnement qui remonte des indices à ce qui les a produits, rapproché notamment de la sémiologie médicale.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Consultation d’aide méthodologique F2RSM Psy — J. Charbit, M. Trimbur. L’exemple et les extraits d’entretien sont entièrement fictifs.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  /* ---------- Navigation : un module à la fois ---------- */
+  var sections = Array.prototype.slice.call(document.querySelectorAll("section.module"));
+  var ids = sections.map(function(s){ return s.id; });
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll("nav.toc a"));
+  var nextBoxes = {};
+  var retenir = {
+    "reperes": "La validité est ce qu’on revendique ; la rigueur est ce qu’on fait pour la mériter. Un résultat qualitatif ne prétend pas à la vérité définitive, mais à une plausibilité argumentée et révisable.",
+    "soutenance": "L’objection « ce n’est pas représentatif » juge l’enquête avec un critère conçu pour une autre question. On y répond en recadrant la question, en justifiant le choix des cas, en délimitant la portée des résultats et en décrivant sa position, sans concéder ni surenchérir.",
+    "ecrire": "Une dizaine d’entretiens peut montrer qu’un phénomène existe, décrire comment il fonctionne, contredire un « tous » et proposer un mécanisme plausible. Elle ne peut pas dire combien de personnes sont concernées, mesurer un effet, prouver une absence ni trancher entre deux traitements. Compter décrit les entretiens recueillis, sans faire preuve, et un propos rare peut être le plus éclairant.",
+    "coder": "Le verbatim n’est pas un fait brut : la question à poser est « pourquoi me dit-il cela, à moi, ici ? ». Un bon code dit déjà quelque chose, un passage peut en recevoir plusieurs, et le contexte de l’entretien rend certaines lectures mieux fondées que d’autres.",
+    "position": "Aucune version n’est la vraie : chacune est un récit produit dans une situation. La question utile n’est pas « ai-je un biais ? », mais : que ma position permet-elle de voir, que masque-t-elle, et comment en ai-je tenu compte ?",
+    "effectif": "Il n’existe pas de nombre magique. La force d’un petit nombre d’entretiens tient au choix raisonné des personnes, à la qualité de la relation d’enquête et à la profondeur de l’analyse. La portée d’un résultat vient de ce que ses concepts permettent de comprendre ailleurs, pas du nombre de personnes étudiées.",
+    "produits": "Le produit d’une enquête qualitative est une interprétation argumentée, pas une liste de thèmes : description dense, typologie, processus ou mécanisme, souvent combinés. Un mécanisme plausible n’est pas une causalité démontrée ; il peut devenir une hypothèse à tester.",
+    "cas-negatif": "Cherchez activement les contre-exemples, au lieu d’écarter ce qui gêne. Un cas qui résiste ne détruit pas un thème : il en précise les conditions, et en fait parfois apparaître un autre.",
+    "biais": "Le mot « biais » reste utile pour les mécanismes qui orientent les données, comme l’intimidation ou les relances sélectives : on les limite. Les effets de position se décrivent, et les incidents d’enquête s’analysent comme des données.",
+    "dit-observe": "Reliez chaque affirmation aux données, et distinguez ce qui a été dit, observé et interprété. Un propos fidèlement rapporté ne décrit pas pour autant exactement les événements : il reste une donnée à analyser.",
+    "concurrence": "Une interprétation est valide si elle explique mieux les données que d’autres interprétations du même matériau. Cherchez les passages qui départagent les lectures plutôt que ceux qui les confirment : ni le décompte ni l’accord entre codeurs ne tranchent."
+  };
+
+  sections.forEach(function(sec, i){
+    var box = document.createElement("div");
+    box.className = "nextbox hidden";
+    var isLast = (i === sections.length - 1);
+    var label = isLast ? "Vous avez terminé l’atelier." : "Module terminé.";
+    var p = document.createElement("p");
+    p.className = "ref";
+    p.textContent = label;
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn";
+    if (isLast){
+      b.textContent = "Revenir au premier module";
+      b.addEventListener("click", function(){ go(ids[0]); });
+    } else {
+      var nextTitle = sections[i + 1].querySelector("h2").textContent;
+      b.textContent = "Module suivant : " + nextTitle;
+      b.addEventListener("click", function(){ go(ids[i + 1]); });
+    }
+    if (retenir[sec.id]){
+      var r = document.createElement("div");
+      r.className = "retenir";
+      var rt = document.createElement("p"); rt.className = "verdict"; rt.textContent = "À retenir";
+      var rx = document.createElement("p"); rx.textContent = retenir[sec.id];
+      r.appendChild(rt); r.appendChild(rx);
+      box.appendChild(r);
+    }
+    box.appendChild(p);
+    box.appendChild(b);
+    sec.appendChild(box);
+    nextBoxes[sec.id] = box;
+  });
+
+  function markDone(id){
+    if (nextBoxes[id]) nextBoxes[id].classList.remove("hidden");
+  }
+
+  function show(id){
+    if (ids.indexOf(id) < 0) id = ids[0];
+    sections.forEach(function(s){ s.classList.toggle("inactive", s.id !== id); });
+    navLinks.forEach(function(a){
+      if (a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+    var counter = document.getElementById("modCounter");
+    var mn = document.getElementById(id).querySelector(".modnum");
+    if (counter) counter.textContent = (id === "synthese") ? "Synthèse et ressources" : mn.textContent + " sur 10";
+  }
+
+  function go(id){
+    if (location.hash === "#" + id){ show(id); }
+    else { location.hash = id; }
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener("hashchange", function(){
+    show(location.hash.slice(1));
+    window.scrollTo(0, 0);
+  });
+
+  /* ---------- Module 1 : soutenance ---------- */
+  var nodes = {
+    start: {
+      who: "Un membre du jury",
+      q: "« 12 patients, ce n’est pas représentatif. »",
+      opts: [
+        {t: "C’est une limite que je reconnais et que je discute : mes résultats sont exploratoires et devront être confirmés sur un échantillon plus large.", k: "bad",
+         f: "La réponse paraît honnête, mais elle concède un défaut qui n’en est pas un. Dire « exploratoire » laisse entendre que la vraie réponse viendra plus tard, d’une étude chiffrée. Or votre enquête répond déjà à sa propre question : comprendre une logique, pas compter.",
+         ref: "Voir le module 0", next: "questionnaire"},
+        {t: "J’ai recruté jusqu’à saturation des données : les trois derniers entretiens n’apportaient plus de code nouveau, ce que j’ai documenté dans un tableau.", k: "mid",
+         f: "La saturation (le moment où de nouveaux entretiens n’apportent plus rien de neuf) rassure souvent. Mais elle ne répond pas à l’objection : elle dit quand vous avez arrêté de recruter, pas pourquoi ces personnes-là. Et le jury risque de demander ce qui, exactement, n’apportait plus rien.",
+         ref: "Voir les modules 2 et 5", next: "saturation"},
+        {t: "Ma question porte sur ce que l’arrêt signifie. J’ai donc cherché la diversité des situations : arrêts récents et anciens, annoncés et cachés.", k: "good",
+         f: "Vous recadrez la question (comprendre une logique, pas estimer une fréquence) et vous justifiez le choix des cas par rapport à elle. Ce qui compte est la diversité des situations au regard de la question.",
+         ref: "Voir le module 0 et la synthèse", next: "transfer"},
+        {t: "Ce n’est pas un échantillon de convenance, mais un échantillon raisonné : il reproduit la répartition par âge et par sexe de la file active du CMP.", k: "bad",
+         f: "Reproduire la répartition par âge et par sexe, c’est la logique des sondages. Sur 12 personnes, elle ne rend pas l’échantillon représentatif. Et ce n’est pas la diversité utile ici : celle qui compte, c’est la diversité des situations d’arrêt.",
+         ref: "Voir le module 0 et la synthèse", next: "transfer"}
+      ]
+    },
+    questionnaire: {
+      who: "Le même membre du jury",
+      q: "« Alors pourquoi ne pas avoir commencé par un questionnaire ? »",
+      opts: [
+        {t: "Un questionnaire aurait été prématuré : il fallait d’abord identifier les thèmes pertinents, que je pourrai ensuite transformer en items.", k: "mid",
+         f: "Ce n’est pas faux : une enquête qualitative peut faire naître des questions de questionnaire. Mais la réponse présente à nouveau votre enquête comme une étape préparatoire, en attente de la « vraie » étude. Or elle produit déjà ses propres résultats : ce que l’arrêt signifie pour les patients et comment ils y arrivent, ce qu’aucun questionnaire ne dirait.",
+         ref: "Voir les modules 2 et 5", next: "transfer"},
+        {t: "Un questionnaire m’aurait dit combien de patients arrêtent. Ma question porte sur ce que l’arrêt signifie et sur la façon dont on y arrive.", k: "good",
+         f: "Vous revenez à la question de recherche. Les deux méthodes ne se concurrencent pas : elles répondent à des questions différentes.",
+         ref: "Voir le module 0", next: "transfer"},
+        {t: "Pas par principe, mais par réalisme : les patients en rupture de soins répondent peu aux questionnaires, alors qu’ils acceptent plus volontiers un entretien.", k: "bad",
+         f: "L’argument d’accès est réel, mais secondaire : il laisse entendre qu’avec un bon taux de réponse, le questionnaire aurait aussi bien fait l’affaire. Le choix de la méthode découle de la question, pas des contraintes de recrutement.",
+         ref: "Voir les modules 0 et 4", next: "transfer"}
+      ]
+    },
+    saturation: {
+      who: "Le même membre du jury",
+      q: "« Saturé de quoi, exactement ? Et comment l’avez-vous établi ? »",
+      opts: [
+        {t: "J’ai appliqué un critère publié : à partir du dixième entretien, moins de 5 % de codes nouveaux apparaissaient. Ma courbe de saturation est en annexe.", k: "mid",
+         f: "Certains jurys s’en contenteront. Mais compter les « codes » nouveaux (les étiquettes qu’on pose sur les passages d’entretien) suppose qu’ils existent dans les données et qu’il suffit de les trouver. Quand on interprète, c’est le chercheur qui les construit, et il peut presque toujours en proposer d’autres.",
+         ref: "Voir le module 5, « Combien d’entretiens ? »", next: "transfer"},
+        {t: "La saturation était théorique : mes catégories étaient stabilisées et les derniers entretiens les confirmaient, comme le recommande la théorisation ancrée.", k: "bad",
+         f: "Cette notion vient d’une méthode particulière, la théorisation ancrée, où l’on choisit chaque nouvel entretien en fonction de ce que l’analyse a déjà fait apparaître. Si ce n’est pas ce que vous avez fait, l’emprunter affaiblit votre démarche. Et des entretiens qui « confirment » méritent d’être relus en cherchant ce qui contredit.",
+         ref: "Voir le module 2 et la synthèse", next: "transfer"},
+        {t: "La saturation n’est pas mon argument principal. Ma question est étroite, les personnes ont été choisies pour elle, les entretiens sont riches : le corpus suffit.", k: "good",
+         f: "Vous justifiez le nombre d’entretiens par ce que votre question demande et par ce que vous affirmez. C’est ce qu’on appelle le pouvoir informationnel (voir le module 5) : un raisonnement explicite, pas un calcul.",
+         ref: "Voir les modules 2 et 5", next: "transfer"}
+      ]
+    },
+    transfer: {
+      who: "Un deuxième membre du jury",
+      q: "« Vos résultats ne valent donc que pour ces 12 personnes ? »",
+      opts: [
+        {t: "Ils ne sont pas généralisables, mais transférables : j’ai décrit en détail le service et les patients, pour que le lecteur juge des contextes proches.", k: "mid",
+         f: "C’est une réponse classique : on parle de transférabilité, l’idée que le lecteur juge lui-même si les résultats valent pour un contexte proche du sien. Décrire le service et les patients est indispensable pour cela. Mais la réponse s’arrête là : elle laisse tout le travail au lecteur, sans dire ce qui se transfère. Le jury attend que vous nommiez la logique mise au jour, et les conditions dans lesquelles elle apparaît.",
+         ref: "Synthèse : « Jusqu’où ça vaut ? »", next: "position"},
+        {t: "Oui, et je l’assume : une enquête qualitative décrit des expériences singulières, qu’il serait abusif de généraliser au-delà des personnes rencontrées.", k: "bad",
+         f: "La posture semble prudente, mais elle est trop modeste. On ne peut pas étendre une fréquence au-delà des personnes rencontrées, mais on peut faire valoir ailleurs une logique mise au jour, à certaines conditions. Sinon, à quoi bon l’enquête ?",
+         ref: "Voir le module 2 et la synthèse", next: "position"},
+        {t: "À d’autres situations, sous conditions : l’arrêt comme test apparaît après une période de stabilité, en ambulatoire. C’est cette logique que je transfère.", k: "good",
+         f: "Vous dites ce qui se transfère (une logique, pas une proportion), à quelles conditions et dans quel contexte. C’est la cinquième question de la rigueur : jusqu’où ça vaut ?",
+         ref: "Synthèse : les cinq questions de la rigueur", next: "position"}
+      ]
+    },
+    position: {
+      who: "Un deuxième membre du jury",
+      q: "« Vous êtes interne, vous portez la blouse. Vos données sont biaisées. »",
+      opts: [
+        {t: "J’en ai conscience. Pour limiter ce biais, je me suis présentée sans blouse, j’ai insisté sur la confidentialité et j’ai fait relire mes analyses par un codeur extérieur.", k: "mid",
+         f: "Réduire l’intimidation est une précaution utile. Mais la réponse suppose qu’on pourrait effacer l’effet de sa position, comme on corrige une erreur de mesure. Et faire relire ses analyses par un second codeur (une autre personne qui code les mêmes entretiens) ne dit rien de ce que les patients vous ont tu. Aucune place n’est neutre : on la décrit, on en tient compte.",
+         ref: "Voir les modules 4 et 8", next: "kappa"},
+        {t: "Ma subjectivité fait partie de la recherche : je l’ai explicitée dans un journal réflexif, où je décris mon parcours, mes valeurs et mes attentes sur le sujet.", k: "bad",
+         f: "Décrire sa position (on parle de réflexivité) n’est pas raconter sa vie. Comme l’écrit Olivier de Sardan, « le héros, c’est celui dont on parle » : la question n’est pas qui vous êtes, mais ce que votre place a changé à ce que les patients vous ont dit.",
+         ref: "Voir le module 4 et la synthèse", next: "kappa"},
+        {t: "Elle a pesé : les patients m’ont détaillé leur quotidien avec le traitement, et m’ont peu parlé de leurs doutes sur le prescripteur. Mon analyse en tient compte.", k: "good",
+         f: "Vous dites ce que votre position permet de voir, ce qu’elle masque, et comment vous en tenez compte. C’est exactement ce qu’on attend : décrire, plutôt que se justifier ou s’excuser.",
+         ref: "Voir les modules 4 et 8", next: "kappa"}
+      ]
+    },
+    kappa: {
+      who: "Le président du jury",
+      q: "« Pourquoi n’y a-t-il pas eu de second codeur ? Pas de kappa ? »",
+      opts: [
+        {t: "Mon directeur a codé trois entretiens de façon indépendante, pour éprouver mon codage : kappa de 0,78, puis désaccords résolus par consensus.", k: "mid",
+         f: "Le kappa est un indice d’accord entre deux personnes qui posent les mêmes étiquettes sur les mêmes passages. Il peut vérifier qu’une grille est claire. Mais deux personnes peuvent s’accorder sur une lecture fausse : l’accord ne dit rien de la justesse d’une interprétation.",
+         ref: "Synthèse : quatre réflexes ; face à un jury", next: "coreq"},
+        {t: "J’ai préféré une validation par les participants : je leur ai soumis mes résultats et ils s’y sont reconnus, ce qui conforte mon interprétation.", k: "bad",
+         f: "Que les participants s’y reconnaissent ne valide pas une interprétation, et une analyse qui les surprendrait ne serait pas fausse pour autant. La sociologue Rosaline Barbour range cette « validation par les participants » parmi les « technical fixes » : des recettes techniques qui donnent une apparence de rigueur sans la garantir.",
+         ref: "Barbour, 2001 (voir la synthèse)", next: "coreq"},
+        {t: "J’ai discuté mon analyse avec ma directrice. Nos désaccords m’ont fait reformuler deux thèmes, et c’est ce travail que je décris dans la méthode.", k: "good",
+         f: "Vous remplacez l’accord par la discussion des désaccords, et vous montrez ce qu’elle a changé. Un kappa aurait seulement mesuré si deux personnes posent les mêmes étiquettes, pas si la lecture est juste.",
+         ref: "Synthèse : quatre réflexes ; face à un jury", next: "coreq"}
+      ]
+    },
+    coreq: {
+      who: "Le président du jury",
+      q: "« Avez-vous suivi une grille de compte rendu, comme COREQ ? »",
+      opts: [
+        {t: "Oui : les 32 items sont renseignés en annexe. Le lecteur peut ainsi évaluer la qualité de l’étude, point par point.", k: "mid",
+         f: "La grille aide à rendre compte de ce qui a été fait, et c’est utile. Mais un item renseigné dit qu’une chose a été faite, pas qu’elle a été bien faite : on peut indiquer « saturation atteinte » ou « double codage » sans que l’analyse soit juste. La grille permet au lecteur de suivre la démarche, pas d’évaluer la qualité de l’analyse.",
+         ref: "Synthèse : quatre réflexes à repérer chez soi", next: "end"},
+        {t: "Non : ces grilles conviennent aux études descriptives, mais elles figent la démarche ; une analyse interprétative s’en passe sans perte.", k: "bad",
+         f: "La réponse oppose démarche interprétative et grilles, comme si l’une excluait les autres. Mais une grille comme COREQ n’impose pas de méthode : elle aide à dire au lecteur qui a mené les entretiens, comment, dans quelles conditions. La rejeter par principe le prive d’informations utiles pour juger le travail. Le problème n’est pas la grille, mais de la prendre pour une preuve de qualité.",
+         ref: "Synthèse : quatre réflexes à repérer chez soi", next: "end"},
+        {t: "Oui, pour rendre compte de ma démarche au lecteur. La justesse de l’analyse, elle, se juge au lien entre mes interprétations et les données.", k: "good",
+         f: "Vous donnez à la grille sa juste place : un outil de compte rendu. La qualité se juge ailleurs, dans le lien entre les interprétations et les données.",
+         ref: "Synthèse : quatre réflexes à repérer chez soi", next: "end"}
+      ]
+    }
+  };
+  var steps = 5;
+  var path = [];
+  var current = "start";
+
+  var body = document.getElementById("sceneBody");
+  var prog = document.getElementById("sceneProgress");
+  var trail = document.getElementById("sceneTrail");
+
+  function shuffle(a){
+    var b = a.slice();
+    for (var i = b.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = b[i]; b[i] = b[j]; b[j] = t; }
+    return b;
+  }
+
+  function el(tag, cls, text){
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function drawTrail(){
+    trail.innerHTML = "";
+    for (var i = 0; i < steps; i++){
+      var d = el("span", "dot" + (path[i] ? " " + path[i] : ""));
+      trail.appendChild(d);
+    }
+    prog.textContent = current === "end" ? "Soutenance terminée" : "Question " + Math.min(path.length + 1, steps) + " sur " + steps;
+  }
+
+  function verdictLabel(k){
+    return k === "good" ? "Bonne réponse." : (k === "mid" ? "Réponse discutable." : "Réponse fragile.");
+  }
+
+  function renderNode(id){
+    current = id;
+    body.innerHTML = "";
+    drawTrail();
+    if (id === "end"){ renderEnd(); return; }
+    var n = nodes[id];
+    var wrap = el("div"); wrap.style.display = "grid"; wrap.style.gap = "14px";
+    wrap.appendChild(el("p", "speaker", n.who));
+    wrap.appendChild(el("p", "quote", n.q));
+    var list = el("div", "choices");
+    shuffle(n.opts).forEach(function(o){
+      var b = el("button", "choice", o.t);
+      b.type = "button";
+      b.addEventListener("click", function(){
+        Array.prototype.forEach.call(list.children, function(c){ c.disabled = true; });
+        b.classList.add("picked", o.k);
+        if (id === "start") steps = (o.next === "transfer") ? 5 : 6;
+        path.push(o.k);
+        drawTrail();
+        var fb = el("div", "feedback " + o.k);
+        fb.appendChild(el("p", "verdict", verdictLabel(o.k)));
+        fb.appendChild(el("p", null, o.f));
+        fb.appendChild(el("p", "ref", o.ref));
+        var row = el("div", "row");
+        var nx = el("button", "btn", o.next === "end" ? "Voir le bilan" : "Question suivante");
+        nx.type = "button";
+        nx.addEventListener("click", function(){ renderNode(o.next); document.getElementById("scene").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"}); });
+        row.appendChild(nx);
+        if (o.k !== "good"){
+          var best = n.opts.filter(function(x){ return x.k === "good"; })[0];
+          var lb = el("button", "linkbtn", "Voir la réponse la plus solide");
+          lb.type = "button";
+          lb.addEventListener("click", function(){
+            Array.prototype.forEach.call(list.children, function(c){
+              if (c.textContent === best.t) c.classList.add("picked", "good");
+            });
+            var rev = el("div", "feedback good");
+            rev.appendChild(el("p", "verdict", "La réponse la plus solide"));
+            rev.appendChild(el("p", "quote-small", best.t));
+            rev.appendChild(el("p", null, best.f));
+            fb.insertBefore(rev, row);
+            lb.remove();
+          });
+          row.appendChild(lb);
+        }
+        fb.appendChild(row);
+        wrap.appendChild(fb);
+        nx.focus({preventScroll:true});
+      });
+      list.appendChild(b);
+    });
+    wrap.appendChild(list);
+    body.appendChild(wrap);
+  }
+
+  function renderEnd(){
+    markDone("soutenance");
+    var good = path.filter(function(k){ return k === "good"; }).length;
+    var wrap = el("div"); wrap.style.display = "grid"; wrap.style.gap = "14px";
+    wrap.appendChild(el("h3", null, good + " réponse" + (good > 1 ? "s" : "") + " solide" + (good > 1 ? "s" : "") + " sur " + path.length));
+    var msg = good === path.length
+      ? "Vous tenez la ligne de bout en bout : vous recadrez la question, délimitez la portée de vos résultats, décrivez votre position et remplacez l’accord par la discussion."
+      : "Les réponses fragiles ont un point commun : elles jugent l’enquête qualitative avec les critères d’une autre question, ou elles concèdent trop, ou pas assez. Rejouez la soutenance en cherchant la réponse qui assume la plausibilité argumentée.";
+    wrap.appendChild(el("p", null, msg));
+    wrap.appendChild(el("p", "ref", "À relire, dans la synthèse : les cinq questions de la rigueur et les réponses face à un jury."));
+    var row = el("div", "row");
+    var again = el("button", "btn", "Rejouer la soutenance");
+    again.type = "button";
+    again.addEventListener("click", function(){ path = []; steps = 5; renderNode("start"); });
+    row.appendChild(again);
+    wrap.appendChild(row);
+    body.appendChild(wrap);
+  }
+
+  renderNode("start");
+
+  /* ---------- Module 2 : peut-on écrire ça ? ---------- */
+  var stmts = [
+    {s: "La majorité des patients qui arrêtent leur traitement le font après une période de stabilité.", ok: false,
+     f: "La phrase parle des patients en général, pas des personnes rencontrées. On peut écrire que, chez les personnes rencontrées, l’arrêt suit souvent une période de stabilité ; on ne peut pas en tirer une proportion pour l’ensemble des patients."},
+    {s: "Dans notre corpus, les arrêts cachés au prescripteur sont plus nombreux que les arrêts annoncés.", ok: true,
+     f: "Compter reste utile pour décrire les entretiens recueillis (ce qu’on appelle le corpus), tant qu’on n’en tire ni preuve ni conclusion sur l’ensemble des patients. La phrase le dit explicitement : « dans notre corpus »."},
+    {s: "Les effets secondaires semblent peser moins que le doute sur le diagnostic dans la décision d’arrêter.", ok: false,
+     f: "Le « semblent » ne change rien : comparer le poids de deux facteurs, c’est faire une mesure, qui demande un autre type d’étude. On peut montrer comment chacun intervient, pas lequel pèse le plus."},
+    {s: "Une patiente arrête son traitement sans aucun doute sur son diagnostic : l’arrêt n’est donc pas toujours une mise à l’épreuve de la maladie.", ok: true,
+     f: "Un seul cas bien documenté suffit à contredire un « toujours ». C’est l’une des forces d’un petit nombre d’entretiens."},
+    {s: "Chez les patients rencontrés, taire l’arrêt au psychiatre a retardé l’ajustement du traitement, parfois de plusieurs mois.", ok: true,
+     f: "La phrase est affirmative, mais elle décrit ce qui s’est passé dans les situations étudiées. Elle propose une explication (comment le silence retarde l’ajustement), sans prétendre que c’est toujours le cas."},
+    {s: "Le silence sur l’arrêt apparaît comme un probable facteur de risque de rechute, à confirmer par des études ultérieures.", ok: false,
+     f: "« Facteur de risque » est un terme d’épidémiologie : il suppose d’avoir mesuré, sur un grand nombre de personnes, que l’un va avec l’autre. Le qualitatif peut décrire comment le silence retarde l’ajustement ; c’est cette explication qui pourrait ensuite être testée par une étude chiffrée."},
+    {s: "La logique du test apparaît surtout après une période de stabilité.", ok: true,
+     f: "La phrase précise les conditions dans lesquelles une logique se manifeste chez les personnes rencontrées. Comparez avec la première phrase de la série : ici, on ne parle pas de la majorité des patients, mais de quand la logique apparaît."},
+    {s: "Aucun des patients rencontrés n’a évoqué de motif financier : le coût du traitement n’intervient pas dans l’arrêt.", ok: false,
+     f: "La première moitié est juste ; la seconde affirme une absence au-delà des personnes rencontrées. On peut écrire que ce motif n’est pas apparu, et se demander pourquoi : recrutement, situation d’entretien, couverture sociale."},
+    {s: "Ces résultats invitent à proposer plus systématiquement des fenêtres thérapeutiques encadrées aux patients stabilisés.", ok: false,
+     f: "Une enquête qualitative peut nourrir la pratique, par exemple en invitant à parler du doute avant l’arrêt. Recommander un dispositif thérapeutique, c’est trancher entre deux options de soin, ce que dix entretiens ne permettent pas."},
+    {s: "9 des 12 patients évoquent les effets secondaires : c’est donc la principale raison d’arrêter le traitement.", ok: false,
+     f: "Que la plupart en parlent n’en fait pas la raison principale : c’est aussi la raison la plus facile à donner à une soignante. Le nombre de personnes qui disent une chose ne prouve ni qu’elle est vraie, ni qu’elle est la plus importante."},
+    {s: "Un seul patient évoque la honte de prendre un traitement devant ses enfants ; ce propos éclaire ce que l’arrêt peut chercher à protéger.", ok: true,
+     f: "Un propos rare peut être le plus éclairant. La question n’est pas combien l’ont dit, mais ce que ce propos permet de comprendre."},
+    {s: "Pour plusieurs personnes, arrêter revient à vérifier un diagnostic auquel elles ne croient qu’à moitié.", ok: true,
+     f: "La phrase montre qu’une logique existe et dit ce qu’elle signifie pour les personnes, sans prétendre à une fréquence."}
+  ];
+  var answered = 0, right = 0;
+  var stmtWrap = document.getElementById("stmts");
+  var scoreEl = document.getElementById("sortScore");
+
+  function updateScore(){
+    scoreEl.textContent = answered < stmts.length
+      ? answered + " réponse" + (answered > 1 ? "s" : "") + " sur " + stmts.length + (answered ? " · " + right + " juste" + (right > 1 ? "s" : "") : "")
+      : "Terminé : " + right + " juste" + (right > 1 ? "s" : "") + " sur " + stmts.length;
+  }
+
+  function renderStmts(){
+    stmtWrap.innerHTML = ""; answered = 0; right = 0; updateScore();
+    stmts.forEach(function(item){
+      var card = el("div", "stmt");
+      card.appendChild(el("p", "s", item.s));
+      var row = el("div", "row");
+      var yes = el("button", "sortbtn", "Peut s’écrire");
+      var no = el("button", "sortbtn", "Affirme trop");
+      yes.type = "button"; no.type = "button";
+      function pick(val){
+        yes.disabled = true; no.disabled = true;
+        answered++;
+        var correct = (val === item.ok);
+        if (correct) right++;
+        card.classList.add(item.ok ? "ok" : "ko");
+        var fb = el("div", "feedback " + (correct ? "good" : "bad"));
+        var v = el("p", "verdict");
+        v.appendChild(document.createTextNode(correct ? "Juste. " : "Non. "));
+        v.appendChild(el("span", "pill " + (item.ok ? "ok" : "ko"), item.ok ? "Peut s’écrire" : "Affirme trop"));
+        fb.appendChild(v);
+        fb.appendChild(el("p", null, item.f));
+        card.appendChild(fb);
+        updateScore();
+        if (answered === stmts.length) markDone("ecrire");
+      }
+      yes.addEventListener("click", function(){ pick(true); });
+      no.addEventListener("click", function(){ pick(false); });
+      row.appendChild(yes); row.appendChild(no);
+      card.appendChild(row);
+      stmtWrap.appendChild(card);
+    });
+  }
+  document.getElementById("sortReset").addEventListener("click", renderStmts);
+  renderStmts();
+
+  /* ---------- Module 3 : coder un extrait ---------- */
+  var codesEl = document.getElementById("codes");
+  var yoursEl = document.getElementById("yours");
+  var yoursText = document.getElementById("yoursText");
+  var ta = document.getElementById("userCode");
+  var ctxComment = document.getElementById("ctxComment");
+
+  document.getElementById("showCodes").addEventListener("click", function(){
+    var v = ta.value.trim();
+    if (v){
+      yoursText.textContent = "« " + v + " »";
+      yoursEl.classList.remove("hidden");
+    } else {
+      yoursEl.classList.add("hidden");
+    }
+    codesEl.classList.remove("hidden");
+  });
+  document.getElementById("showContext").addEventListener("click", function(){
+    document.querySelectorAll("#transcript .hidden").forEach(function(n){ n.classList.remove("hidden"); });
+    ctxComment.classList.remove("hidden");
+    markDone("coder");
+    document.getElementById("transcript").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"});
+  });
+  document.getElementById("codeReset").addEventListener("click", function(){
+    ta.value = "";
+    yoursEl.classList.add("hidden");
+    codesEl.classList.add("hidden");
+    ctxComment.classList.add("hidden");
+    document.querySelectorAll("#transcript .context, #ctxLabel, #ctxLabel2").forEach(function(n){ n.classList.add("hidden"); });
+    ta.focus();
+  });
+
+  /* ---------- Outil commun : question à choix commentée ---------- */
+  function makeMCQ(q, onDone){
+    var box = el("div", "mcq");
+    box.appendChild(el("p", "qq", q.q));
+    var list = el("div", "choices");
+    var fbZone = el("div", "fbzone");
+    var buttons = [];
+    var notified = false;
+    function setAll(disabled){
+      buttons.forEach(function(x){ if (!x.b.classList.contains("picked")) x.b.disabled = disabled; });
+    }
+    function feedbackFor(o, label){
+      var fb = el("div", "feedback " + o.k);
+      fb.appendChild(el("p", "verdict", label || verdictLabel(o.k)));
+      fb.appendChild(el("p", null, o.f));
+      return fb;
+    }
+    shuffle(q.opts).forEach(function(o){
+      var b = el("button", "choice", o.t);
+      b.type = "button";
+      buttons.push({b: b, o: o});
+      b.addEventListener("click", function(){
+        b.classList.add("picked", o.k);
+        b.disabled = true;
+        setAll(true);
+        fbZone.innerHTML = "";
+        fbZone.appendChild(feedbackFor(o));
+        if (o.k !== "good"){
+          var acts = el("div", "acts");
+          var retry = el("button", "linkbtn", "Réessayer");
+          retry.type = "button";
+          retry.addEventListener("click", function(){
+            fbZone.innerHTML = "";
+            setAll(false);
+            var first = buttons.filter(function(x){ return !x.b.disabled; })[0];
+            if (first) first.b.focus();
+          });
+          var reveal = el("button", "linkbtn", "Voir la bonne réponse");
+          reveal.type = "button";
+          reveal.addEventListener("click", function(){
+            buttons.forEach(function(x){
+              if (x.o.k === "good"){ x.b.classList.add("picked", "good"); x.b.disabled = true; }
+            });
+            setAll(true);
+            acts.remove();
+            var g = buttons.filter(function(x){ return x.o.k === "good"; })[0];
+            if (g) fbZone.appendChild(feedbackFor(g.o, "La bonne réponse"));
+          });
+          acts.appendChild(retry);
+          acts.appendChild(reveal);
+          fbZone.appendChild(acts);
+        }
+        if (!notified && onDone){ notified = true; onDone(o.k); }
+      });
+      list.appendChild(b);
+    });
+    box.appendChild(list);
+    box.appendChild(fbZone);
+    return box;
+  }
+
+  /* ---------- Module 4 : la blouse ---------- */
+  var posQs = [
+    {q: "Laquelle des deux versions est la plus fiable ?", opts: [
+      {t: "Celle de la sociologue : hors de l’équipe, le patient ose dire ses doutes sur le prescripteur, qu’il tait devant l’interne.", k: "bad",
+       f: "La réponse a une part de vrai : hors de l’équipe, le patient dit des choses qu’il tait à l’interne. Mais elle suppose qu’il existerait une parole « libre », débarrassée de toute influence. Or face à la sociologue aussi, le patient ajuste son récit : il se présente comme quelqu’un qui décide seul, et il ne sait plus quoi dire de son quotidien avec le traitement. Moins orientée par la relation de soin, la parole est orientée autrement."},
+      {t: "Celle de l’interne : le récit y est plus précis et plus circonstancié, et elle peut le confronter au dossier médical.", k: "bad",
+       f: "La réponse confond précision et fiabilité. Le récit fait à l’interne est riche en détails, mais sur ce qui peut se dire à une soignante de l’équipe : le pilulier, les effets secondaires, le changement de molécule. Il reste silencieux sur les doutes envers le prescripteur. Quant au dossier médical, il ne tranche pas : c’est lui aussi un récit, écrit d’un autre point de vue."},
+      {t: "Ni l’une ni l’autre seule : c’est en les recoupant qu’on reconstitue ce qui s’est passé avec le traitement.", k: "mid",
+       f: "Confronter les deux récits est une bonne idée, mais pas pour le but annoncé. La réponse suppose qu’il existe une version vraie, cachée derrière les récits, qu’on reconstituerait en les recoupant. Or chaque récit est produit dans une situation : on n’obtiendrait qu’une troisième version, celle du chercheur. La confrontation sert plutôt à comprendre ce que chaque situation permet de dire."},
+      {t: "Aucune ne l’est plus que l’autre : chacune est un récit produit dans une situation, qui rend certaines choses dicibles.", k: "good",
+       f: "Un autre enquêteur n’obtient pas une version plus vraie, mais un autre échange, où d’autres choses peuvent se dire. Aucune place ne permet de tout voir."}
+    ]},
+    {q: "Que la position de l’interne permet-elle de saisir ?", opts: [
+      {t: "Les raisons médicales de l’arrêt, qu’il formule plus précisément face à une soignante qui connaît les effets secondaires.", k: "bad",
+       f: "La réponse suppose que le patient livre à l’interne ses vraies raisons, simplement mieux formulées. Mais face à un membre de l’équipe, les effets secondaires sont une raison recevable, que tout soignant comprend : c’est aussi pour cela qu’ils sont mis en avant. Le doute sur le prescripteur, lui, n’apparaît pas. La position de l’interne fait voir le quotidien du traitement, pas les raisons cachées de l’arrêt."},
+      {t: "Le détail concret de la gestion du traitement, qu’il expose volontiers à quelqu’un qui sait quoi lui demander.", k: "good",
+       f: "Pilulier, horaires, reprise du travail : le patient expose volontiers ce quotidien à une soignante, qui sait aussi quoi lui demander."},
+      {t: "Une parole plus spontanée : le patient est en terrain connu et n’a pas à se justifier devant une inconnue.", k: "bad",
+       f: "La réponse suppose qu’être en terrain connu rend la parole plus libre. C’est en partie l’inverse : le patient sait ce qu’on attend de lui dans un service de soins, et il le fournit. Il se justifie d’ailleurs bel et bien : les effets secondaires, le changement de molécule, « maintenant ça va mieux ». La familiarité ouvre certaines portes et en ferme d’autres."}
+    ]},
+    {q: "Et que fait apparaître l’entretien de la sociologue ?", opts: [
+      {t: "Ce que la relation de soin l’empêchait de dire : son désaccord avec le prescripteur, qui explique ses arrêts répétés.", k: "mid",
+       f: "C’est en partie juste : ces propos sont plus faciles à tenir hors de l’équipe. Mais la réponse fait de ce second récit la vérité que le premier cachait, et lui prête un pouvoir d’explication (« qui explique ses arrêts répétés »). Or ce récit est lui aussi produit dans une situation, et il a ses angles morts, comme le quotidien du traitement. Le désaccord avec le prescripteur est un élément à interpréter, pas une cause établie."},
+      {t: "Une incohérence du patient, qui varie selon son interlocuteur, ce qui invite à interpréter ses propos avec prudence.", k: "bad",
+       f: "La réponse traite l’écart entre les deux récits comme un défaut du patient, qui obligerait à se méfier de lui. Mais chacun adapte ce qu’il dit à son interlocuteur : on ne raconte pas la même chose à son médecin et à une inconnue. Cet ajustement n’est pas un bruit à neutraliser, c’est une donnée : il montre ce qui peut se dire à l’équipe soignante, et ce qui ne le peut pas."},
+      {t: "Le doute sur le prescripteur et l’arrêt « pour voir ». Le quotidien du traitement, en revanche, lui échappe.", k: "good",
+       f: "Ces propos sont plus faciles à tenir hors de l’équipe. Mais la sociologue saisit mal ce que le traitement change au quotidien : « je sais pas trop quoi vous dire »."}
+    ]},
+    {q: "Que faire de cet écart dans l’analyse ?", opts: [
+      {t: "Le mentionner dans les limites : le recueil par une soignante a pu orienter certaines réponses, ce qui invite à la prudence.", k: "bad",
+       f: "C’est le paragraphe « limites » le plus courant, et il a l’air honnête. Mais il traite l’effet de la position de l’interne comme un défaut qui aurait faussé certaines réponses, puis il passe à autre chose : l’analyse reste intacte. Or ce que les patients disent ou taisent face à une soignante renseigne sur l’objet même de l’enquête, le secret qui entoure l’arrêt. C’est dans l’analyse qu’il faut l’intégrer."},
+      {t: "Ne retenir que ce qui est commun aux deux versions, puisque c’est ce qui résiste au changement d’interlocuteur.", k: "mid",
+       f: "L’argument a l’air rigoureux : ne garder que ce qui résiste au changement d’interlocuteur. Mais ce qui est commun aux deux versions n’est pas plus vrai que le reste : c’est seulement ce qui peut se dire partout. On perdrait l’essentiel, c’est-à-dire ce que chaque situation permet de dire : le quotidien du traitement d’un côté, le doute sur le prescripteur de l’autre."},
+      {t: "En faire un objet d’analyse : ce que chaque situation rend dicible renseigne sur le rapport au traitement.", k: "good",
+       f: "Ce que chaque interlocuteur permet de dire nous apprend quelque chose sur le rapport au traitement lui-même : ce qu’on avoue à qui, ce qu’on cache à l’équipe. L’entretien est une relation entre deux personnes, et cette relation fait partie de ce qu’on étudie."}
+    ]}
+  ];
+  var posWrap = document.getElementById("posQs");
+  var posDone = 0;
+  posQs.forEach(function(q){ posWrap.appendChild(makeMCQ(q, function(){ posDone++; if (posDone === posQs.length) markDone("position"); })); });
+
+  /* ---------- Module 5 : pouvoir informationnel ---------- */
+  var dims = [
+    {id: "obj", name: "Objectif de l’étude", hint: "Votre question porte-t-elle sur un aspect précis, ou sur un phénomène vaste ?", def: "less",
+     less: {l: "Étroit", s: "l’objectif est étroit et porte sur un aspect précis du phénomène"},
+     more: {l: "Large", s: "l’objectif est large et couvre plusieurs aspects du phénomène"}},
+    {id: "spec", name: "Spécificité de l’échantillon", hint: "Les personnes sont-elles choisies pour leur rapport direct à la question, avec une variété d’expériences ?", def: "less",
+     less: {l: "Très ciblé", s: "les participants sont choisis pour leur expérience directe de la question, avec une variété de situations"},
+     more: {l: "Peu ciblé", s: "le recrutement est en partie de convenance, ce qui rend chaque entretien moins directement informatif"}},
+    {id: "theo", name: "Usage de la théorie", hint: "L’analyse s’appuie-t-elle sur un cadre théorique établi, qui oriente le regard ?", def: "open",
+     less: {l: "Cadre établi", s: "l’analyse s’appuie sur un cadre théorique établi, qui oriente le regard"},
+     more: {l: "Peu ou pas de cadre", s: "l’analyse mobilise peu de théorie établie, ce qui demande davantage de matériau"}},
+    {id: "dial", name: "Qualité du dialogue", hint: "Les échanges sont-ils riches et centrés sur la question ? À réévaluer après les premiers entretiens.", def: "less",
+     less: {l: "Solide et clair", s: "les entretiens sont riches et centrés sur la question"},
+     more: {l: "Flou ou peu centré", s: "les échanges restent parfois flous ou peu centrés, ce qui appelle davantage d’entretiens"}},
+    {id: "strat", name: "Stratégie d’analyse", hint: "Approfondissez-vous les récits de quelques personnes, ou comparez-vous de nombreux cas ?", def: "less",
+     less: {l: "Approfondir quelques cas", s: "l’analyse approfondit le récit de chaque personne"},
+     more: {l: "Comparer largement", s: "l’analyse compare de nombreux cas pour couvrir une large variété"}}
+  ];
+  var dimState = {};
+  var dimsEl = document.getElementById("dims");
+  var nEnv = document.getElementById("nEnv");
+  var arrowText = {less: "Plutôt moins de participants", more: "Plutôt plus de participants", open: "À préciser"};
+
+  function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function renderDims(){
+    dimsEl.innerHTML = "";
+    dims.forEach(function(d){
+      var box = el("div", "dim");
+      var top = el("div", "dimtop");
+      top.appendChild(el("span", "dimname", d.name));
+      var ar = el("span", "arrow " + dimState[d.id], arrowText[dimState[d.id]]);
+      top.appendChild(ar);
+      box.appendChild(top);
+      box.appendChild(el("p", "dimhint", d.hint));
+      var seg = el("div", "seg");
+      seg.setAttribute("role", "group");
+      seg.setAttribute("aria-label", d.name);
+      [["less", d.less.l], ["more", d.more.l], ["open", "Je ne sais pas encore"]].forEach(function(p){
+        var b = el("button", null, p[1]);
+        b.type = "button";
+        b.setAttribute("aria-pressed", dimState[d.id] === p[0] ? "true" : "false");
+        b.addEventListener("click", function(){ dimState[d.id] = p[0]; renderDims(); updateInfo(); });
+        seg.appendChild(b);
+      });
+      box.appendChild(seg);
+      dimsEl.appendChild(box);
+    });
+  }
+
+  function updateInfo(){
+    var less = 0, more = 0, open = 0;
+    var parts = [];
+    dims.forEach(function(d){
+      var v = dimState[d.id];
+      if (v === "less"){ less++; parts.push(cap(d.less.s) + "."); }
+      else if (v === "more"){ more++; parts.push(cap(d.more.s) + "."); }
+      else { open++; parts.push("[À préciser : " + d.name.toLowerCase() + ".]"); }
+    });
+    var n = parseInt(nEnv.value, 10);
+    var nTxt = (n > 0) ? n + " entretiens" : "[effectif à préciser]";
+    var verdict, concl;
+    if (more === 0 && less > 0){
+      verdict = "Les dimensions que vous avez renseignées plaident toutes pour un corpus resserré. Cela ne fixe aucun nombre : à vous de dire combien, et pourquoi.";
+      concl = "Ces éléments plaident pour un corpus resserré. L’effectif envisagé de " + nTxt + " sera réévalué au fil du recueil, notamment au regard de la qualité des échanges.";
+    } else if (less === 0 && more > 0){
+      verdict = "Les dimensions que vous avez renseignées plaident toutes pour un corpus plus étendu. Pensez aussi au risque inverse : un corpus trop grand pour être analysé en profondeur.";
+      concl = "Ces éléments plaident pour un corpus plus étendu. L’effectif envisagé de " + nTxt + " sera réévalué au fil du recueil.";
+    } else if (less === 0 && more === 0){
+      verdict = "Aucune dimension n’est encore renseignée : la justification reste entièrement à construire.";
+      concl = "L’effectif envisagé de " + nTxt + " reste à justifier.";
+    } else {
+      verdict = "Vos dimensions tirent dans des sens différents. Il ne s’agit pas de les additionner, mais de dire laquelle pèse le plus pour votre question, et pourquoi.";
+      concl = "Ces éléments tirent dans des sens différents ; l’effectif envisagé de " + nTxt + " tient compte de [dimension qui pèse le plus, à argumenter] et sera réévalué au fil du recueil.";
+    }
+    if (open > 0){
+      verdict += " " + open + (open > 1 ? " dimensions restent" : " dimension reste") + " à préciser.";
+    }
+    document.getElementById("infoVerdict").textContent = verdict;
+    document.getElementById("infoDraft").textContent =
+      "La taille du corpus a été raisonnée à partir de la notion de pouvoir informationnel (Malterud et al., 2016). " + parts.join(" ") + " " + concl;
+  }
+
+  dims.forEach(function(d){ dimState[d.id] = d.def; });
+  renderDims(); updateInfo();
+  markDone("effectif");
+  nEnv.addEventListener("input", updateInfo);
+  document.getElementById("copyDraft").addEventListener("click", function(){
+    var msg = document.getElementById("copyMsg");
+    var txt = document.getElementById("infoDraft").textContent;
+    try {
+      navigator.clipboard.writeText(txt).then(function(){ msg.textContent = "Ébauche copiée."; },
+        function(){ msg.textContent = "La copie a été refusée : sélectionnez le texte à la main."; });
+    } catch (e) {
+      msg.textContent = "La copie a été refusée : sélectionnez le texte à la main.";
+    }
+  });
+
+  /* ---------- Module 6 : des thèmes à l’interprétation ---------- */
+  var cats = [
+    ["etiquette", "Étiquette"], ["description", "Description dense"], ["typologie", "Typologie"],
+    ["processus", "Processus"], ["mecanisme", "Mécanisme"]
+  ];
+  var catName = {}; cats.forEach(function(c){ catName[c[0]] = c[1]; });
+  var prods = [
+    {s: "Rapport ambivalent au traitement.", c: "etiquette",
+     f: "« Ambivalent » donne une couleur interprétative, mais l’intitulé ne dit ni en quoi consiste l’ambivalence ni ce qu’elle produit. C’est encore une étiquette."},
+    {s: "« Arrêter » recouvre des gestes différents : espacer les prises, diminuer, cesser, puis parfois reprendre.", c: "description",
+     f: "Une description dense : elle restitue ce que recouvre concrètement la pratique. Piège à éviter : glisser une interprétation sous l’apparence d’un fait."},
+    {s: "Il y a trois types de patients : les testeurs, les protecteurs et les affirmés.", c: "typologie",
+     f: "C’est bien une typologie, mais elle tombe dans le piège : elle classe les personnes une fois pour toutes, alors qu’une même personne peut changer de logique."},
+    {s: "Taire l’arrêt pour préserver la relation avec le psychiatre peut retarder l’ajustement du traitement.", c: "mecanisme",
+     f: "Un mécanisme : comment ceci produit cela, dans ce contexte. Piège à éviter : le présenter comme un effet mesuré."},
+    {s: "La stigmatisation revient à de nombreuses reprises dans les récits, en particulier dans les cadres familial et professionnel.", c: "etiquette",
+     f: "Détaillé, mais c’est un résumé de sujet : la phrase dit où et combien le thème est abordé, pas ce qu’il signifie ni ce qu’il produit."},
+    {s: "Les patients sont d’abord stables, puis ils doutent, puis ils arrêtent, puis certains rechutent.", c: "processus",
+     f: "C’est un processus, mais il tombe dans le piège : une suite d’étapes, sans dire ce qui fait passer de l’une à l’autre."},
+    {s: "L’arrêt peut fonctionner comme un test, comme une protection ou comme une affirmation de soi, et une même personne peut passer d’une logique à l’autre.", c: "typologie",
+     f: "Une typologie de logiques, pas de personnes. La fin de la phrase évite le piège du classement définitif."},
+    {s: "De la stabilité au doute, puis à l’arrêt discret : c’est l’absence de discussion sur la durée du traitement qui fait passer du doute à l’arrêt.", c: "processus",
+     f: "Un processus abouti : il dit ce qui fait passer d’une étape à l’autre. Sans sa seconde moitié, ce ne serait qu’une chronologie."}
+  ];
+  var prodWrap = document.getElementById("prods");
+  var prodScore = document.getElementById("prodScore");
+  var pAns = 0, pRight = 0;
+
+  function updateProdScore(){
+    prodScore.textContent = pAns < prods.length
+      ? pAns + " réponse" + (pAns > 1 ? "s" : "") + " sur " + prods.length + (pAns ? " · " + pRight + " juste" + (pRight > 1 ? "s" : "") : "")
+      : "Terminé : " + pRight + " juste" + (pRight > 1 ? "s" : "") + " sur " + prods.length;
+  }
+
+  function renderProds(){
+    prodWrap.innerHTML = ""; pAns = 0; pRight = 0; updateProdScore();
+    prods.forEach(function(item){
+      var card = el("div", "stmt");
+      card.appendChild(el("p", "s", item.s));
+      var row = el("div", "catbtns");
+      var btns = [];
+      cats.forEach(function(c){
+        var b = el("button", "sortbtn", c[1]);
+        b.type = "button";
+        b.addEventListener("click", function(){
+          btns.forEach(function(x){ x.disabled = true; });
+          pAns++;
+          var ok = (c[0] === item.c);
+          if (ok) pRight++;
+          card.classList.add(ok ? "ok" : "ko");
+          var fb = el("div", "feedback " + (ok ? "good" : "bad"));
+          var v = el("p", "verdict");
+          v.appendChild(document.createTextNode(ok ? "Juste. " : "Non, c’est : "));
+          v.appendChild(el("span", "pill " + (ok ? "ok" : "ko"), catName[item.c]));
+          fb.appendChild(v);
+          fb.appendChild(el("p", null, item.f));
+          card.appendChild(fb);
+          updateProdScore();
+          if (pAns === prods.length) markDone("produits");
+        });
+        btns.push(b);
+        row.appendChild(b);
+      });
+      card.appendChild(row);
+      prodWrap.appendChild(card);
+    });
+  }
+  document.getElementById("prodReset").addEventListener("click", renderProds);
+  renderProds();
+
+  /* ---------- Module 7 : le cas qui dérange ---------- */
+  var negQ = {q: "Que faites-vous de l’entretien avec Mme L. ?", opts: [
+    {t: "Je le signale comme cas atypique : son arrêt répond à une contrainte pratique plutôt qu’à une logique de sens, ce que je précise dans la discussion.", k: "bad",
+     f: "La réponse paraît soigneuse : le cas n’est pas caché, il est signalé dans la discussion. Mais il est écarté comme « atypique », et le thème principal reste intact. Et l’opposition entre contrainte pratique et logique de sens ne tient pas : concilier le traitement et la garde de son petit-fils a un sens pour Mme L. C’est une autre logique d’arrêt, qui mérite d’être analysée."},
+    {t: "Je crée un sous-thème « Contraintes du quotidien », à côté du thème principal, pour ne perdre aucune donnée.", k: "mid",
+     f: "La réponse a l’air prudente : rien n’est perdu. Mais le cas de Mme L. est rangé à part, comme une exception, et le thème principal continue d’affirmer que l’arrêt sert à tester sa maladie. Or Mme L. montre justement que ce n’est pas toujours vrai. Le sous-thème protège le thème au lieu de l’obliger à se préciser : à quelles conditions l’arrêt est-il un test ?"},
+    {t: "Je considère que le thème du test est fragilisé et je reviens à une lecture plus descriptive des motifs d’arrêt.", k: "bad",
+     f: "La réponse prend un cas qui contredit (on parle de « cas négatif ») pour une réfutation du thème entier. Mais Mme L. contredit l’idée que tous les arrêts sont des tests, pas l’existence de cette logique : les quatre premiers entretiens restent là. Revenir à une simple liste de motifs ferait perdre ce qu’ils montrent. Le cas négatif sert à préciser le thème, pas à l’abandonner."},
+    {t: "Je révise le thème : le test suppose un doute sur le diagnostic, et cet arrêt-là relève d’une autre logique.", k: "good",
+     f: "Le cas qui contredit précise à quelles conditions le thème vaut, et en fait apparaître un autre. L’analyse en sort plus solide qu’avant."}
+  ]};
+  var negWrap = document.getElementById("negQ");
+  document.getElementById("showL").addEventListener("click", function(){
+    document.getElementById("caseL").classList.remove("hidden");
+    this.classList.add("hidden");
+    negWrap.innerHTML = "";
+    negWrap.appendChild(makeMCQ(negQ, function(){ document.getElementById("reform").classList.remove("hidden"); }));
+    negWrap.classList.remove("hidden");
+  });
+  document.getElementById("showModel").addEventListener("click", function(){
+    document.getElementById("model").classList.remove("hidden");
+    markDone("cas-negatif");
+  });
+  document.getElementById("negReset").addEventListener("click", function(){
+    document.getElementById("caseL").classList.add("hidden");
+    document.getElementById("showL").classList.remove("hidden");
+    negWrap.classList.add("hidden"); negWrap.innerHTML = "";
+    document.getElementById("reform").classList.add("hidden");
+    document.getElementById("model").classList.add("hidden");
+    document.getElementById("userTheme").value = "";
+    document.getElementById("cas-negatif").scrollIntoView({behavior: "auto", block: "start"});
+  });
+  /* ---------- Outil commun : classement avec score ---------- */
+  function makeSorter(opt){
+    var wrap = document.getElementById(opt.list);
+    var score = document.getElementById(opt.score);
+    var names = {}; opt.cats.forEach(function(c){ names[c[0]] = c[1]; });
+    var ans = 0, ok = 0;
+    function upd(){
+      var n = opt.items.length;
+      score.textContent = ans < n
+        ? ans + " réponse" + (ans > 1 ? "s" : "") + " sur " + n + (ans ? " · " + ok + " juste" + (ok > 1 ? "s" : "") : "")
+        : "Terminé : " + ok + " juste" + (ok > 1 ? "s" : "") + " sur " + n;
+    }
+    function render(){
+      wrap.innerHTML = ""; ans = 0; ok = 0; upd();
+      if (opt.onReset) opt.onReset();
+      opt.items.forEach(function(item){
+        var card = el("div", "stmt");
+        if (item.who){ card.appendChild(el("span", "speaker", item.who)); }
+        card.appendChild(el("p", "s", item.s));
+        var row = el("div", "catbtns");
+        var btns = [];
+        opt.cats.forEach(function(c){
+          var b = el("button", "sortbtn", c[1]);
+          b.type = "button";
+          b.addEventListener("click", function(){
+            btns.forEach(function(x){ x.disabled = true; });
+            ans++;
+            var good = (c[0] === item.c);
+            if (good) ok++;
+            card.classList.add(good ? "ok" : "ko");
+            var fb = el("div", "feedback " + (good ? "good" : "bad"));
+            var v = el("p", "verdict");
+            v.appendChild(document.createTextNode(good ? "Juste. " : "Plutôt : "));
+            v.appendChild(el("span", "pill " + (good ? "ok" : "ko"), names[item.c]));
+            fb.appendChild(v);
+            fb.appendChild(el("p", null, item.f));
+            card.appendChild(fb);
+            upd();
+            if (ans === opt.items.length){ if (opt.onDone) opt.onDone(); if (opt.module) markDone(opt.module); }
+          });
+          btns.push(b);
+          row.appendChild(b);
+        });
+        card.appendChild(row);
+        wrap.appendChild(card);
+      });
+    }
+    document.getElementById(opt.reset).addEventListener("click", render);
+    render();
+  }
+
+  /* ---------- Module 8 : biais ou donnée ? ---------- */
+  makeSorter({
+    list: "biaisList", score: "biaisScore", reset: "biaisReset", module: "biais",
+    cats: [["meca", "Mécanisme à limiter"], ["pos", "Effet de position"], ["inc", "Incident révélateur"]],
+    items: [
+      {s: "En relisant ses transcriptions, l’interne s’aperçoit qu’elle relance presque toujours quand un patient parle des effets secondaires, et rarement quand il parle de sa famille.", c: "meca",
+       f: "Des relances qui ne suivent qu’une piste orientent l’ensemble des entretiens vers ce qu’on cherchait déjà. Il faut les corriger dans les entretiens suivants. Cela dit aussi quelque chose du regard clinique de l’interne, qui mérite d’être décrit."},
+      {s: "Une patiente, ancienne infirmière, parle à l’interne « entre collègues » et décrit son arrêt avec le vocabulaire clinique : observance, fenêtre thérapeutique, rechute.", c: "pos",
+       f: "La proximité professionnelle change le registre du récit. Ce n’est pas une erreur à corriger, mais un effet à décrire : ce vocabulaire donne accès à certaines choses et en recouvre d’autres, comme ce que l’arrêt lui a fait vivre."},
+      {s: "Quand l’interne précise qu’elle travaille avec le Dr M., un patient refuse l’enregistrement, puis accepte de parler sans magnétophone.", c: "inc",
+       f: "Le refus renseigne sur ce qu’on étudie : la crainte que la parole circule dans l’équipe est au cœur du secret de l’arrêt. Noter les conditions de ce refus, et ce qui s’est dit ensuite, fait partie des données."},
+      {s: "Les entretiens ont lieu dans un bureau de consultation du CMP, entre deux rendez-vous médicaux. Plusieurs patients regardent la porte et écourtent leurs réponses.", c: "meca",
+       f: "Le cadre intimide et presse les réponses, quel que soit le sujet. Réduire les effets d’intimidation est une précaution indiscutable : autre lieu, autre moment, plus de temps."},
+      {s: "Connaissant bien le service, l’interne ne demande jamais aux patients ce que représente pour eux une hospitalisation : cela lui paraît évident.", c: "pos",
+       f: "C’est le revers de la familiarité avec le milieu : elle aide à saisir les sous-entendus, mais expose à trouver évident ce qu’il faudrait interroger. On le décrit, et on se force à poser les questions naïves."},
+      {s: "L’interne évoque par mégarde un détail du dossier médical que le patient ne lui avait pas confié. Il se ferme pour le reste de l’entretien.", c: "inc",
+       f: "La gaffe est à éviter, mais elle a eu lieu, et elle renseigne : le patient découvre ce que l’institution sait de lui, et réagit. Son rapport à ce qui circule sur lui dans l’équipe devient visible."}
+    ]
+  });
+
+  /* ---------- Module 9 : dit, observé, interprété ---------- */
+  var ditNote = document.getElementById("ditNote");
+  makeSorter({
+    list: "ditList", score: "ditScore", reset: "ditReset", module: "dit-observe",
+    cats: [["dit", "Dit"], ["obs", "Observé"], ["int", "Interprété"]],
+    onReset: function(){ ditNote.classList.add("hidden"); },
+    onDone: function(){ ditNote.classList.remove("hidden"); },
+    items: [
+      {s: "M. C. explique qu’il a arrêté son traitement « pour voir », après un an sans symptômes.", c: "dit",
+       f: "Un propos rapporté, attribué à son auteur (« explique que »). C’est la forme la plus sûre."},
+      {s: "M. C. a arrêté son traitement après un an sans symptômes.", c: "dit",
+       f: "La phrase est présentée comme un fait, mais sa seule source est le récit de M. C. C’est le glissement le plus courant : un propos devenu événement. Écrire « selon lui » ou « dit-il » suffit à le corriger."},
+      {s: "Pendant l’entretien, il baisse la voix chaque fois qu’il mentionne le Dr M.", c: "obs",
+       f: "Un fait constaté par l’enquêtrice pendant l’entretien, qu’elle peut noter et dater."},
+      {s: "Cette baisse de voix traduit la crainte que ses propos remontent jusqu’au prescripteur.", c: "int",
+       f: "Une lecture de l’enquêtrice. Elle est plausible, mais d’autres le sont aussi : gêne, respect, fatigue. Il faut la présenter comme une interprétation et l’étayer par d’autres passages."},
+      {s: "Il est le seul des douze participants à avoir demandé que l’enregistreur soit coupé avant de parler de son prescripteur.", c: "obs",
+       f: "Un constat sur le déroulement de l’enquête, ici une comparaison entre les douze entretiens. Ce qu’il signifie reste à interpréter."},
+      {s: "Pour lui, arrêter revient à vérifier qu’il n’est plus malade.", c: "int",
+       f: "La phrase ressemble à un propos, mais M. C. a dit « pour voir », pas cela. C’est une formulation de l’enquêtrice, légitime si elle est reliée aux passages qui la fondent, et à ne pas mettre entre guillemets."},
+      {s: "« Au bout de trois semaines, j’ai compris. »", c: "dit",
+       f: "Une citation. Elle ne dit pas ce qu’il a compris, et c’est justement ce qui reste à analyser plutôt qu’à compléter."}
+    ]
+  });
+
+  /* ---------- Module 10 : deux lectures en concurrence ---------- */
+  var concQ = document.getElementById("concQ");
+  var concFinal = {q: "Au vu de ces extraits, que concluez-vous ?", opts: [
+    {t: "Je privilégie la lecture B : elle s’appuie sur moins d’extraits, mais la crainte d’une sanction pèse plus lourd cliniquement.", k: "bad",
+     f: "La réponse mélange deux questions : ce qui est important pour la pratique, et ce qui est le mieux fondé dans les données. Que la crainte d’une sanction soit lourde de conséquences justifie de s’en préoccuper, pas de la tenir pour la meilleure explication. Une interprétation est valide si elle rend compte des extraits, y compris de ceux qui la compliquent, pas si elle paraît la plus grave."},
+    {t: "Je retiens la lecture qui réunit le plus d’extraits, en la présentant comme une tendance du corpus.", k: "mid",
+     f: "La réponse est prudente, puisqu’elle parle de « tendance du corpus » (l’ensemble des entretiens recueillis). Mais compter les extraits ne départage pas deux interprétations : un même extrait peut être compatible avec les deux, et un extrait unique peut éclairer ce que trois autres laissent ouvert. Il faut regarder ce que chaque extrait permet de comprendre, pas combien il y en a."},
+    {t: "A et B ne s’excluent pas : je cherche dans quelles situations l’une ou l’autre l’emporte, et ce qui les distingue.", k: "good",
+     f: "L’extrait sur « les papiers pour l’hôpital » montre que relation et sanction peuvent ne faire qu’un, et un autre extrait ouvre une troisième lecture. L’interprétation valide est celle qui rend compte de cette situation plus complexe, pas celle qui l’emporte sur l’autre."},
+    {t: "On ne peut pas trancher seul : je soumets les extraits à un second codeur et je retiens la lecture sur laquelle nous nous accordons.", k: "bad",
+     f: "La réponse paraît prudente, puisqu’elle refuse de trancher seul. Mais un second codeur (une deuxième personne qui analyse les mêmes extraits) ne règle pas la question : si vous vous accordez sur A, cela ne montre pas que A explique mieux les données que B. Ce qui fait avancer, c’est de chercher activement les passages qui départagent les lectures, et de regarder ceux qui ne cadrent avec aucune."}
+  ]};
+  makeSorter({
+    list: "concList", score: "concScore", reset: "concReset",
+    cats: [["a", "Soutient A"], ["b", "Soutient B"], ["both", "Ne départage pas"], ["other", "Ouvre une autre lecture"]],
+    onReset: function(){ concQ.classList.add("hidden"); concQ.innerHTML = ""; },
+    onDone: function(){ concQ.innerHTML = ""; concQ.appendChild(makeMCQ(concFinal, function(){ markDone("concurrence"); })); concQ.classList.remove("hidden"); },
+    items: [
+      {who: "M. A.", s: "« Je voulais pas qu’il pense que je le prenais pas au sérieux. Il s’est donné du mal pour moi. »", c: "a",
+       f: "Le silence est justifié par le souci de ne pas décevoir quelqu’un qui s’est investi. C’est la lecture A."},
+      {who: "Mme B.", s: "« La dernière fois que j’ai dit que j’arrêtais, je me suis retrouvée avec la piqûre tous les mois. »", c: "b",
+       f: "Une expérience passée de sanction, qui rend le silence raisonnable. C’est la lecture B."},
+      {who: "M. C.", s: "« Je lui ai rien dit, c’est tout. »", c: "both",
+       f: "L’extrait confirme le silence, mais ne dit rien de ses raisons. Il est compatible avec les deux lectures, et ne peut donc pas les départager. Il ne faut pas le compter pour l’une ou pour l’autre."},
+      {who: "Mme D.", s: "« Il est gentil, hein. Mais c’est quand même lui qui signe les papiers pour l’hôpital. »", c: "both",
+       f: "La relation et la crainte de la sanction sont ici nouées dans la même phrase. L’extrait ne départage pas A et B : il suggère qu’elles ne s’excluent pas, ce qui est en soi un résultat."},
+      {who: "M. E.", s: "« Je lui dirai quand ça ira bien. Comme ça, il verra que j’avais raison. »", c: "other",
+       f: "Ni protéger la relation, ni éviter une sanction : se taire pour pouvoir prouver quelque chose. L’extrait ouvre une troisième lecture, l’arrêt comme affirmation de soi, qu’il faut chercher dans les autres entretiens."}
+    ]
+  });
+
+  /* ---------- Module 0 : repères ---------- */
+  var m0Qs = [
+    {q: "Une enquête qualitative se définit d’abord par…", opts: [
+      {t: "Le recours à des entretiens ou à des observations, plutôt qu’à des questionnaires standardisés.", k: "bad",
+       f: "Ce sont ses outils les plus fréquents, mais ils ne la définissent pas : une enquête qualitative peut aussi travailler sur des documents, et un entretien peut servir une démarche quantitative."},
+      {t: "Un petit nombre de participants, choisis pour la richesse de leur expérience plutôt que tirés au sort.", k: "bad",
+       f: "La réponse décrit un trait fréquent des enquêtes qualitatives, mais elle le prend pour leur définition. Le petit nombre est une conséquence de la question : pour comprendre en profondeur des logiques, on choisit des personnes et on prend le temps de les entendre. Une enquête qualitative peut réunir cinquante entretiens, et une enquête sur douze personnes n’est pas qualitative si elle cherche à compter."},
+      {t: "Ce qu’elle cherche : comprendre des pratiques et le sens qu’elles ont pour les personnes.", k: "good",
+       f: "C’est la question posée qui définit l’enquête qualitative. Les outils et la taille du corpus en découlent."},
+      {t: "Une analyse du contenu des propos, qui remplace le traitement statistique des données.", k: "bad",
+       f: "La réponse décrit un outil possible, mais pas ce qui définit l’enquête. Une enquête qualitative n’est pas une enquête « sans chiffres » : compter peut être utile pour décrire les entretiens recueillis. Et l’analyse de contenu peut elle-même être très quantitative, quand elle compte des mots ou des thèmes. Ce qui définit le qualitatif, c’est ce qu’il cherche : comprendre des pratiques et leur sens."}
+    ]},
+    {q: "Qu’est-ce qui rend valide un résultat qualitatif ?", opts: [
+      {t: "Le respect d’une procédure reconnue, dont le lecteur peut vérifier chaque étape dans une grille.", k: "bad",
+       f: "La réponse paraît exigeante, car elle mise sur la transparence. Mais une grille dit qu’une étape a été faite, pas qu’elle a été bien faite : on peut cocher « saturation atteinte » ou « double codage » sans que l’interprétation soit solide. La transparence est nécessaire, mais elle ne suffit pas. La validité se juge au lien entre ce qu’on affirme et les données qui le fondent."},
+      {t: "L’accord de plusieurs chercheurs, parvenus indépendamment à la même interprétation des données.", k: "bad",
+       f: "La réponse paraît rigoureuse, car l’accord semble écarter l’arbitraire d’un chercheur isolé. Mais deux subjectivités ne font pas une objectivité : deux chercheurs peuvent partager les mêmes présupposés et s’accorder sur une lecture discutable. Multiplier les regards aide, à condition de discuter les désaccords. Ce qui valide un résultat, c’est sa fidélité aux données et sa capacité à les expliquer mieux qu’une autre interprétation."},
+      {t: "Le fait qu’il reste fidèle aux données et les explique mieux qu’une autre interprétation des mêmes entretiens.", k: "good",
+       f: "Un résultat qualitatif ne devient pas valide en franchissant un seuil. Il vise une interprétation bien argumentée, appuyée sur les données, qu’on réviserait si de nouveaux éléments la contredisaient."},
+      {t: "La saturation des données, qui indique que le corpus couvre la diversité des situations.", k: "bad",
+       f: "La saturation (le moment où de nouveaux entretiens n’apportent plus rien de neuf) dit quand on a arrêté de recruter, pas si l’interprétation est juste. Et une analyse qui interprète peut presque toujours trouver du nouveau."}
+    ]},
+    {q: "Un collègue vous dit : « Le quantitatif, au moins, c’est objectif. » Que lui répondez-vous ?", opts: [
+      {t: "En partie : le qualitatif engage davantage la subjectivité, mais il la compense par la profondeur des données recueillies.", k: "bad",
+       f: "La réponse fait du qualitatif une solution de second rang, sauvée par la « richesse » des données. La subjectivité n’est pas un défaut à compenser : la question est de savoir si elle reste contrôlable, c’est-à-dire si le lecteur peut vérifier d’où viennent les interprétations."},
+      {t: "Le chiffre contient aussi des choix : items, critère de jugement, seuils. La standardisation les rend répétables, pas neutres.", k: "good",
+       f: "La comparaison est trompeuse : le quantitatif repose aussi sur des décisions humaines. Cela ne le disqualifie pas, mais cela défait l’opposition entre « objectif » et « subjectif »."},
+      {t: "Aucune méthode n’est tout à fait objective : chacune repose sur des choix, et le qualitatif n’a pas à se justifier davantage.", k: "mid",
+       f: "La première moitié est juste : le chiffre aussi repose sur des choix. Mais la conclusion glisse vers « tout se vaut » : si aucune méthode n’est objective, aucune n’aurait de comptes à rendre. Or le qualitatif doit justifier ses interprétations, à sa manière : en montrant d’où il tient ce qu’il avance, et en cherchant ce qui le contredit."},
+      {t: "Le qualitatif peut atteindre la même objectivité, à condition de faire coder les entretiens par plusieurs personnes.", k: "bad",
+       f: "La réponse suppose que l’objectivité naît de l’accord : si plusieurs personnes codent pareil, la lecture serait juste. Mais deux subjectivités ne font pas une objectivité : des codeurs formés de la même façon peuvent partager les mêmes angles morts. Ce qui rend une interprétation fiable, c’est que le lecteur puisse voir d’où elle vient et la contester : les passages qui la fondent, les cas qui la contredisent."}
+    ]}
+  ];
+  var m0Wrap = document.getElementById("m0Qs");
+  var m0Done = 0;
+  m0Qs.forEach(function(q){ m0Wrap.appendChild(makeMCQ(q, function(){ m0Done++; if (m0Done === m0Qs.length) markDone("reperes"); })); });
+
+  /* ---------- Module 5 : la portée (Goffman) ---------- */
+  var goffQ = {q: "D’où vient la portée du concept d’« institution totale » ?", opts: [
+    {t: "De la durée du terrain : un an d’observation donne une base bien plus large qu’une série d’entretiens.", k: "bad",
+     f: "La réponse a raison sur un point : la durée du terrain compte, et dix entretiens ne donnent pas automatiquement la portée d’Asiles. Mais elle traduit cette durée en quantité, comme si un an d’observation valait beaucoup d’entretiens et permettait donc de généraliser. La portée de Goffman ne vient pas d’un volume de données : elle vient du concept qu’il en a tiré, qui éclaire d’autres institutions."},
+    {t: "De la représentativité de l’hôpital étudié, assez typique des grands hôpitaux psychiatriques de l’époque.", k: "bad",
+     f: "Cette réponse applique au qualitatif la logique des sondages : un terrain « typique » permettrait de généraliser. Goffman n’a pas choisi un hôpital moyen, et personne ne lui demande de dire combien d’hôpitaux fonctionnent ainsi. Ce qui voyage, c’est le concept d’institution totale : une façon de comprendre la vie en institution, qu’on peut mettre à l’épreuve ailleurs, dans une prison ou une caserne."},
+    {t: "De ce que le concept permet de comprendre ailleurs, des prisons aux casernes, une fois sa pertinence examinée.", k: "good",
+     f: "La portée d’un résultat qualitatif vient de ses concepts, pas du nombre de personnes étudiées. On transfère une façon de comprendre, en vérifiant chaque fois qu’elle éclaire le nouveau terrain."},
+    {t: "De sa généralité : il décrit ce que partagent les institutions qui prennent en charge des personnes vulnérables.", k: "bad",
+     f: "La réponse va trop loin dans l’autre sens : elle étend le concept à toute institution qui accueille des personnes vulnérables, sans vérifier qu’il s’y applique. Or une institution totale suppose une vie coupée du monde, sous une même autorité, avec des règles communes à tous. Un EHPAD ou un hôpital de jour en partagent parfois certains traits, mais pas d’emblée tous : chaque transfert demande d’être examiné."}
+  ]};
+  document.getElementById("goffQ").appendChild(makeMCQ(goffQ));
+  markDone("synthese");
+
+  /* ---------- Synthèse : impression ---------- */
+  var printRow = document.getElementById("printRow");
+  var framed = false;
+  try { framed = (window.self !== window.top); } catch (e) { framed = true; }
+  if (framed) {
+    printRow.classList.add("hidden");
+  } else {
+    document.getElementById("printBtn").addEventListener("click", function(){ try { window.print(); } catch (e) {} });
+  }
+
+
+  show(location.hash.slice(1));
+})();
+</script>
+</body>
+</html>
