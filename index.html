@@ -482,7 +482,7 @@ footer p{margin:0}
       <p class="defpit"><span>Piège</span> Présenter comme un effet mesuré ce qui reste une explication plausible.</p>
     </div>
   </div>
-  <p class="intro">Les formulations à classer viennent d’une enquête fictive : une interne en psychiatrie a mené 12 entretiens avec des patients qui ont arrêté leur traitement, pour comprendre ce que signifie cet arrêt et comment ils en arrivent là. Certaines formulations sont réussies, d’autres tombent dans le piège de leur catégorie.</p>
+  <p class="intro">Les formulations à classer viennent d’une enquête fictive : une interne en psychiatrie a mené 12 entretiens avec des patients qui ont arrêté leur traitement, pour comprendre ce que signifie cet arrêt et comment ils en arrivent là. Pour chaque formulation, choisissez la catégorie qui lui correspond ; le commentaire rappelle aussi le piège à éviter.</p>
   <div class="row"><span class="score" id="prodScore"></span></div>
   <div class="stmts" id="prods"></div>
   <div class="row"><button class="btn ghost" id="prodReset" type="button">Recommencer le module</button></div>
@@ -1042,29 +1042,29 @@ footer p{margin:0}
   /* ---------- Module 2 : peut-on écrire ça ? ---------- */
   var stmts = [
     {s: "La majorité des patients qui arrêtent leur traitement le font après une période de stabilité.", ok: false,
-     f: "La phrase parle des patients en général, pas des personnes rencontrées. On peut écrire que, chez les personnes rencontrées, l’arrêt suit souvent une période de stabilité ; on ne peut pas en tirer une proportion pour l’ensemble des patients."},
-    {s: "Dans notre corpus, les arrêts cachés au prescripteur sont plus nombreux que les arrêts annoncés.", ok: true,
-     f: "Compter reste utile pour décrire les entretiens recueillis (ce qu’on appelle le corpus), tant qu’on n’en tire ni preuve ni conclusion sur l’ensemble des patients. La phrase le dit explicitement : « dans notre corpus »."},
-    {s: "Les effets secondaires semblent peser moins que le doute sur le diagnostic dans la décision d’arrêter.", ok: false,
-     f: "Le « semblent » ne change rien : comparer le poids de deux facteurs, c’est faire une mesure, qui demande un autre type d’étude. On peut montrer comment chacun intervient, pas lequel pèse le plus."},
+     f: "La phrase parle des patients en général (« la majorité »), alors que l’interne n’en a rencontré que 12, choisis pour la variété de leurs situations. Une proportion valable pour l’ensemble des patients demanderait une autre enquête, construite pour mesurer. On peut écrire, en revanche : « chez les personnes rencontrées, l’arrêt survient souvent après une période de stabilité ». Toute la différence est dans le « chez les personnes rencontrées »."},
+    {s: "Dans notre corpus, les arrêts cachés au psychiatre sont plus nombreux que les arrêts annoncés.", ok: true,
+     f: "Cela peut s’écrire. Compter reste utile pour décrire les entretiens recueillis, ce qu’on appelle le corpus. La phrase le dit clairement : « dans notre corpus ». Elle ne prétend pas que les arrêts cachés sont plus fréquents chez tous les patients. Ce qu’il ne faudrait pas faire, c’est tirer de ce décompte une conclusion sur l’ensemble des patients."},
+    {s: "Les patients qui arrêtent leur traitement manquent d’information sur leur maladie.", ok: false,
+     f: "La phrase affirme trop, de deux façons. Elle parle de tous les patients, alors que l’interne en a rencontré 12. Et elle donne une explication toute faite, qui vient plutôt du regard soignant que des entretiens : plusieurs patients savent très bien ce qu’on leur a dit, et arrêtent quand même, « pour voir ». Un résultat qualitatif doit venir des données, pas des idées qu’on avait avant l’enquête."},
     {s: "Une patiente arrête son traitement sans aucun doute sur son diagnostic : l’arrêt n’est donc pas toujours une mise à l’épreuve de la maladie.", ok: true,
-     f: "Un seul cas bien documenté suffit à contredire un « toujours ». C’est l’une des forces d’un petit nombre d’entretiens."},
+     f: "Cela peut s’écrire. Un seul cas bien documenté suffit à montrer qu’une affirmation générale (« toujours ») est fausse. C’est l’une des forces d’un petit nombre d’entretiens : on ne peut pas mesurer, mais on peut montrer qu’une chose existe, ou qu’une idée reçue ne tient pas. Le module 7 revient sur ces cas qui dérangent."},
     {s: "Chez les patients rencontrés, taire l’arrêt au psychiatre a retardé l’ajustement du traitement, parfois de plusieurs mois.", ok: true,
-     f: "La phrase est affirmative, mais elle décrit ce qui s’est passé dans les situations étudiées. Elle propose une explication (comment le silence retarde l’ajustement), sans prétendre que c’est toujours le cas."},
-    {s: "Le silence sur l’arrêt apparaît comme un probable facteur de risque de rechute, à confirmer par des études ultérieures.", ok: false,
-     f: "« Facteur de risque » est un terme d’épidémiologie : il suppose d’avoir mesuré, sur un grand nombre de personnes, que l’un va avec l’autre. Le qualitatif peut décrire comment le silence retarde l’ajustement ; c’est cette explication qui pourrait ensuite être testée par une étude chiffrée."},
-    {s: "La logique du test apparaît surtout après une période de stabilité.", ok: true,
-     f: "La phrase précise les conditions dans lesquelles une logique se manifeste chez les personnes rencontrées. Comparez avec la première phrase de la série : ici, on ne parle pas de la majorité des patients, mais de quand la logique apparaît."},
-    {s: "Aucun des patients rencontrés n’a évoqué de motif financier : le coût du traitement n’intervient pas dans l’arrêt.", ok: false,
-     f: "La première moitié est juste ; la seconde affirme une absence au-delà des personnes rencontrées. On peut écrire que ce motif n’est pas apparu, et se demander pourquoi : recrutement, situation d’entretien, couverture sociale."},
-    {s: "Ces résultats invitent à proposer plus systématiquement des fenêtres thérapeutiques encadrées aux patients stabilisés.", ok: false,
-     f: "Une enquête qualitative peut nourrir la pratique, par exemple en invitant à parler du doute avant l’arrêt. Recommander un dispositif thérapeutique, c’est trancher entre deux options de soin, ce que dix entretiens ne permettent pas."},
+     f: "Cela peut s’écrire. La phrase est affirmative, mais elle décrit ce qui s’est passé dans les situations étudiées (« chez les patients rencontrés »). Elle propose une explication : comment le silence retarde l’ajustement du traitement. Elle ne prétend pas que c’est toujours le cas, ni mesurer de combien."},
+    {s: "Le silence sur l’arrêt est un facteur de risque de rechute.", ok: false,
+     f: "« Facteur de risque » est un terme d’épidémiologie : il suppose d’avoir mesuré, sur un grand nombre de personnes, que le silence et la rechute vont ensemble plus souvent que par hasard. Douze entretiens ne le permettent pas. Le qualitatif peut en revanche décrire comment le silence retarde l’ajustement du traitement. Cette explication pourrait ensuite devenir une hypothèse, testée par une étude chiffrée."},
+    {s: "Chez les patients rencontrés, la logique du test apparaît après une période de stabilité.", ok: true,
+     f: "Cela peut s’écrire. La phrase dit dans quelles conditions une logique apparaît chez les personnes rencontrées : après une période où elles allaient bien. Comparez avec la première phrase de la série : il ne s’agit pas de dire combien de patients sont concernés, mais quand cette logique se manifeste."},
+    {s: "Aucun patient n’a parlé d’argent : le coût du traitement ne joue donc aucun rôle dans l’arrêt.", ok: false,
+     f: "La première moitié est juste : ce motif n’est pas apparu dans les entretiens. La seconde affirme beaucoup plus : que l’argent ne joue jamais aucun rôle. Or l’absence d’un motif peut tenir au recrutement (des patients bien remboursés, par exemple) ou à la situation d’entretien (on parle peu d’argent à une soignante). On peut écrire que ce motif n’est pas apparu, et se demander pourquoi."},
+    {s: "Il faut donc proposer des fenêtres thérapeutiques à tous les patients stabilisés.", ok: false,
+     f: "La phrase passe d’une compréhension à une recommandation de soin pour tous les patients. Décider qu’une pratique thérapeutique est préférable demande de comparer ses effets, ce que 12 entretiens ne permettent pas. Une enquête qualitative peut en revanche nourrir la pratique : par exemple, inviter les soignants à parler avec les patients de leurs doutes et de la durée du traitement, avant qu’ils n’arrêtent seuls."},
     {s: "9 des 12 patients évoquent les effets secondaires : c’est donc la principale raison d’arrêter le traitement.", ok: false,
-     f: "Que la plupart en parlent n’en fait pas la raison principale : c’est aussi la raison la plus facile à donner à une soignante. Le nombre de personnes qui disent une chose ne prouve ni qu’elle est vraie, ni qu’elle est la plus importante."},
+     f: "Que la plupart des patients en parlent n’en fait pas la raison principale. Les effets secondaires sont aussi la raison la plus facile à donner à une soignante : elle est acceptable, médicale, comprise de tous. Le nombre de personnes qui disent une chose ne prouve ni qu’elle est vraie, ni qu’elle est la plus importante. Il faut plutôt se demander pourquoi cette raison est si souvent donnée, et à qui."},
     {s: "Un seul patient évoque la honte de prendre un traitement devant ses enfants ; ce propos éclaire ce que l’arrêt peut chercher à protéger.", ok: true,
-     f: "Un propos rare peut être le plus éclairant. La question n’est pas combien l’ont dit, mais ce que ce propos permet de comprendre."},
-    {s: "Pour plusieurs personnes, arrêter revient à vérifier un diagnostic auquel elles ne croient qu’à moitié.", ok: true,
-     f: "La phrase montre qu’une logique existe et dit ce qu’elle signifie pour les personnes, sans prétendre à une fréquence."}
+     f: "Cela peut s’écrire. Un propos rare peut être le plus éclairant : il ouvre une piste que les autres entretiens n’auraient pas fait voir. En qualitatif, la question n’est pas combien de personnes l’ont dit, mais ce que ce propos permet de comprendre. La phrase reste prudente : elle dit que ce propos « éclaire », pas qu’il décrit tous les patients."},
+    {s: "Pour plusieurs personnes rencontrées, arrêter revient à vérifier un diagnostic auquel elles ne croient qu’à moitié.", ok: true,
+     f: "Cela peut s’écrire. La phrase montre qu’une logique existe et dit ce qu’elle signifie pour les personnes, sans prétendre à une fréquence : « plusieurs personnes rencontrées », pas « la majorité des patients ». C’est typiquement ce que produit une enquête qualitative : rendre visible une façon de vivre une situation."}
   ];
   var answered = 0, right = 0;
   var stmtWrap = document.getElementById("stmts");
@@ -1217,38 +1217,38 @@ footer p{margin:0}
   /* ---------- Module 4 : la blouse ---------- */
   var posQs = [
     {q: "Laquelle des deux versions est la plus fiable ?", opts: [
-      {t: "Celle de la sociologue : hors de l’équipe, le patient ose dire ses doutes sur le prescripteur, qu’il tait devant l’interne.", k: "bad",
-       f: "La réponse a une part de vrai : hors de l’équipe, le patient dit des choses qu’il tait à l’interne. Mais elle suppose qu’il existerait une parole « libre », débarrassée de toute influence. Or face à la sociologue aussi, le patient ajuste son récit : il se présente comme quelqu’un qui décide seul, et il ne sait plus quoi dire de son quotidien avec le traitement. Moins orientée par la relation de soin, la parole est orientée autrement."},
-      {t: "Celle de l’interne : le récit y est plus précis et plus circonstancié, et elle peut le confronter au dossier médical.", k: "bad",
-       f: "La réponse confond précision et fiabilité. Le récit fait à l’interne est riche en détails, mais sur ce qui peut se dire à une soignante de l’équipe : le pilulier, les effets secondaires, le changement de molécule. Il reste silencieux sur les doutes envers le prescripteur. Quant au dossier médical, il ne tranche pas : c’est lui aussi un récit, écrit d’un autre point de vue."},
-      {t: "Ni l’une ni l’autre seule : c’est en les recoupant qu’on reconstitue ce qui s’est passé avec le traitement.", k: "mid",
-       f: "Confronter les deux récits est une bonne idée, mais pas pour le but annoncé. La réponse suppose qu’il existe une version vraie, cachée derrière les récits, qu’on reconstituerait en les recoupant. Or chaque récit est produit dans une situation : on n’obtiendrait qu’une troisième version, celle du chercheur. La confrontation sert plutôt à comprendre ce que chaque situation permet de dire."},
-      {t: "Aucune ne l’est plus que l’autre : chacune est un récit produit dans une situation, qui rend certaines choses dicibles.", k: "good",
-       f: "Un autre enquêteur n’obtient pas une version plus vraie, mais un autre échange, où d’autres choses peuvent se dire. Aucune place ne permet de tout voir."}
+      {t: "Celle de la sociologue : loin de l’équipe soignante, le patient ose enfin dire ce qu’il pense vraiment.", k: "bad",
+       f: "C’est la réponse la plus tentante : hors de l’équipe, le patient dit en effet des choses qu’il tait à l’interne, comme ses doutes sur le psychiatre. Mais elle suppose qu’il existerait une parole « libre », sans aucune influence. Or face à la sociologue aussi, le patient ajuste son récit : il se présente comme quelqu’un qui décide seul, et il ne sait plus quoi dire de son quotidien avec le traitement. Sa parole n’est pas plus vraie, elle est orientée autrement."},
+      {t: "Celle de l’interne : le récit est plus précis et plus détaillé.", k: "bad",
+       f: "La réponse confond précision et fiabilité. Le récit fait à l’interne est riche en détails, mais sur ce qui peut se dire facilement à une soignante : le pilulier, les effets secondaires, le changement de traitement. Il reste silencieux sur les doutes envers le psychiatre. Un récit peut être très détaillé et laisser de côté l’essentiel."},
+      {t: "Aucune : seul le dossier médical permet de savoir ce qui s’est réellement passé.", k: "bad",
+       f: "Le dossier médical est une source précieuse, mais il n’est pas plus « objectif » que les entretiens. C’est lui aussi un récit, écrit par des soignants à partir de ce que le patient a bien voulu leur dire : l’arrêt caché au Dr M. n’y figure sans doute pas. Il ne tranche donc pas entre les deux versions ; il en ajoute une troisième, écrite d’un autre point de vue."},
+      {t: "Aucune n’est plus fiable que l’autre : chaque récit dépend de la personne à qui l’on parle, et montre des choses différentes.", k: "good",
+       f: "C’est la bonne réponse. Le patient ne ment ni à l’une ni à l’autre : il adapte ce qu’il dit à son interlocuteur, comme chacun de nous. Face à une soignante de l’équipe, il parle volontiers de son quotidien avec le traitement ; face à une inconnue venue de l’extérieur, il ose dire ses doutes sur le psychiatre. Un autre enquêteur n’obtient pas une version plus vraie, mais un autre échange. Aucune place ne permet de tout voir."}
     ]},
     {q: "Que la position de l’interne permet-elle de saisir ?", opts: [
-      {t: "Les raisons médicales de l’arrêt, qu’il formule plus précisément face à une soignante qui connaît les effets secondaires.", k: "bad",
-       f: "La réponse suppose que le patient livre à l’interne ses vraies raisons, simplement mieux formulées. Mais face à un membre de l’équipe, les effets secondaires sont une raison recevable, que tout soignant comprend : c’est aussi pour cela qu’ils sont mis en avant. Le doute sur le prescripteur, lui, n’apparaît pas. La position de l’interne fait voir le quotidien du traitement, pas les raisons cachées de l’arrêt."},
-      {t: "Le détail concret de la gestion du traitement, qu’il expose volontiers à quelqu’un qui sait quoi lui demander.", k: "good",
-       f: "Pilulier, horaires, reprise du travail : le patient expose volontiers ce quotidien à une soignante, qui sait aussi quoi lui demander."},
-      {t: "Une parole plus spontanée : le patient est en terrain connu et n’a pas à se justifier devant une inconnue.", k: "bad",
-       f: "La réponse suppose qu’être en terrain connu rend la parole plus libre. C’est en partie l’inverse : le patient sait ce qu’on attend de lui dans un service de soins, et il le fournit. Il se justifie d’ailleurs bel et bien : les effets secondaires, le changement de molécule, « maintenant ça va mieux ». La familiarité ouvre certaines portes et en ferme d’autres."}
+      {t: "Les vraies raisons de l’arrêt : le patient fait confiance à quelqu’un qui le soigne.", k: "bad",
+       f: "La réponse suppose que la confiance dans l’équipe soignante amène le patient à tout dire. C’est en partie l’inverse : face à un membre de l’équipe, il met en avant des raisons acceptables, comme les effets secondaires, que tout soignant comprend. Ses doutes sur le psychiatre, eux, n’apparaissent pas. La position de l’interne fait voir le quotidien du traitement, pas les raisons cachées de l’arrêt."},
+      {t: "Le quotidien concret du traitement, que le patient décrit volontiers à quelqu’un qui sait quoi lui demander.", k: "good",
+       f: "C’est la bonne réponse. Pilulier, horaires, reprise du travail, effets secondaires : le patient expose volontiers ce quotidien à une soignante. Et l’interne sait quelles questions poser, parce qu’elle connaît les traitements. Sa position n’est donc pas seulement un obstacle : elle donne accès à des choses que la sociologue saisit mal."},
+      {t: "Rien d’utile : en tant que soignante, elle ne peut obtenir que des réponses de façade.", k: "bad",
+       f: "La réponse tombe dans l’excès inverse : puisque la position de soignante oriente la parole, elle ne vaudrait rien. Mais aucune position n’est neutre, celle de la sociologue non plus. Chaque place ouvre certaines portes et en ferme d’autres. Ici, la position de l’interne donne accès au quotidien du traitement, que le patient décrit en détail. Il ne faut pas jeter ces données, mais savoir ce qu’elles permettent de dire."}
     ]},
     {q: "Et que fait apparaître l’entretien de la sociologue ?", opts: [
-      {t: "Ce que la relation de soin l’empêchait de dire : son désaccord avec le prescripteur, qui explique ses arrêts répétés.", k: "mid",
-       f: "C’est en partie juste : ces propos sont plus faciles à tenir hors de l’équipe. Mais la réponse fait de ce second récit la vérité que le premier cachait, et lui prête un pouvoir d’explication (« qui explique ses arrêts répétés »). Or ce récit est lui aussi produit dans une situation, et il a ses angles morts, comme le quotidien du traitement. Le désaccord avec le prescripteur est un élément à interpréter, pas une cause établie."},
-      {t: "Une incohérence du patient, qui varie selon son interlocuteur, ce qui invite à interpréter ses propos avec prudence.", k: "bad",
-       f: "La réponse traite l’écart entre les deux récits comme un défaut du patient, qui obligerait à se méfier de lui. Mais chacun adapte ce qu’il dit à son interlocuteur : on ne raconte pas la même chose à son médecin et à une inconnue. Cet ajustement n’est pas un bruit à neutraliser, c’est une donnée : il montre ce qui peut se dire à l’équipe soignante, et ce qui ne le peut pas."},
-      {t: "Le doute sur le prescripteur et l’arrêt « pour voir ». Le quotidien du traitement, en revanche, lui échappe.", k: "good",
-       f: "Ces propos sont plus faciles à tenir hors de l’équipe. Mais la sociologue saisit mal ce que le traitement change au quotidien : « je sais pas trop quoi vous dire »."}
+      {t: "La vérité : le patient y dit enfin ce qu’il cachait à l’équipe soignante.", k: "bad",
+       f: "C’est en partie juste : ces propos sont plus faciles à tenir hors de l’équipe. Mais la réponse fait de ce second récit « la vérité », que le premier aurait cachée. Or ce récit est lui aussi produit dans une situation particulière, et il a ses angles morts : le patient n’y parle presque pas de son quotidien avec le traitement. Il ne remplace pas le premier récit : il le complète."},
+      {t: "Une incohérence du patient, qui change de version selon son interlocuteur : on ne peut pas se fier à lui.", k: "bad",
+       f: "La réponse traite l’écart entre les deux récits comme un défaut du patient. Mais chacun adapte ce qu’il dit à son interlocuteur : on ne raconte pas la même chose à son médecin et à une inconnue. Ce n’est pas de l’incohérence, c’est la vie sociale ordinaire. Et cet ajustement est une donnée précieuse : il montre ce qui peut se dire à l’équipe soignante, et ce qui ne le peut pas."},
+      {t: "Ses doutes sur le psychiatre et l’arrêt « pour voir ». En revanche, le quotidien du traitement lui échappe.", k: "good",
+       f: "C’est la bonne réponse. Hors de l’équipe, le patient ose parler de ses doutes sur le Dr M. et de ses arrêts « pour voir ». Mais la sociologue saisit mal ce que le traitement change au quotidien : « je sais pas trop quoi vous dire ». Chaque position fait voir une partie de l’expérience du patient, et en laisse une autre dans l’ombre."}
     ]},
-    {q: "Que faire de cet écart dans l’analyse ?", opts: [
-      {t: "Le mentionner dans les limites : le recueil par une soignante a pu orienter certaines réponses, ce qui invite à la prudence.", k: "bad",
-       f: "C’est le paragraphe « limites » le plus courant, et il a l’air honnête. Mais il traite l’effet de la position de l’interne comme un défaut qui aurait faussé certaines réponses, puis il passe à autre chose : l’analyse reste intacte. Or ce que les patients disent ou taisent face à une soignante renseigne sur l’objet même de l’enquête, le secret qui entoure l’arrêt. C’est dans l’analyse qu’il faut l’intégrer."},
-      {t: "Ne retenir que ce qui est commun aux deux versions, puisque c’est ce qui résiste au changement d’interlocuteur.", k: "mid",
-       f: "L’argument a l’air rigoureux : ne garder que ce qui résiste au changement d’interlocuteur. Mais ce qui est commun aux deux versions n’est pas plus vrai que le reste : c’est seulement ce qui peut se dire partout. On perdrait l’essentiel, c’est-à-dire ce que chaque situation permet de dire : le quotidien du traitement d’un côté, le doute sur le prescripteur de l’autre."},
-      {t: "En faire un objet d’analyse : ce que chaque situation rend dicible renseigne sur le rapport au traitement.", k: "good",
-       f: "Ce que chaque interlocuteur permet de dire nous apprend quelque chose sur le rapport au traitement lui-même : ce qu’on avoue à qui, ce qu’on cache à l’équipe. L’entretien est une relation entre deux personnes, et cette relation fait partie de ce qu’on étudie."}
+    {q: "Que faire de cet écart entre les deux récits dans l’analyse ?", opts: [
+      {t: "Le signaler dans les limites de l’étude : le fait que l’interne soit soignante a pu fausser certaines réponses.", k: "bad",
+       f: "C’est le paragraphe « limites » le plus courant, et il a l’air honnête. Mais il traite l’effet de la position comme un défaut, puis passe à autre chose : l’analyse reste la même. Or ce que les patients disent ou taisent face à une soignante renseigne sur le sujet même de l’enquête : le secret qui entoure l’arrêt. C’est dans l’analyse qu’il faut l’intégrer, pas seulement dans les limites."},
+      {t: "Ne garder que la version de la sociologue, plus sincère, et écarter celle de l’interne.", k: "bad",
+       f: "La réponse suppose qu’une des deux versions est sincère et l’autre non. On perdrait alors tout ce que le patient a confié à l’interne : son quotidien avec le traitement, ses effets secondaires, son organisation. Aucune version n’est la bonne : chacune montre ce qui peut se dire dans une situation donnée. En écarter une, c’est se priver d’une partie de ce qu’on cherche à comprendre."},
+      {t: "En faire un résultat : ce que le patient dit ou tait selon son interlocuteur nous apprend quelque chose sur son rapport au traitement.", k: "good",
+       f: "C’est la bonne réponse. Ce que chaque interlocuteur permet de dire nous apprend quelque chose sur le sujet lui-même : ce qu’on avoue à qui, ce qu’on cache à l’équipe soignante. Par exemple, le fait que les doutes sur le psychiatre ne se disent pas devant une soignante éclaire le secret qui entoure l’arrêt. L’entretien est une relation entre deux personnes, et cette relation fait partie de ce qu’on étudie."}
     ]}
   ];
   var posWrap = document.getElementById("posQs");
@@ -1369,21 +1369,17 @@ footer p{margin:0}
   var catName = {}; cats.forEach(function(c){ catName[c[0]] = c[1]; });
   var prods = [
     {s: "Rapport ambivalent au traitement.", c: "etiquette",
-     f: "« Ambivalent » donne une couleur interprétative, mais l’intitulé ne dit ni en quoi consiste l’ambivalence ni ce qu’elle produit. C’est encore une étiquette."},
-    {s: "« Arrêter » recouvre des gestes différents : espacer les prises, diminuer, cesser, puis parfois reprendre.", c: "description",
-     f: "Une description dense : elle restitue ce que recouvre concrètement la pratique. Piège à éviter : glisser une interprétation sous l’apparence d’un fait."},
-    {s: "Il y a trois types de patients : les testeurs, les protecteurs et les affirmés.", c: "typologie",
-     f: "C’est bien une typologie, mais elle tombe dans le piège : elle classe les personnes une fois pour toutes, alors qu’une même personne peut changer de logique."},
-    {s: "Taire l’arrêt pour préserver la relation avec le psychiatre peut retarder l’ajustement du traitement.", c: "mecanisme",
-     f: "Un mécanisme : comment ceci produit cela, dans ce contexte. Piège à éviter : le présenter comme un effet mesuré."},
-    {s: "La stigmatisation revient à de nombreuses reprises dans les récits, en particulier dans les cadres familial et professionnel.", c: "etiquette",
-     f: "Détaillé, mais c’est un résumé de sujet : la phrase dit où et combien le thème est abordé, pas ce qu’il signifie ni ce qu’il produit."},
-    {s: "Les patients sont d’abord stables, puis ils doutent, puis ils arrêtent, puis certains rechutent.", c: "processus",
-     f: "C’est un processus, mais il tombe dans le piège : une suite d’étapes, sans dire ce qui fait passer de l’une à l’autre."},
-    {s: "L’arrêt peut fonctionner comme un test, comme une protection ou comme une affirmation de soi, et une même personne peut passer d’une logique à l’autre.", c: "typologie",
-     f: "Une typologie de logiques, pas de personnes. La fin de la phrase évite le piège du classement définitif."},
+     f: "C’est une étiquette. « Ambivalent » semble déjà interpréter, mais l’intitulé ne dit ni en quoi consiste cette ambivalence, ni ce qu’elle produit. Pour en faire un résultat, il faudrait dire par exemple ce que les patients attendent et redoutent à la fois du traitement, et comment cela pèse sur leur décision d’arrêter."},
+    {s: "Les patients parlent souvent des effets secondaires, surtout de la prise de poids.", c: "etiquette",
+     f: "C’est une étiquette, même si la phrase est longue et précise. Elle dit de quoi les patients parlent et combien de fois, mais pas ce que cela signifie pour eux ni ce que cela produit. C’est le piège le plus courant : présenter comme un résultat un simple résumé des sujets abordés. C’est une étape utile du travail, mais pas encore une interprétation."},
+    {s: "« Arrêter » recouvre des gestes différents : espacer les prises, diminuer la dose, cesser, puis parfois reprendre.", c: "description",
+     f: "C’est une description dense. Elle restitue ce que recouvre concrètement une pratique, ici « arrêter son traitement », qui n’est pas un geste unique. C’est déjà un résultat : on croyait savoir ce que veut dire « arrêter », et l’enquête montre que le mot cache des réalités très différentes. Le piège serait de glisser une interprétation sous l’apparence d’un fait."},
+    {s: "L’arrêt peut servir à tester sa maladie, à se protéger ou à s’affirmer, et une même personne peut passer d’une logique à l’autre.", c: "typologie",
+     f: "C’est une typologie réussie. Elle met en ordre les différentes logiques de l’arrêt, et elle classe des logiques, pas des personnes : la fin de la phrase rappelle qu’un même patient peut passer de l’une à l’autre. Le piège serait d’écrire « il y a trois types de patients » : on enfermerait chacun dans une case."},
     {s: "De la stabilité au doute, puis à l’arrêt discret : c’est l’absence de discussion sur la durée du traitement qui fait passer du doute à l’arrêt.", c: "processus",
-     f: "Un processus abouti : il dit ce qui fait passer d’une étape à l’autre. Sans sa seconde moitié, ce ne serait qu’une chronologie."}
+     f: "C’est un processus. Il décrit des étapes dans le temps (stabilité, doute, arrêt discret), et surtout il dit ce qui fait passer de l’une à l’autre : l’absence de discussion sur la durée du traitement. Sans cette seconde moitié, ce ne serait qu’une chronologie, une suite d’étapes sans explication."},
+    {s: "Taire l’arrêt pour préserver la relation avec le psychiatre peut retarder l’ajustement du traitement.", c: "mecanisme",
+     f: "C’est un mécanisme : il montre comment une chose en produit une autre, ici comment le silence retarde l’ajustement du traitement. Ce n’est pas un effet mesuré : on ne sait pas de combien, ni chez combien de patients. C’est une explication plausible, tirée des entretiens, qui pourrait ensuite être testée par une étude chiffrée."}
   ];
   var prodWrap = document.getElementById("prods");
   var prodScore = document.getElementById("prodScore");
@@ -1443,14 +1439,12 @@ footer p{margin:0}
 
   /* ---------- Module 7 : le cas qui dérange ---------- */
   var negQ = {q: "Que faites-vous de l’entretien avec Mme L. ?", opts: [
-    {t: "Je le signale comme cas atypique : son arrêt répond à une contrainte pratique plutôt qu’à une logique de sens, ce que je précise dans la discussion.", k: "bad",
-     f: "La réponse paraît soigneuse : le cas n’est pas caché, il est signalé dans la discussion. Mais il est écarté comme « atypique », et le thème principal reste intact. Et l’opposition entre contrainte pratique et logique de sens ne tient pas : concilier le traitement et la garde de son petit-fils a un sens pour Mme L. C’est une autre logique d’arrêt, qui mérite d’être analysée."},
-    {t: "Je crée un sous-thème « Contraintes du quotidien », à côté du thème principal, pour ne perdre aucune donnée.", k: "mid",
-     f: "La réponse a l’air prudente : rien n’est perdu. Mais le cas de Mme L. est rangé à part, comme une exception, et le thème principal continue d’affirmer que l’arrêt sert à tester sa maladie. Or Mme L. montre justement que ce n’est pas toujours vrai. Le sous-thème protège le thème au lieu de l’obliger à se préciser : à quelles conditions l’arrêt est-il un test ?"},
-    {t: "Je considère que le thème du test est fragilisé et je reviens à une lecture plus descriptive des motifs d’arrêt.", k: "bad",
-     f: "La réponse prend un cas qui contredit (on parle de « cas négatif ») pour une réfutation du thème entier. Mais Mme L. contredit l’idée que tous les arrêts sont des tests, pas l’existence de cette logique : les quatre premiers entretiens restent là. Revenir à une simple liste de motifs ferait perdre ce qu’ils montrent. Le cas négatif sert à préciser le thème, pas à l’abandonner."},
-    {t: "Je révise le thème : le test suppose un doute sur le diagnostic, et cet arrêt-là relève d’une autre logique.", k: "good",
-     f: "Le cas qui contredit précise à quelles conditions le thème vaut, et en fait apparaître un autre. L’analyse en sort plus solide qu’avant."}
+    {t: "Je l’écarte : c’est un cas isolé, qui ne remet pas en cause ce que montrent les quatre autres entretiens.", k: "bad",
+     f: "C’est le réflexe le plus courant : un cas sur cinq ne colle pas, on le met de côté. Mais en qualitatif, un cas qui contredit (on parle de « cas négatif ») n’est pas une exception statistique à négliger. Il oblige à se demander : à quelles conditions mon thème est-il vrai ? Ici, Mme L. arrête sans aucun doute sur son diagnostic : elle montre que l’arrêt n’est pas toujours un test. L’écarter, ce serait garder un thème faux pour une partie des patients."},
+    {t: "J’abandonne le thème du test : un seul cas suffit à montrer qu’il est faux.", k: "bad",
+     f: "La réponse va trop loin dans l’autre sens. Mme L. montre que tous les arrêts ne sont pas des tests, mais pas que cette logique n’existe pas : les quatre premiers entretiens la montrent bel et bien. Abandonner le thème, ce serait perdre ce qu’ils révèlent. Le cas négatif sert à préciser le thème, pas à le détruire."},
+    {t: "Je précise le thème : l’arrêt comme test suppose un doute sur le diagnostic, et Mme L. montre une autre logique d’arrêt.", k: "good",
+     f: "C’est la bonne réponse. Le cas de Mme L. précise à quelles conditions le thème vaut : l’arrêt est un test quand le patient doute de son diagnostic. Et il fait apparaître une autre logique : sauter une prise pour concilier le traitement avec ses obligations, ici garder son petit-fils et conduire. L’analyse en sort plus juste et plus riche. C’est le rôle du cas qui dérange : obliger le chercheur à affiner ce qu’il affirme."}
   ]};
   var negWrap = document.getElementById("negQ");
   document.getElementById("showL").addEventListener("click", function(){
@@ -1540,17 +1534,17 @@ footer p{margin:0}
     cats: [["meca", "Mécanisme à limiter"], ["pos", "Effet de position"], ["inc", "Incident révélateur"]],
     items: [
       {s: "En relisant ses transcriptions, l’interne s’aperçoit qu’elle relance presque toujours quand un patient parle des effets secondaires, et rarement quand il parle de sa famille.", c: "meca",
-       f: "Des relances qui ne suivent qu’une piste orientent l’ensemble des entretiens vers ce qu’on cherchait déjà. Il faut les corriger dans les entretiens suivants. Cela dit aussi quelque chose du regard clinique de l’interne, qui mérite d’être décrit."},
+       f: "C’est un mécanisme à limiter. En relançant surtout sur les effets secondaires, l’interne oriente tous ses entretiens vers ce qu’elle connaît déjà, et recueille moins d’informations sur la famille. Le risque : conclure que les effets secondaires comptent plus que la famille, alors que c’est elle qui a posé plus de questions dessus. Il faut corriger ses relances dans les entretiens suivants. On peut aussi décrire ce que cela dit de son regard de soignante."},
       {s: "Une patiente, ancienne infirmière, parle à l’interne « entre collègues » et décrit son arrêt avec le vocabulaire clinique : observance, fenêtre thérapeutique, rechute.", c: "pos",
-       f: "La proximité professionnelle change le registre du récit. Ce n’est pas une erreur à corriger, mais un effet à décrire : ce vocabulaire donne accès à certaines choses et en recouvre d’autres, comme ce que l’arrêt lui a fait vivre."},
+       f: "C’est un effet de position. La patiente parle à l’interne comme à une collègue, et raconte son arrêt avec des mots de soignante. Ce n’est pas une erreur à corriger : aucune place ne permet d’entendre une parole « pure ». On le décrit, et on en tient compte : ce vocabulaire médical permet de dire certaines choses, mais peut recouvrir ce que l’arrêt lui a fait vivre personnellement. L’interne peut l’inviter à le raconter avec ses propres mots."},
       {s: "Quand l’interne précise qu’elle travaille avec le Dr M., un patient refuse l’enregistrement, puis accepte de parler sans magnétophone.", c: "inc",
-       f: "Le refus renseigne sur ce qu’on étudie : la crainte que la parole circule dans l’équipe est au cœur du secret de l’arrêt. Noter les conditions de ce refus, et ce qui s’est dit ensuite, fait partie des données."},
+       f: "C’est un incident révélateur. Le refus n’est pas un simple contretemps : il montre que le patient craint que ses paroles circulent dans l’équipe du Dr M. Or cette crainte est au cœur du sujet étudié, le secret qui entoure l’arrêt. Il faut donc noter le refus, ses conditions, et ce qui s’est dit ensuite : cela fait partie des données."},
       {s: "Les entretiens ont lieu dans un bureau de consultation du CMP, entre deux rendez-vous médicaux. Plusieurs patients regardent la porte et écourtent leurs réponses.", c: "meca",
-       f: "Le cadre intimide et presse les réponses, quel que soit le sujet. Réduire les effets d’intimidation est une précaution indiscutable : autre lieu, autre moment, plus de temps."},
+       f: "C’est un mécanisme à limiter. Le lieu intimide et presse les réponses, quel que soit le sujet : les patients regardent la porte et abrègent. Ici, réduire l’effet est simple et indiscutable : choisir un autre lieu, un autre moment, prévoir plus de temps. C’est pour ce genre de situation que le mot « biais » reste utile : une condition d’enquête qui déforme les réponses, et qu’on peut corriger."},
       {s: "Connaissant bien le service, l’interne ne demande jamais aux patients ce que représente pour eux une hospitalisation : cela lui paraît évident.", c: "pos",
-       f: "C’est le revers de la familiarité avec le milieu : elle aide à saisir les sous-entendus, mais expose à trouver évident ce qu’il faudrait interroger. On le décrit, et on se force à poser les questions naïves."},
+       f: "C’est un effet de position, le revers de la familiarité avec le milieu. Bien connaître le service aide à comprendre les sous-entendus, mais expose à trouver évident ce qu’il faudrait interroger. Or une hospitalisation peut signifier des choses très différentes selon les patients : un soulagement, une humiliation, une sanction. On ne peut pas cesser d’être interne, mais on peut le décrire et s’obliger à poser les questions naïves."},
       {s: "L’interne évoque par mégarde un détail du dossier médical que le patient ne lui avait pas confié. Il se ferme pour le reste de l’entretien.", c: "inc",
-       f: "La gaffe est à éviter, mais elle a eu lieu, et elle renseigne : le patient découvre ce que l’institution sait de lui, et réagit. Son rapport à ce qui circule sur lui dans l’équipe devient visible."}
+       f: "C’est un incident révélateur. La gaffe est à éviter, mais elle a eu lieu, et elle renseigne : le patient découvre que l’interne sait sur lui des choses qu’il ne lui a pas dites, et il se ferme. Sa réaction montre son rapport à ce qui circule sur lui dans l’équipe soignante, un élément central pour comprendre pourquoi on cache un arrêt. On la note et on l’analyse, plutôt que de faire comme si elle n’avait pas eu lieu."}
     ]
   });
 
@@ -1563,33 +1557,33 @@ footer p{margin:0}
     onDone: function(){ ditNote.classList.remove("hidden"); },
     items: [
       {s: "M. C. explique qu’il a arrêté son traitement « pour voir », après un an sans symptômes.", c: "dit",
-       f: "Un propos rapporté, attribué à son auteur (« explique que »). C’est la forme la plus sûre."},
+       f: "C’est un propos rapporté : « M. C. explique que… ». La phrase dit clairement qui parle, et cite ses mots (« pour voir »). C’est la forme la plus sûre pour rapporter ce qu’une personne a dit. Elle n’affirme pas que les choses se sont passées exactement ainsi : elle dit ce que M. C. en raconte."},
       {s: "M. C. a arrêté son traitement après un an sans symptômes.", c: "dit",
-       f: "La phrase est présentée comme un fait, mais sa seule source est le récit de M. C. C’est le glissement le plus courant : un propos devenu événement. Écrire « selon lui » ou « dit-il » suffit à le corriger."},
+       f: "C’est un propos, même si la phrase a l’air d’un fait. Sa seule source est le récit de M. C. : l’enquêtrice n’a constaté ni l’arrêt, ni l’année sans symptômes. C’est le glissement le plus courant dans un mémoire : un propos devient un événement. Il suffit d’écrire « selon lui » ou « dit-il » pour le corriger."},
       {s: "Pendant l’entretien, il baisse la voix chaque fois qu’il mentionne le Dr M.", c: "obs",
-       f: "Un fait constaté par l’enquêtrice pendant l’entretien, qu’elle peut noter et dater."},
+       f: "C’est une observation : l’enquêtrice a constaté elle-même ce changement de voix pendant l’entretien. Elle peut le noter, le dater, préciser à quels moments il se produit. Ce qu’il signifie, en revanche, reste à interpréter : c’est l’objet de la phrase suivante."},
       {s: "Cette baisse de voix traduit la crainte que ses propos remontent jusqu’au prescripteur.", c: "int",
-       f: "Une lecture de l’enquêtrice. Elle est plausible, mais d’autres le sont aussi : gêne, respect, fatigue. Il faut la présenter comme une interprétation et l’étayer par d’autres passages."},
+       f: "C’est une interprétation : une lecture proposée par l’enquêtrice. Elle est plausible, mais d’autres le sont aussi : gêne, respect, fatigue, timidité. Proposer cette lecture n’est pas une faute, c’est même le cœur de l’analyse. Mais il faut la présenter comme une interprétation (« on peut y lire », « cela suggère ») et l’appuyer sur d’autres passages de l’entretien."},
       {s: "Il est le seul des douze participants à avoir demandé que l’enregistreur soit coupé avant de parler de son prescripteur.", c: "obs",
-       f: "Un constat sur le déroulement de l’enquête, ici une comparaison entre les douze entretiens. Ce qu’il signifie reste à interpréter."},
+       f: "C’est une observation, même si elle porte sur l’ensemble de l’enquête : l’enquêtrice a constaté que M. C. est le seul des douze à avoir demandé de couper l’enregistreur. Ce constat vient de la comparaison entre les entretiens. Ce qu’il signifie (crainte, méfiance, simple habitude ?) reste à interpréter."},
       {s: "Pour lui, arrêter revient à vérifier qu’il n’est plus malade.", c: "int",
-       f: "La phrase ressemble à un propos, mais M. C. a dit « pour voir », pas cela. C’est une formulation de l’enquêtrice, légitime si elle est reliée aux passages qui la fondent, et à ne pas mettre entre guillemets."},
+       f: "C’est une interprétation, même si la phrase ressemble à un propos de M. C. Il a dit « pour voir », pas « pour vérifier que je ne suis plus malade » : c’est une formulation de l’enquêtrice. Elle est légitime si elle est reliée aux passages qui la fondent. Mais il ne faut surtout pas la mettre entre guillemets, comme si M. C. l’avait dite."},
       {s: "« Au bout de trois semaines, j’ai compris. »", c: "dit",
-       f: "Une citation. Elle ne dit pas ce qu’il a compris, et c’est justement ce qui reste à analyser plutôt qu’à compléter."}
+       f: "C’est un propos : une citation exacte de M. C. Remarquez qu’elle ne dit pas ce qu’il a compris. La tentation est de compléter (« j’ai compris que j’étais malade »). Mais ce silence fait partie du propos : c’est justement ce qui reste à analyser, avec d’autres passages, plutôt qu’à deviner."}
     ]
   });
 
   /* ---------- Module 10 : deux lectures en concurrence ---------- */
   var concQ = document.getElementById("concQ");
   var concFinal = {q: "Au vu de ces extraits, que concluez-vous ?", opts: [
-    {t: "Je privilégie la lecture B : elle s’appuie sur moins d’extraits, mais la crainte d’une sanction pèse plus lourd cliniquement.", k: "bad",
-     f: "La réponse mélange deux questions : ce qui est important pour la pratique, et ce qui est le mieux fondé dans les données. Que la crainte d’une sanction soit lourde de conséquences justifie de s’en préoccuper, pas de la tenir pour la meilleure explication. Une interprétation est valide si elle rend compte des extraits, y compris de ceux qui la compliquent, pas si elle paraît la plus grave."},
-    {t: "Je retiens la lecture qui réunit le plus d’extraits, en la présentant comme une tendance du corpus.", k: "mid",
-     f: "La réponse est prudente, puisqu’elle parle de « tendance du corpus » (l’ensemble des entretiens recueillis). Mais compter les extraits ne départage pas deux interprétations : un même extrait peut être compatible avec les deux, et un extrait unique peut éclairer ce que trois autres laissent ouvert. Il faut regarder ce que chaque extrait permet de comprendre, pas combien il y en a."},
-    {t: "A et B ne s’excluent pas : je cherche dans quelles situations l’une ou l’autre l’emporte, et ce qui les distingue.", k: "good",
-     f: "L’extrait sur « les papiers pour l’hôpital » montre que relation et sanction peuvent ne faire qu’un, et un autre extrait ouvre une troisième lecture. L’interprétation valide est celle qui rend compte de cette situation plus complexe, pas celle qui l’emporte sur l’autre."},
-    {t: "On ne peut pas trancher seul : je soumets les extraits à un second codeur et je retiens la lecture sur laquelle nous nous accordons.", k: "bad",
-     f: "La réponse paraît prudente, puisqu’elle refuse de trancher seul. Mais un second codeur (une deuxième personne qui analyse les mêmes extraits) ne règle pas la question : si vous vous accordez sur A, cela ne montre pas que A explique mieux les données que B. Ce qui fait avancer, c’est de chercher activement les passages qui départagent les lectures, et de regarder ceux qui ne cadrent avec aucune."}
+    {t: "Je choisis la lecture B : la crainte d’une sanction est plus grave cliniquement, c’est donc la plus importante.", k: "bad",
+     f: "La réponse mélange deux questions : ce qui est important pour la pratique, et ce qui est le mieux appuyé par les données. Que la crainte d’une sanction ait de lourdes conséquences justifie de s’en préoccuper, pas de la tenir pour la meilleure explication. Une interprétation est valide si elle rend compte des extraits, y compris de ceux qui la compliquent, pas si elle paraît la plus grave."},
+    {t: "Je compte les extraits : la lecture qui en réunit le plus est la bonne.", k: "bad",
+     f: "Compter les extraits ne départage pas deux interprétations. Un même extrait peut être compatible avec les deux (comme celui de M. C.), et un extrait unique peut éclairer ce que trois autres laissent ouvert (comme celui de Mme D.). En qualitatif, on regarde ce que chaque extrait permet de comprendre, pas combien il y en a. Une lecture n’est pas plus vraie parce qu’elle est plus souvent illustrée."},
+    {t: "A et B ne s’excluent pas : je cherche dans quelles situations l’une ou l’autre domine, et je creuse la troisième lecture ouverte par M. E.", k: "good",
+     f: "C’est la bonne réponse. L’extrait de Mme D. montre que relation et crainte de la sanction peuvent aller ensemble, et celui de M. E. ouvre une troisième lecture, l’affirmation de soi. Plutôt que de faire gagner une interprétation, vous cherchez celle qui rend compte de toute cette complexité : quand domine le souci de la relation, quand domine la crainte, et quand le silence sert à prouver quelque chose. C’est cela, une interprétation qui explique mieux les données que ses concurrentes."},
+    {t: "Je fais relire les extraits par un collègue, et je retiens la lecture sur laquelle nous sommes d’accord.", k: "bad",
+     f: "La réponse paraît prudente, puisqu’elle refuse de trancher seul. Mais si votre collègue et vous tombez d’accord sur A, cela ne montre pas que A explique mieux les données que B : deux subjectivités ne font pas une objectivité. Discuter avec un collègue peut aider, surtout pour examiner vos désaccords. Mais ce qui fait avancer, c’est de revenir aux extraits : chercher ceux qui départagent les lectures, et ceux qui ne cadrent avec aucune."}
   ]};
   makeSorter({
     list: "concList", score: "concScore", reset: "concReset",
@@ -1598,49 +1592,49 @@ footer p{margin:0}
     onDone: function(){ concQ.innerHTML = ""; concQ.appendChild(makeMCQ(concFinal, function(){ markDone("concurrence"); })); concQ.classList.remove("hidden"); },
     items: [
       {who: "M. A.", s: "« Je voulais pas qu’il pense que je le prenais pas au sérieux. Il s’est donné du mal pour moi. »", c: "a",
-       f: "Le silence est justifié par le souci de ne pas décevoir quelqu’un qui s’est investi. C’est la lecture A."},
+       f: "Cet extrait soutient la lecture A. M. A. explique son silence par le souci de ne pas décevoir un psychiatre qui « s’est donné du mal » pour lui. C’est la relation qu’il cherche à préserver, sans aucune mention d’une sanction."},
       {who: "Mme B.", s: "« La dernière fois que j’ai dit que j’arrêtais, je me suis retrouvée avec la piqûre tous les mois. »", c: "b",
-       f: "Une expérience passée de sanction, qui rend le silence raisonnable. C’est la lecture B."},
+       f: "Cet extrait soutient la lecture B. Mme B. a vécu une conséquence concrète après avoir dit qu’elle arrêtait : une injection tous les mois. Se taire devient alors un choix raisonnable, pour éviter que cela se reproduise."},
       {who: "M. C.", s: "« Je lui ai rien dit, c’est tout. »", c: "both",
-       f: "L’extrait confirme le silence, mais ne dit rien de ses raisons. Il est compatible avec les deux lectures, et ne peut donc pas les départager. Il ne faut pas le compter pour l’une ou pour l’autre."},
+       f: "Cet extrait ne départage pas les deux lectures. Il confirme que M. C. s’est tu, mais ne dit rien de ses raisons : il est compatible avec A comme avec B. C’est un piège courant : le compter pour l’une ou l’autre lecture parce qu’il parle du silence. Un extrait n’appuie une interprétation que s’il dit quelque chose des raisons."},
       {who: "Mme D.", s: "« Il est gentil, hein. Mais c’est quand même lui qui signe les papiers pour l’hôpital. »", c: "both",
-       f: "La relation et la crainte de la sanction sont ici nouées dans la même phrase. L’extrait ne départage pas A et B : il suggère qu’elles ne s’excluent pas, ce qui est en soi un résultat."},
+       f: "Cet extrait ne départage pas les deux lectures, mais pour une autre raison : il contient les deux à la fois. Mme D. apprécie son psychiatre (« il est gentil ») et le craint (« c’est lui qui signe les papiers pour l’hôpital »). Il suggère que A et B ne s’excluent pas : la relation et la crainte de la sanction peuvent aller ensemble. C’est en soi un résultat."},
       {who: "M. E.", s: "« Je lui dirai quand ça ira bien. Comme ça, il verra que j’avais raison. »", c: "other",
-       f: "Ni protéger la relation, ni éviter une sanction : se taire pour pouvoir prouver quelque chose. L’extrait ouvre une troisième lecture, l’arrêt comme affirmation de soi, qu’il faut chercher dans les autres entretiens."}
+       f: "Cet extrait ouvre une autre lecture. M. E. ne se tait ni pour protéger la relation, ni pour éviter une sanction : il veut pouvoir prouver qu’il « avait raison ». L’arrêt devient une affirmation de soi. Une troisième lecture apparaît, qu’il faudra chercher dans les autres entretiens."}
     ]
   });
 
   /* ---------- Module 0 : repères ---------- */
   var m0Qs = [
     {q: "Une enquête qualitative se définit d’abord par…", opts: [
-      {t: "Le recours à des entretiens ou à des observations, plutôt qu’à des questionnaires standardisés.", k: "bad",
-       f: "Ce sont ses outils les plus fréquents, mais ils ne la définissent pas : une enquête qualitative peut aussi travailler sur des documents, et un entretien peut servir une démarche quantitative."},
-      {t: "Un petit nombre de participants, choisis pour la richesse de leur expérience plutôt que tirés au sort.", k: "bad",
-       f: "La réponse décrit un trait fréquent des enquêtes qualitatives, mais elle le prend pour leur définition. Le petit nombre est une conséquence de la question : pour comprendre en profondeur des logiques, on choisit des personnes et on prend le temps de les entendre. Une enquête qualitative peut réunir cinquante entretiens, et une enquête sur douze personnes n’est pas qualitative si elle cherche à compter."},
-      {t: "Ce qu’elle cherche : comprendre des pratiques et le sens qu’elles ont pour les personnes.", k: "good",
-       f: "C’est la question posée qui définit l’enquête qualitative. Les outils et la taille du corpus en découlent."},
-      {t: "Une analyse du contenu des propos, qui remplace le traitement statistique des données.", k: "bad",
-       f: "La réponse décrit un outil possible, mais pas ce qui définit l’enquête. Une enquête qualitative n’est pas une enquête « sans chiffres » : compter peut être utile pour décrire les entretiens recueillis. Et l’analyse de contenu peut elle-même être très quantitative, quand elle compte des mots ou des thèmes. Ce qui définit le qualitatif, c’est ce qu’il cherche : comprendre des pratiques et leur sens."}
+      {t: "L’absence de chiffres : on n’y compte jamais rien.", k: "bad",
+       f: "C’est une idée très répandue, mais elle est fausse. Une enquête qualitative peut compter : dire combien de personnes rencontrées ont caché leur arrêt au médecin aide à décrire les entretiens recueillis. Ce qu’elle ne fait pas, c’est tirer de ces chiffres une preuve, ou une proportion valable pour toute une population. Ce n’est donc pas l’absence de chiffres qui la définit, mais ce qu’elle cherche : comprendre."},
+      {t: "Un petit nombre de participants.", k: "bad",
+       f: "C’est un trait fréquent, mais c’est une conséquence, pas une définition. Pour comprendre en profondeur des pratiques et leur sens, on prend le temps d’écouter chaque personne, ce qui limite souvent leur nombre. Mais une enquête qualitative peut réunir cinquante entretiens, et une enquête sur douze personnes n’est pas qualitative si elle cherche seulement à compter. Ce qui définit l’enquête, c’est sa question."},
+      {t: "L’usage d’entretiens ou d’observations, plutôt que de questionnaires.", k: "bad",
+       f: "Ce sont ses outils les plus courants, mais ils ne la définissent pas. Une enquête qualitative peut aussi travailler sur des documents : dossiers, courriers, comptes rendus de réunion. Et un entretien très fermé, analysé en comptant les réponses, peut servir une démarche quantitative. Les outils découlent de la question posée, pas l’inverse."},
+      {t: "Ce qu’elle cherche : comprendre des pratiques, des situations, et le sens qu’elles ont pour les personnes.", k: "good",
+       f: "C’est la bonne réponse. Ce qui définit une enquête qualitative, c’est le type de question qu’elle pose : comment les choses se passent, et ce qu’elles signifient pour ceux qui les vivent. Les outils (entretiens, observations, documents) et la taille du corpus en découlent. C’est pourquoi on ne peut pas la juger avec les critères d’une enquête qui cherche à mesurer."}
     ]},
     {q: "Qu’est-ce qui rend valide un résultat qualitatif ?", opts: [
-      {t: "Le respect d’une procédure reconnue, dont le lecteur peut vérifier chaque étape dans une grille.", k: "bad",
-       f: "La réponse paraît exigeante, car elle mise sur la transparence. Mais une grille dit qu’une étape a été faite, pas qu’elle a été bien faite : on peut cocher « saturation atteinte » ou « double codage » sans que l’interprétation soit solide. La transparence est nécessaire, mais elle ne suffit pas. La validité se juge au lien entre ce qu’on affirme et les données qui le fondent."},
-      {t: "L’accord de plusieurs chercheurs, parvenus indépendamment à la même interprétation des données.", k: "bad",
-       f: "La réponse paraît rigoureuse, car l’accord semble écarter l’arbitraire d’un chercheur isolé. Mais deux subjectivités ne font pas une objectivité : deux chercheurs peuvent partager les mêmes présupposés et s’accorder sur une lecture discutable. Multiplier les regards aide, à condition de discuter les désaccords. Ce qui valide un résultat, c’est sa fidélité aux données et sa capacité à les expliquer mieux qu’une autre interprétation."},
-      {t: "Le fait qu’il reste fidèle aux données et les explique mieux qu’une autre interprétation des mêmes entretiens.", k: "good",
-       f: "Un résultat qualitatif ne devient pas valide en franchissant un seuil. Il vise une interprétation bien argumentée, appuyée sur les données, qu’on réviserait si de nouveaux éléments la contredisaient."},
-      {t: "La saturation des données, qui indique que le corpus couvre la diversité des situations.", k: "bad",
-       f: "La saturation (le moment où de nouveaux entretiens n’apportent plus rien de neuf) dit quand on a arrêté de recruter, pas si l’interprétation est juste. Et une analyse qui interprète peut presque toujours trouver du nouveau."}
+      {t: "Le fait d’avoir rempli une grille de qualité reconnue, comme COREQ.", k: "bad",
+       f: "Une grille comme COREQ aide à décrire ce qui a été fait : qui a mené les entretiens, où, comment. C’est utile, car le lecteur peut suivre la démarche. Mais une case cochée dit qu’une étape a eu lieu, pas qu’elle a été bien faite : on peut écrire « saturation atteinte » sous une analyse superficielle. La validité se juge ailleurs : dans le lien entre ce qu’on affirme et les données qui le fondent."},
+      {t: "L’accord de deux chercheurs qui ont codé les entretiens chacun de leur côté.", k: "bad",
+       f: "L’accord semble écarter l’arbitraire d’un chercheur isolé, d’où son succès. Mais deux personnes formées de la même façon peuvent partager les mêmes idées toutes faites, et s’accorder sur une lecture discutable : deux subjectivités ne font pas une objectivité. Discuter à plusieurs est utile, surtout quand on examine ses désaccords. Mais ce qui valide un résultat, c’est sa fidélité aux données, pas le nombre de personnes qui l’approuvent."},
+      {t: "Un nombre suffisant d’entretiens, jusqu’à ce que plus rien de nouveau n’apparaisse.", k: "bad",
+       f: "La réponse parle de la saturation : le moment où de nouveaux entretiens n’apportent plus rien de neuf. C’est une information utile sur le recueil, mais elle dit quand on a arrêté de recruter, pas si l’interprétation est juste. On peut avoir beaucoup d’entretiens et une analyse fragile, ou peu d’entretiens et une analyse solide. Ce qui compte, c’est que l’interprétation tienne face aux données."},
+      {t: "Une interprétation fidèle aux données, qui les explique mieux que les autres lectures possibles, et que le lecteur peut vérifier.", k: "good",
+       f: "C’est la bonne réponse. Un résultat qualitatif ne devient pas valide en franchissant un seuil, comme un p < 0,05. Il l’est quand il s’appuie sur ce qui a été dit et observé, quand il rend mieux compte des données que d’autres lectures, y compris des cas qui dérangent, et quand le lecteur peut voir d’où il vient. Il reste révisable : de nouveaux éléments pourraient le corriger."}
     ]},
     {q: "Un collègue vous dit : « Le quantitatif, au moins, c’est objectif. » Que lui répondez-vous ?", opts: [
-      {t: "En partie : le qualitatif engage davantage la subjectivité, mais il la compense par la profondeur des données recueillies.", k: "bad",
-       f: "La réponse fait du qualitatif une solution de second rang, sauvée par la « richesse » des données. La subjectivité n’est pas un défaut à compenser : la question est de savoir si elle reste contrôlable, c’est-à-dire si le lecteur peut vérifier d’où viennent les interprétations."},
-      {t: "Le chiffre contient aussi des choix : items, critère de jugement, seuils. La standardisation les rend répétables, pas neutres.", k: "good",
-       f: "La comparaison est trompeuse : le quantitatif repose aussi sur des décisions humaines. Cela ne le disqualifie pas, mais cela défait l’opposition entre « objectif » et « subjectif »."},
-      {t: "Aucune méthode n’est tout à fait objective : chacune repose sur des choix, et le qualitatif n’a pas à se justifier davantage.", k: "mid",
-       f: "La première moitié est juste : le chiffre aussi repose sur des choix. Mais la conclusion glisse vers « tout se vaut » : si aucune méthode n’est objective, aucune n’aurait de comptes à rendre. Or le qualitatif doit justifier ses interprétations, à sa manière : en montrant d’où il tient ce qu’il avance, et en cherchant ce qui le contredit."},
-      {t: "Le qualitatif peut atteindre la même objectivité, à condition de faire coder les entretiens par plusieurs personnes.", k: "bad",
-       f: "La réponse suppose que l’objectivité naît de l’accord : si plusieurs personnes codent pareil, la lecture serait juste. Mais deux subjectivités ne font pas une objectivité : des codeurs formés de la même façon peuvent partager les mêmes angles morts. Ce qui rend une interprétation fiable, c’est que le lecteur puisse voir d’où elle vient et la contester : les passages qui la fondent, les cas qui la contredisent."}
+      {t: "Il a raison : le qualitatif est subjectif, c’est pourquoi il sert surtout à explorer avant une vraie étude.", k: "bad",
+       f: "La réponse accepte que seul le chiffre produise une vraie connaissance, et réduit le qualitatif à une étape préparatoire. Mais le qualitatif répond à ses propres questions (comment, pourquoi, avec quel sens), auxquelles une étude chiffrée ne répond pas. Sa subjectivité n’est pas une faiblesse en soi : ce qui compte, c’est qu’elle soit contrôlée, et que le lecteur puisse vérifier d’où viennent les interprétations."},
+      {t: "Il a raison, mais le qualitatif compense par la richesse de ses données.", k: "bad",
+       f: "La réponse défend le qualitatif comme une solution de second rang, sauvée par la « richesse » de ses données. Mais des données riches ne sont pas pour autant plus vraies : un entretien reste un récit à analyser. Et l’opposition de départ est trompeuse : le chiffre repose lui aussi sur des choix. Mieux vaut contester l’idée que le quantitatif serait objectif par nature."},
+      {t: "Le chiffre repose aussi sur des choix : quelles questions poser, quel critère retenir, quel seuil fixer. On les applique de la même façon à tous, mais ils restent des choix.", k: "good",
+       f: "C’est la bonne réponse. Un questionnaire est rédigé par quelqu’un, un critère de jugement est choisi, un seuil est fixé : ce sont des décisions humaines. La standardisation permet de les appliquer de la même façon à tous, ce qui est précieux, mais elle ne les rend pas neutres. Cela ne disqualifie pas le quantitatif. Cela défait seulement l’opposition simple entre un quantitatif « objectif » et un qualitatif « subjectif »."},
+      {t: "Tout est subjectif de toute façon : toutes les méthodes se valent.", k: "bad",
+       f: "La réponse tombe dans l’autre fossé : « tout est subjectif, donc tout se vaut ». Si toutes les méthodes se valaient, aucune n’aurait de comptes à rendre. Or le qualitatif doit justifier ses interprétations, à sa manière : en montrant d’où il tient ce qu’il avance, et en cherchant ce qui le contredit. Comme l’écrit Olivier de Sardan, l’à peu près du qualitatif n’a « rien […] d’un n’importe quoi »."}
     ]}
   ];
   var m0Wrap = document.getElementById("m0Qs");
@@ -1657,14 +1651,14 @@ footer p{margin:0}
 
   /* ---------- Module 5 : la portée (Goffman) ---------- */
   var goffQ = {q: "D’où vient la portée du concept d’« institution totale » ?", opts: [
-    {t: "De la durée du terrain : un an d’observation donne une base bien plus large qu’une série d’entretiens.", k: "bad",
-     f: "La réponse a raison sur un point : la durée du terrain compte, et dix entretiens ne donnent pas automatiquement la portée d’Asiles. Mais elle traduit cette durée en quantité, comme si un an d’observation valait beaucoup d’entretiens et permettait donc de généraliser. La portée de Goffman ne vient pas d’un volume de données : elle vient du concept qu’il en a tiré, qui éclaire d’autres institutions."},
-    {t: "De la représentativité de l’hôpital étudié, assez typique des grands hôpitaux psychiatriques de l’époque.", k: "bad",
-     f: "Cette réponse applique au qualitatif la logique des sondages : un terrain « typique » permettrait de généraliser. Goffman n’a pas choisi un hôpital moyen, et personne ne lui demande de dire combien d’hôpitaux fonctionnent ainsi. Ce qui voyage, c’est le concept d’institution totale : une façon de comprendre la vie en institution, qu’on peut mettre à l’épreuve ailleurs, dans une prison ou une caserne."},
-    {t: "De ce que le concept permet de comprendre ailleurs, des prisons aux casernes, une fois sa pertinence examinée.", k: "good",
-     f: "La portée d’un résultat qualitatif vient de ses concepts, pas du nombre de personnes étudiées. On transfère une façon de comprendre, en vérifiant chaque fois qu’elle éclaire le nouveau terrain."},
-    {t: "De sa généralité : il décrit ce que partagent les institutions qui prennent en charge des personnes vulnérables.", k: "bad",
-     f: "La réponse va trop loin dans l’autre sens : elle étend le concept à toute institution qui accueille des personnes vulnérables, sans vérifier qu’il s’y applique. Or une institution totale suppose une vie coupée du monde, sous une même autorité, avec des règles communes à tous. Un EHPAD ou un hôpital de jour en partagent parfois certains traits, mais pas d’emblée tous : chaque transfert demande d’être examiné."}
+    {t: "Du grand nombre de patients qu’il a observés : en un an dans un grand hôpital, il a vu des centaines de personnes.", k: "bad",
+     f: "La réponse cherche la force du résultat dans la quantité, comme pour une étude chiffrée. Goffman a certes observé longtemps, et beaucoup de personnes. Mais il ne dit pas combien de patients vivent ceci ou cela. Ce qui fait la portée de son travail, c’est le concept qu’il en a tiré : une façon de comprendre la vie en institution, qui éclaire d’autres lieux."},
+    {t: "De la représentativité de l’hôpital étudié, typique des grands hôpitaux psychiatriques de l’époque.", k: "bad",
+     f: "Cette réponse applique la logique des sondages : un terrain « typique » permettrait de généraliser. Mais Goffman n’a pas choisi un hôpital moyen, et personne ne lui demande de dire combien d’hôpitaux fonctionnaient ainsi. Ce qui voyage, c’est le concept d’institution totale : une façon de comprendre la vie en institution, qu’on peut mettre à l’épreuve ailleurs, dans une prison ou une caserne."},
+    {t: "De ce que le concept permet de comprendre ailleurs, des prisons aux casernes, à condition de vérifier chaque fois qu’il s’applique.", k: "good",
+     f: "C’est la bonne réponse. La portée d’un résultat qualitatif vient de ses concepts, pas du nombre de personnes étudiées. Goffman ne dit pas « 80 % des hôpitaux sont ainsi » : il propose une façon de comprendre ce que vivent les personnes dans une institution qui règle toute leur vie. On peut transférer cette façon de comprendre à d’autres lieux, en vérifiant chaque fois qu’elle éclaire vraiment le nouveau terrain."},
+    {t: "De la notoriété de Goffman : c’est un auteur reconnu, ses conclusions font autorité.", k: "bad",
+     f: "La notoriété d’un auteur ne fait pas la valeur d’un résultat : c’est plutôt l’inverse, Goffman est reconnu parce que son concept s’est révélé utile pour comprendre bien d’autres institutions. En recherche, un résultat vaut par les arguments et les données qui le fondent, et chacun peut le discuter. Ce qui donne sa portée au travail de Goffman, c’est le concept d’institution totale et ce qu’il permet de comprendre ailleurs."}
   ]};
   var goffBox = document.getElementById("goffQ");
   goffBox.appendChild(makeMCQ(goffQ));
