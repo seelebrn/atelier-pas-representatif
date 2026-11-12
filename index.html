@@ -183,7 +183,7 @@ ol.five{margin:0;padding-left:22px;display:grid;gap:10px}
 @media (max-width:520px){.gloss{grid-template-columns:1fr;gap:2px}.gloss dd{margin-bottom:10px}}
 ul.biblio{margin:0;padding-left:20px;display:grid;gap:8px;font-size:15px}
 @media print{
-  nav.toc,#modCounter,.nextbox,.btn,header.top .lede{display:none !important}
+  nav.toc,#modCounter,.nextbox,.btn,.resetbar,header.top .lede{display:none !important}
   body{background:#fff;color:#000}
   .panel,.def,.note{break-inside:avoid;border:1px solid #bbb;background:#fff}
 }
@@ -192,6 +192,9 @@ ul.biblio{margin:0;padding-left:20px;display:grid;gap:8px;font-size:15px}
 .acts{display:flex;flex-wrap:wrap;gap:6px 20px}
 .linkbtn{background:none;border:0;padding:2px 0;color:var(--accent);font-size:15px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .linkbtn:hover{text-decoration-thickness:2px}
+.resetbar{display:flex;justify-content:flex-end;margin-top:4px}
+.resetbar .linkbtn{font-size:14px;color:var(--muted)}
+.resetbar .linkbtn::before{content:"↺ ";text-decoration:none;display:inline-block;margin-right:2px}
 .quote-small{font-style:italic}
 .hidden{display:none !important}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);display:grid;gap:6px}
@@ -236,6 +239,7 @@ footer p{margin:0}
     <h2 id="t0">Avant de commencer</h2>
     <p class="intro">Le qualitatif ne mesure pas moins bien : il répond à une autre question, avec ses propres exigences de preuve. Cet atelier aide à repérer quelques réflexes bien ancrés, puis à leur substituer une idée exigeante de la rigueur. Il s’adresse à celles et ceux qui découvrent les méthodes qualitatives, en particulier en médecine et en sciences infirmières.</p>
     <p class="intro ref">Il n’existe pas une seule épistémologie du qualitatif : ses traditions ne conçoivent pas toutes de la même façon la réalité étudiée, le rôle du chercheur et la valeur des données. Cet atelier adopte principalement une approche compréhensive et réflexive, en s’appuyant notamment sur les travaux de Jean-Pierre Olivier de Sardan.</p>
+    <div class="resetbar"><button class="linkbtn" id="m0Reset" type="button">Recommencer le module</button></div>
   </div>
   <div class="defs">
     <div class="def">
@@ -271,7 +275,6 @@ footer p{margin:0}
   </div>
   <p class="intro">Trois questions pour vérifier vos repères.</p>
   <div class="mcqs" id="m0Qs"></div>
-  <div class="row"><button class="btn ghost" id="m0Reset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 1 -->
@@ -280,6 +283,7 @@ footer p{margin:0}
     <span class="modnum">Module 1</span>
     <h2 id="t1">La soutenance</h2>
     <p class="intro">Une interne en psychiatrie a mené 12 entretiens avec des patients qui ont arrêté leur traitement. Sa question : que signifie arrêter son traitement pour ces personnes, et comment en arrivent-elles là ? Vous êtes à sa place devant le jury. Choisissez vos réponses.</p>
+    <div class="resetbar"><button class="linkbtn" id="sceneReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="panel" id="scene">
     <div class="row" style="justify-content:space-between">
@@ -288,7 +292,6 @@ footer p{margin:0}
     </div>
     <div id="sceneBody"></div>
   </div>
-  <div class="row"><button class="btn ghost" id="sceneReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 2 -->
@@ -297,10 +300,10 @@ footer p{margin:0}
     <span class="modnum">Module 2</span>
     <h2 id="t2">Peut-on écrire ça ?</h2>
     <p class="intro">Toujours avec les 12 entretiens de l’interne. Pour chaque phrase, décidez si elle peut figurer dans ses résultats, ou si elle affirme plus que ce que le matériau permet.</p>
+    <div class="resetbar"><button class="linkbtn" id="sortReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="row"><span class="score" id="sortScore">0 réponse sur 12</span></div>
   <div class="stmts" id="stmts"></div>
-  <div class="row"><button class="btn ghost" id="sortReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 3 -->
@@ -309,6 +312,7 @@ footer p{margin:0}
     <span class="modnum">Module 3</span>
     <h2 id="t3">Coder un extrait</h2>
     <p class="intro">Voici un passage d’un entretien de l’interne (fictif). Proposez un code, puis comparez-le à trois lectures possibles. Ensuite, découvrez ce qui s’était dit plus tôt dans l’entretien.</p>
+    <div class="resetbar"><button class="linkbtn" id="codeReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="panel">
     <div class="transcript" id="transcript">
@@ -364,7 +368,6 @@ footer p{margin:0}
       <p class="verdict">Le contexte change-t-il votre lecture ?</p>
       <p>Deux éléments plus tôt dans l’entretien pèsent sur le passage. Le « à vie » rend plus plausible la lecture du test : arrêter, c’est vérifier que ce verdict ne s’applique pas à soi. Et l’interne s’est présentée comme collègue du Dr M. : dire « je l’ai pas dit au Dr M. » à quelqu’un de son équipe n’est pas anodin, et « j’ai oublié » prend un relief différent.</p>
       <p>Le contexte ne tranche pas pour autant : le patient a peut-être vraiment oublié. Il rend certaines lectures mieux fondées que d’autres. C’est pourquoi on code des segments assez larges, et pourquoi on garde le lien entre chaque interprétation et les passages qui la fondent.</p>
-      <div class="row"><button class="btn ghost" id="codeReset" type="button">Recommencer le module</button></div>
     </div>
   </div>
 </section>
@@ -375,6 +378,7 @@ footer p{margin:0}
     <span class="modnum">Module 4</span>
     <h2 id="t4">La blouse</h2>
     <p class="intro">Le même patient (fictif) parle de son traitement deux fois : à l’interne, qui fait partie de l’équipe soignante, puis à une sociologue venue de l’extérieur, sans blouse. Lisez les deux extraits, puis répondez aux questions.</p>
+    <div class="resetbar"><button class="linkbtn" id="posReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="panel">
     <div class="cols">
@@ -402,7 +406,6 @@ footer p{margin:0}
     <p>Pas « ai-je un biais ? », mais : que ma position permet-elle de voir, que masque-t-elle, et comment en ai-je tenu compte ? En pratique, on ne dispose souvent que d’une des deux versions. D’où l’intérêt de décrire sa position et de chercher, dans ses propres données, la trace de ce qu’elle rend difficile à dire.</p>
     <p class="ref">Approfondir : module 8, « Biais ou donnée ? »</p>
   </div>
-  <div class="row"><button class="btn ghost" id="posReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 5 -->
@@ -411,6 +414,7 @@ footer p{margin:0}
     <span class="modnum">Module 5</span>
     <h2 id="t5">Combien d’entretiens ?</h2>
     <p class="intro">Un outil pour raisonner sur la taille d’un corpus avec la notion de pouvoir informationnel (Malterud et al., 2016). Il ne calcule rien : il vous aide à rédiger une justification. Les réglages de départ correspondent au projet de l’interne ; modifiez-les pour le vôtre.</p>
+    <div class="resetbar"><button class="linkbtn" id="effReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="panel">
     <div class="dims" id="dims"></div>
@@ -441,7 +445,6 @@ footer p{margin:0}
     <p style="margin:0">Il en montre les effets des deux côtés. Dès l’admission, les reclus sont dépossédés de leurs affaires, de leurs rôles sociaux et d’une part de leur identité ; leur quotidien dépend ensuite de privilèges à gagner et de petites ruses pour préserver un peu d’eux-mêmes. Le personnel doit traiter des personnes comme un travail à organiser. Les deux groupes forment des mondes séparés, qui se voient à travers des stéréotypes hostiles. Surtout, des conduites lues comme des symptômes peuvent être des façons de s’adapter à l’institution elle-même.</p>
   </div>
   <div class="mcqs" id="goffQ"></div>
-  <div class="row"><button class="btn ghost" id="effReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 6 -->
@@ -450,6 +453,7 @@ footer p{margin:0}
     <span class="modnum">Module 6</span>
     <h2 id="t6">Des thèmes à l’interprétation</h2>
     <p class="intro">Une liste comme « isolement, stigmatisation, observance » range le matériau, mais ne dit encore rien. Le produit d’une enquête qualitative est une interprétation argumentée, qui peut prendre plusieurs formes, souvent combinées dans un même travail. Lisez d’abord les repères ci-dessous, puis classez les formulations.</p>
+    <div class="resetbar"><button class="linkbtn" id="prodReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="defs">
     <div class="def">
@@ -485,7 +489,6 @@ footer p{margin:0}
   <p class="intro">Les formulations à classer viennent d’une enquête fictive : une interne en psychiatrie a mené 12 entretiens avec des patients qui ont arrêté leur traitement, pour comprendre ce que signifie cet arrêt et comment ils en arrivent là. Pour chaque formulation, choisissez la catégorie qui lui correspond ; le commentaire rappelle aussi le piège à éviter.</p>
   <div class="row"><span class="score" id="prodScore"></span></div>
   <div class="stmts" id="prods"></div>
-  <div class="row"><button class="btn ghost" id="prodReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 7 -->
@@ -494,6 +497,7 @@ footer p{margin:0}
     <span class="modnum">Module 7</span>
     <h2 id="t7">Le cas qui dérange</h2>
     <p class="intro">L’interne a codé ses premiers entretiens et formulé un thème provisoire. Il reste un entretien à relire.</p>
+    <div class="resetbar"><button class="linkbtn" id="negReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="panel">
     <p class="speaker">Thème provisoire</p>
@@ -517,7 +521,6 @@ footer p{margin:0}
       <p class="theme">L’arrêt comme test suppose un doute sur le diagnostic. Il coexiste avec des arrêts tactiques, sans doute aucun, qui concilient le traitement et les obligations du quotidien.</p>
       <p>D’autres formulations sont possibles. L’essentiel est que le cas qui dérange précise les conditions du thème, au lieu d’être écarté. Le thème en sort plus étroit, mais plus solide, et une seconde logique apparaît.</p>
       <p class="ref">Synthèse : « Qu’est-ce qui résiste ? »</p>
-      <div class="row"><button class="btn ghost" id="negReset" type="button">Recommencer le module</button></div>
     </div>
   </div>
 </section>
@@ -528,6 +531,7 @@ footer p{margin:0}
     <span class="modnum">Module 8</span>
     <h2 id="t8">Biais ou donnée ?</h2>
     <p class="intro">Aucune position d’enquête n’est neutre, mais tout ne se vaut pas pour autant. Certaines façons de conduire l’enquête orientent les réponses et doivent être limitées ; d’autres effets tiennent à la place de l’enquêteur et se décrivent ; certains incidents, enfin, renseignent sur l’objet lui-même. Lisez les repères, puis classez six situations tirées d’une enquête fictive : une interne en psychiatrie interroge des patients qui ont arrêté leur traitement.</p>
+    <div class="resetbar"><button class="linkbtn" id="biaisReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="defs">
     <div class="def">
@@ -545,7 +549,6 @@ footer p{margin:0}
   </div>
   <div class="row"><span class="score" id="biaisScore"></span></div>
   <div class="stmts" id="biaisList"></div>
-  <div class="row"><button class="btn ghost" id="biaisReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 9 -->
@@ -554,6 +557,7 @@ footer p{margin:0}
     <span class="modnum">Module 9</span>
     <h2 id="t9">Dit, observé ou interprété ?</h2>
     <p class="intro">Une analyse rigoureuse relie chaque affirmation aux données et distingue ce qui a été dit, ce qui a été observé et ce que le chercheur interprète. Les trois sont légitimes ; la faute est de les confondre. Voici des phrases tirées d’un paragraphe de résultats (fictif) sur M. C., qui a arrêté son traitement après un an de stabilité. Classez chacune.</p>
+    <div class="resetbar"><button class="linkbtn" id="ditReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="defs">
     <div class="def">
@@ -575,7 +579,6 @@ footer p{margin:0}
     <p class="verdict">Le pacte ethnographique</p>
     <p>Olivier de Sardan parle de « pacte ethnographique » : ne pas inventer ses données et respecter le matériau recueilli. Cela ne veut pas dire que les propos rapportés décrivent les faits. Le plus courant n’est pas l’invention, mais le glissement : un récit qui devient un événement, une interprétation qui se présente comme un propos.</p>
   </div>
-  <div class="row"><button class="btn ghost" id="ditReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- MODULE 10 -->
@@ -584,6 +587,7 @@ footer p{margin:0}
     <span class="modnum">Module 10</span>
     <h2 id="t10">Deux lectures en concurrence</h2>
     <p class="intro">Une interprétation qualitative est valide dans la mesure où elle reste fidèle aux données et les explique mieux que d’autres interprétations possibles du même matériau. Encore faut-il confronter ces lectures. Dans une enquête fictive, plusieurs patients disent avoir caché à leur psychiatre qu’ils avaient arrêté leur traitement. Deux interprétations sont en présence.</p>
+    <div class="resetbar"><button class="linkbtn" id="concReset" type="button">Recommencer le module</button></div>
   </div>
   <div class="cols">
     <p class="theme">A. On se tait pour préserver la relation : ne pas décevoir le psychiatre.</p>
@@ -593,7 +597,6 @@ footer p{margin:0}
   <div class="row"><span class="score" id="concScore"></span></div>
   <div class="stmts" id="concList"></div>
   <div class="mcqs hidden" id="concQ"></div>
-  <div class="row"><button class="btn ghost" id="concReset" type="button">Recommencer le module</button></div>
 </section>
 
 <!-- SYNTHESE -->
